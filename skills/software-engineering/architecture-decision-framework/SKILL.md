@@ -1,9 +1,9 @@
 ---
-name: architecture-decision
-description: Make architecture decisions using decision matrices and iterative refinement. Use when comparing implementation approaches, evaluating trade-offs, selecting technology, or facing multiple viable paths. Prioritizes business context over technical purity — clarifies the problem before deciding, presents options with trade-offs, documents decisions as ADRs.
+name: architecture-decision-framework
+description: Make architecture decisions using decision matrices and iterative refinement. Use when comparing implementation approaches, evaluating trade-offs, selecting technology, or facing multiple viable paths. Prioritizes business context over technical purity — clarifies the problem before deciding, presents options with trade-offs, documents decisions as lightweight ADRs.
 ---
 
-# Architecture Decision
+# Architecture Decision Framework
 
 Make architecture decisions using decision matrices and iterative refinement.
 
