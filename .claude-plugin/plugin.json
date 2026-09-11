@@ -1,6 +1,7 @@
 {
   "name": "agustinusnathaniel-skills",
   "skills": [
-    "./skills/software-engineering/architecture-decision-framework"
+    "./skills/software-engineering/architecture-decision-framework",
+    "./skills/software-engineering/reduce-production-code"
   ]
 }

@@ -9,6 +9,7 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
+| [reduce-production-code](skills/software-engineering/reduce-production-code/SKILL.md) | Reduce production code through substantive simplification and ecosystem reuse while preserving intended behavior. |
 
 ## Installing Skills
 
