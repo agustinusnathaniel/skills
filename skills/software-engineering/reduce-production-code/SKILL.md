@@ -10,17 +10,20 @@ description: >
 
 # Reduce Production Code
 
-Deliver a substantial, verified net reduction in the code that implements product
-behavior. Keep testing, documentation, and process changes proportional to that
-work. Preserve intended capabilities and correct confirmed defects encountered.
+Deliver a substantial, verified net reduction in live application code while
+making it easier for humans and agents to understand and maintain. Preserve
+intended capabilities and correct confirmed defects. Testing, documentation, and
+process changes support this production-code objective.
 
 ## Establish scope and baseline
 
-Use the user's scope; otherwise examine the project's main subsystems and shared
-utilities. Understand its purpose, workflows, architectural boundaries, and
-constraints by tracing execution paths and checking relevant documentation
-against the implementation. Treat overengineering as a hypothesis to substantiate,
-including when assessing your own previous work.
+Use the user's scope; otherwise examine the main subsystems and shared utilities.
+Understand the project's vision, intended users, workflows, architecture, and
+constraints. Trace execution paths, compare documentation with implementation,
+and identify gaps in understanding. Challenge existing assumptions and decisions,
+including your own previous work, with concrete evidence. Distinguish actual
+requirements from revisitable architectural choices and conventions; existing
+patterns and ADRs do not by themselves justify retaining complexity.
 
 Record the starting state without disturbing existing user changes. Classify by
 ownership and purpose: live application code, tests/support, docs, shipped
@@ -33,6 +36,8 @@ buckets. Include new/untracked work and reconcile bucket totals with the complet
 diff. Keep classifications fixed and explain corrections. On follow-ups, report
 both the current round and cumulative change; earlier savings cannot conceal new
 growth. If the user specifies a release or commit range, measure that range too.
+PR/release headline figures must use the full delivery range; label reduction-run
+subtotals separately when that range also contains earlier or unrelated work.
 
 ## Choose substantial reductions
 
@@ -54,8 +59,9 @@ stating it. A target based only on trivial cleanups is insufficient. Before
 dismissing a major behavior-sensitive candidate, assess its smallest credible
 replacement and probe the specific uncertainty.
 
-Evaluate built-ins, existing dependencies, then community packages. Verify current
-official documentation/source and integration costs. Before removing an existing
+Before rewriting custom utilities, evaluate built-ins, existing dependencies, then
+established community packages. Browse current official documentation/source to
+verify credible replacements, compatibility, maintenance, and integration costs. Before removing an existing
 library, compare simpler usage with removal and inventory guarantees it supplies,
 including error handling and concurrency; unused advanced APIs prove little.
 Count all replacement glue. Adopt dependencies when ownership savings justify
@@ -66,8 +72,9 @@ skills for concrete questions.
 
 Work through the strongest viable candidates in coherent, reviewable steps.
 Remove unnecessary mechanisms, unify equivalent implementations, and simplify
-control flow. Preserve descriptive names, cohesive modules, clear ownership,
-intended features, public contracts, security properties, and required performance.
+control flow. Write straightforward, idiomatic code with descriptive names,
+cohesive modules, and clear ownership. Preserve intended features, public
+contracts, security properties, and required performance.
 
 Assess the complete replacement. File moves, compressed formatting, and complexity
 redistributed among new abstractions do not demonstrate simplification. Removing
@@ -77,7 +84,9 @@ Before deleting a defensive branch, identify its input boundary and prove the
 condition impossible or locate equivalent protection. Probe affected invalid-input
 behavior. For ecosystem swaps, compare relevant accepted/rejected inputs, outputs,
 side effects, and failure semantics; library defaults can alter the contract.
-Separate authorized behavior changes from accidental incompatibilities.
+Separate authorized behavior changes from accidental incompatibilities. Report
+feature retirement or reduced functionality separately, even when approved; those
+savings do not satisfy a behavior-preserving reduction target.
 
 Investigate pre-existing bugs and inconsistencies encountered. Correct confirmed
 defects within the authorized scope when intended behavior is established and the
@@ -103,17 +112,22 @@ Retire obsolete internal assertions and redundant upstream-algorithm tests while
 preserving application contracts, integration boundaries, and compatibility pins.
 Remove exports maintained solely for obsolete tests, preserving public APIs.
 
-Correct guidance that would recreate the complexity. Prefer concise amendments;
+Revisit affected assumptions, conventions, docs, agent instructions, and ADRs
+that would recreate the complexity. Prefer concise amendments;
 add a superseding ADR only when needed, preserve history, and avoid duplicated
-rationale. Follow canonical ownership and verify regenerated projections. Apply
+rationale. Put rejected/deferred candidates in the final report; create a decision
+record only when repository policy requires it or an architectural decision changes.
+Follow canonical ownership and verify regenerated projections. Apply
 repository release policy to affected shipped artifacts, including those bundling
 private/shared packages; include required release metadata.
 
 ## Review, continue, and finish
 
-Run affected checks and obtain independent review for meaningful changes. Resolve
-actionable findings and repeat affected verification when warranted. If review is
-unavailable, report the gap. Verify repository-required delivery checks on the
+Batch compatible reductions into coherent changes. Use focused checks while
+editing, then independent review and required full checks on the integrated result.
+Repeat only checks/review affected by later changes or required by repository policy;
+each small loop does not need its own reconnaissance, docs pass, and full review.
+If review is unavailable, report the gap. Verify required delivery checks on the
 final artifact; local checks do not establish remote CI success.
 
 After fixes and review, simplify your own new production glue, test setup, and
@@ -127,9 +141,11 @@ Revise the target only when concrete new evidence invalidates an estimate or
 reveals a necessary constraint. Explain that evidence and retain both targets in
 the report. Before declaring the target unattainable, investigate the remaining
 major candidates within scope and substantiate the constraints preventing them.
-Once the target, selected reductions, and verification are complete, stop expanding
-the search. Record evidence-based retention or deferral reasons for other known
-candidates; further exploration requires a concrete unresolved question.
+Treat the target as a progress checkpoint, not a ceiling. Continue through known,
+worthwhile reductions within scope; meeting the target alone is not a deferral
+reason. Stop when those candidates are implemented or ruled out with concrete
+evidence and verification is complete. Further exploration requires an unresolved
+question or a credible additional opportunity, not an exhaustive search.
 
 Completion requires:
 
