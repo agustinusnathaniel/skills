@@ -5,6 +5,20 @@ or when the user requests it. Scores expose trade-offs; they do not establish
 facts or replace the owner's decision. A direct comparison is enough when one
 option meets the requirements with clearly lower cost.
 
+## Choose priorities from context
+
+Use relevant context to identify decision drivers, then ground their priority in
+this project's facts. These prompts replace universal weight profiles:
+
+| Context | Evidence that should shape priorities |
+|---|---|
+| Prototype or pre-product-market fit | What must be learned by when, and what can be discarded? |
+| Production service | Required reliability, operating burden, and recovery from a wrong choice. |
+| Public API or library | Consumer compatibility, release obligations, and contributor maintenance. |
+| Internal tool | The workflow it must unblock and who will maintain it. |
+| Migration | Coexistence, data integrity, cutover, and the cost of rollback or recovery. |
+| Regulated deployment | Binding obligations as feasibility gates; costs among compliant options. |
+
 ## Build the comparison
 
 1. Apply the hard requirements from the main workflow before scoring. Keep

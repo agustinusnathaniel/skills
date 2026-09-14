@@ -1,23 +1,24 @@
 ---
 name: architecture-decision-framework
 description: >
-  Use when choosing or revisiting architectural boundaries, dependencies,
-  platforms, or migration approaches with consequential trade-offs.
+  Use when comparing consequential architecture or implementation approaches,
+  selecting technology, or revisiting a design after changed constraints or feedback.
 ---
 
 # Architecture Decision Framework
 
-Produce an evidence-backed recommendation that serves the user's goal, explains
-its trade-offs, and states when to reconsider. Scale the analysis to the impact
-and cost of changing the decision later. A small reversible choice may need only
-a paragraph; a consequential choice needs evidence for its decisive trade-offs.
+Make architecture decisions through business context, decision matrices, and
+iterative refinement. Prioritize the user's outcome over technical purity. Explain
+the trade-offs and record why the chosen approach fits. Scale the analysis to the
+impact and cost of changing the decision later.
 
 ## Frame the decision
 
-Identify the outcome, exact system or artifact in scope, current behavior to
-preserve, and constraints from the user's request and existing context. Distinguish
-hard requirements from preferences and revisitable conventions. Labels such as
-“MVP” or “production” alone do not establish acceptable reliability or scope.
+Identify the outcome, exact system or artifact in scope, and current behavior to
+preserve. Use the supplied time horizon, budget, team capability, and constraints.
+Distinguish hard requirements from preferences and revisitable conventions.
+Labels such as “MVP” or “production” alone do not establish acceptable reliability
+or scope.
 
 Verify premises that could change the recommendation against relevant code,
 configuration, or current official sources. Distinguish observed facts, estimates,
@@ -25,17 +26,19 @@ and unknowns. Read existing decisions when they constrain this choice; preserve
 their rationale while checking whether their assumptions still hold.
 
 Ask only for missing information that could change the recommendation or establish
-required authority. Reuse supplied answers. State low-impact assumptions and
-proceed; when a consequential unknown remains, explain what depends on it and
-continue analysis that does not require the answer. In a delegated task, return
-unresolved owner decisions to the caller with a provisional recommendation.
+required authority; inspect discoverable facts before asking the user. Keep
+clarification to a short round with a provisional recommendation. Reuse supplied
+answers. State low-impact assumptions and proceed; when a consequential unknown
+remains, explain what depends on it and continue independent analysis. In a
+delegated task, return unresolved owner decisions to the caller.
 
 ## Compare viable alternatives
 
 Consider retaining or simplifying the current approach alongside credible
 alternatives. Compare options that solve the same problem at the same boundary;
 separate independent decisions instead of treating complementary layers as rivals.
-Use only alternatives that could plausibly win under the stated constraints.
+Keep the shortlist small, usually 2-4 options that could plausibly win under the
+stated constraints; include fewer when the evidence leaves fewer viable choices.
 
 Evaluate hard requirements first: an option that fails a required capability,
 security property, compliance obligation, or firm resource limit is infeasible
@@ -50,8 +53,10 @@ and the effort to change course. Make reversibility concrete through what would
 need undoing, including data and external contracts; shipping alone does not make
 a decision irreversible.
 
-Use a short narrative or comparison table with evidence and uncertainties. When
-explicit priorities need weighting, or the user requests numerical scoring, use
+For consequential choices with competing trade-offs, present a compact decision
+matrix using those criteria, evidence, and uncertainties. When the constraints
+clearly favor one option, a short rationale can replace the matrix. When priorities
+need weighting, or the user requests numerical scoring, use
 [weighted scoring](references/scoring.md). Resolve a decision-changing uncertainty
 with the smallest useful source check, experiment, or prototype. Define the
 question and stopping condition before doing further research.
@@ -72,13 +77,16 @@ priorities rather than tuning them to a preferred answer.
 A recommendation is ready when the relevant constraints are accounted for,
 decisive claims have evidence or explicit uncertainty, and the choice, consequence,
 and next action are clear. Further analysis needs a specific unresolved question.
-Honor existing authorization: carry authorized implementation forward; when an
-owner decision is required, present the concrete recommendation for that decision.
+Match the deliverable to the request: a decision brief, ADR, or detailed design
+specification. Carry the chosen approach, constraints, and unresolved validation
+into any requested implementation handoff. Honor existing authorization; present
+the concrete recommendation when an owner decision is still required.
 
 ## Record what must survive
 
-Use an ADR when repository policy requires it or the decision has lasting impact
-on contracts, data, operations, or future changes. For a local reversible choice,
+Record each selected decision proportionately. Use a lightweight ADR when
+repository policy requires it or the decision has lasting impact on contracts,
+data, operations, or future changes. For a local reversible choice,
 the task or PR rationale can be enough. Follow the repository's format and record:
 
 - Context and decision drivers, including binding constraints.
