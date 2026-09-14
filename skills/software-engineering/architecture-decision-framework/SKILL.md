@@ -1,130 +1,92 @@
 ---
 name: architecture-decision-framework
-description: Make architecture decisions using decision matrices and iterative refinement. Use when comparing implementation approaches, evaluating trade-offs, selecting technology, or facing multiple viable paths. Prioritizes business context over technical purity — clarifies the problem before deciding, presents options with trade-offs, documents decisions as lightweight ADRs.
+description: >
+  Use when choosing or revisiting architectural boundaries, dependencies,
+  platforms, or migration approaches with consequential trade-offs.
 ---
 
 # Architecture Decision Framework
 
-Make architecture decisions using decision matrices and iterative refinement.
+Produce an evidence-backed recommendation that serves the user's goal, explains
+its trade-offs, and states when to reconsider. Scale the analysis to the impact
+and cost of changing the decision later. A small reversible choice may need only
+a paragraph; a consequential choice needs evidence for its decisive trade-offs.
 
-## Why This Skill Exists
+## Frame the decision
 
-Most architecture advice jumps to "the best solution" without understanding the problem. This skill flips the order: understand the business context first, present options, ask clarifying questions, then decide.
+Identify the outcome, exact system or artifact in scope, current behavior to
+preserve, and constraints from the user's request and existing context. Distinguish
+hard requirements from preferences and revisitable conventions. Labels such as
+“MVP” or “production” alone do not establish acceptable reliability or scope.
 
-## When to Use
+Verify premises that could change the recommendation against relevant code,
+configuration, or current official sources. Distinguish observed facts, estimates,
+and unknowns. Read existing decisions when they constrain this choice; preserve
+their rationale while checking whether their assumptions still hold.
 
-- Choosing between multiple implementation approaches
-- Evaluating trade-offs between speed, quality, and cost
-- Deciding on technology stack components
-- When the team lacks consensus on the right path
-- When user pushes back on a plan that seems too complex
+Ask only for missing information that could change the recommendation or establish
+required authority. Reuse supplied answers. State low-impact assumptions and
+proceed; when a consequential unknown remains, explain what depends on it and
+continue analysis that does not require the answer. In a delegated task, return
+unresolved owner decisions to the caller with a provisional recommendation.
 
-## When Not to Use
+## Compare viable alternatives
 
-- Decision is obvious (e.g., "should I use TypeScript?")
-- Non-architectural decisions (naming, formatting)
-- User already has a clear preference
-- Only one viable option
+Consider retaining or simplifying the current approach alongside credible
+alternatives. Compare options that solve the same problem at the same boundary;
+separate independent decisions instead of treating complementary layers as rivals.
+Use only alternatives that could plausibly win under the stated constraints.
 
-## The Methodology
+Evaluate hard requirements first: an option that fails a required capability,
+security property, compliance obligation, or firm resource limit is infeasible
+regardless of its other advantages. Record why it is excluded. Changing a hard
+requirement needs the appropriate owner's decision, not a higher aggregate score.
+When none qualify, report the conflicting constraints and what must change to
+make an option feasible.
 
-### Phase 1: Understand the Problem
+Compare viable options on the few criteria that distinguish them. Include adoption
+and ongoing ownership costs: integration, migration, operations, team capability,
+and the effort to change course. Make reversibility concrete through what would
+need undoing, including data and external contracts; shipping alone does not make
+a decision irreversible.
 
-Before presenting options, clarify:
+Use a short narrative or comparison table with evidence and uncertainties. When
+explicit priorities need weighting, or the user requests numerical scoring, use
+[weighted scoring](references/scoring.md). Resolve a decision-changing uncertainty
+with the smallest useful source check, experiment, or prototype. Define the
+question and stopping condition before doing further research.
 
-```
-User request
-  → Business goal?
-  → Constraints (time, team, budget)?
-  → Timeline (MVP vs long-term)?
-  → Reversible vs irreversible?
-  → Team expertise?
-```
+## Recommend and respond to feedback
 
-### MVP vs Production Quick-Check
+Lead with the recommended option, the decisive evidence, its main cost or
+limitation, and why the strongest alternative loses. State confidence and any
+remaining uncertainty that could reverse the recommendation. If evidence cannot
+separate the options, prefer a smaller reversible commitment or propose a bounded
+experiment with a decision criterion.
 
-If constraints are unambiguous, skip the full matrix:
+Treat feedback as evidence to examine. Correct a false premise and reconsider the
+affected comparison; retain supported conclusions when challenged without new
+evidence. Revise priorities when the user changes them. Keep weights tied to those
+priorities rather than tuning them to a preferred answer.
 
-| User says | Default action |
-|-----------|---------------|
-| "I just need something that works" | MVP-first option |
-| "This is for production" | Production-quality option |
-| "I'm prototyping" | Fastest option |
-| "We're scaling this" | Maintainable option |
+A recommendation is ready when the relevant constraints are accounted for,
+decisive claims have evidence or explicit uncertainty, and the choice, consequence,
+and next action are clear. Further analysis needs a specific unresolved question.
+Honor existing authorization: carry authorized implementation forward; when an
+owner decision is required, present the concrete recommendation for that decision.
 
-**Short-circuit rules:** Still document the decision (Phase 5). Offer to revisit if requirements change.
+## Record what must survive
 
-### Phase 2: Present Options with Decision Matrix
+Use an ADR when repository policy requires it or the decision has lasting impact
+on contracts, data, operations, or future changes. For a local reversible choice,
+the task or PR rationale can be enough. Follow the repository's format and record:
 
-Present 2-4 options with a structured comparison:
+- Context and decision drivers, including binding constraints.
+- Decision and status: proposed until accepted by the authorized owner.
+- Decisive evidence, alternatives rejected, and consequences.
+- A concrete revisit trigger and any unresolved validation or migration condition.
 
-```markdown
-| Criterion | Option A | Option B | Option C |
-|-----------|----------|----------|----------|
-| **MVP Speed** | ✅ Fast | ⚠️ Medium | ❌ Slow |
-| **Long-term** | ⚠️ Tech debt | ✅ Maintainable | ✅ Maintainable |
-| **Complexity** | ✅ Low | ⚠️ Medium | ❌ High |
-| **Reversibility** | ✅ Easy | ⚠️ Medium | ❌ Hard |
-| **Team Expertise** | ✅ Known | ⚠️ Learning curve | ❌ New |
-```
-
-For weighted scoring with criteria priorities, see [references/scoring.md](references/scoring.md).
-
-### Phase 3: Ask Clarifying Questions (With a Cap)
-
-Ask 3-5 questions max, then make a preliminary recommendation:
-
-1. Questions 1-2: Always ask (core constraints)
-2. Questions 3-5: Ask if needed (refine details)
-3. After question 5: Recommend with assumptions stated
-
-**When you've hit the cap:**
-
-> "I've asked enough questions. Based on what you've told me — [assumptions] — I recommend Option B. My reasoning: [rationale]. Tell me if I've misunderstood."
-
-### Phase 4: Make Recommendation with Rationale
-
-```markdown
-## Recommendation: Option [X]
-
-**Why:** [business reason], [trade-off acknowledged]
-**Consequences:** [positive], [positive], [known limitation]
-**Revisit when:** [trigger for reconsideration]
-```
-
-### Phase 5: Document as ADR
-
-```markdown
-# ADR-XXX: [Title]
-
-**Status:** Proposed | Accepted | Deprecated | Superseded
-**Context:** What is the issue motivating this decision?
-**Decision:** What is the proposed change?
-**Consequences:** What becomes easier or more difficult?
-**Alternatives:** What other options and why not chosen?
-**Date:** When this was decided
-```
-
-### Phase 6: Iterate Based on Feedback
-
-```
-Recommendation made → User feedback → Refine → Confirm → Document
-```
-
-**Iteration patterns:**
-
-| User says | Action |
-|-----------|--------|
-| "too complex" | Simplify: reduce scope, pick simpler path |
-| "wrong priority" | Re-weight: shift criterion weights |
-| "what about X?" | Evaluate: add new option, rebuild matrix |
-| "I need it faster" | Accelerate: pick MVP option, defer production |
-| "just pick one" | Commit: state recommendation, stop iterating |
-
-## Common Pitfalls
-
-1. **Jumping to solutions** — presenting options before understanding the problem
-2. **Analysis paralysis** — too many options (keep to 2-4)
-3. **Ignoring reversibility** — not considering cost of changing later
-4. **Over-asking** — more than 5 questions before recommending
-5. **Skipping ADR** — not documenting why you chose a path
+Preserve superseded decisions with links or dated amendments. Keep durable reasons
+in the record; leave changing file inventories, line counts, and execution logs in
+their canonical sources or delivery report. Record the final rationale once and
+link to it instead of repeating the full analysis.
