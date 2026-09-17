@@ -38,8 +38,9 @@ Prioritize unnecessary mechanisms, parallel implementations, duplicated logic,
 obsolete compatibility, speculative extensibility, and layers with little
 responsibility. For the strongest candidates, establish consumers, behavior to
 preserve, the smallest credible replacement, and net savings including supporting
-costs. Trace scripts, hooks, entry points, and bundled consumers before declaring
-code unused. Resolve specific uncertainties before dismissing major candidates.
+costs. Trace scripts, hooks, entry points, bundled consumers, and downstream
+or plugin contracts before declaring code unused. Absence of internal callers
+does not establish that a public name is removable. Resolve specific uncertainties before dismissing major candidates.
 
 Derive a substantial production target in lines and percentage from those
 candidates, then proceed with authorized implementation. Formatting compression,
@@ -58,7 +59,10 @@ inputs, side effects, and failure semantics.
 
 Batch compatible reductions into coherent changes with straightforward code and
 clear ownership. Preserve public contracts, security properties, and required
-performance. Before removing a defense, identify the boundary or equivalent
+performance. Before applying a repeated rewrite, validate the transformation on
+representative semantic variants, especially exception scope, cleanup,
+evaluation order, and side effects. Review the affected variants, not just one
+successful example. Before removing a defense, identify the boundary or equivalent
 protection that enforces its invariant and verify relevant invalid inputs.
 
 For behavior-sensitive reductions, establish representative real inputs before
@@ -84,7 +88,11 @@ Reuse existing coverage and still-valid evidence. Run focused checks during edit
 then review meaningful changes independently and run repository-required checks on
 the integrated batch. After a repair, revisit affected evidence and findings;
 repeat broader checks only when the change or repository policy warrants them.
-Report unavailable review or verification as a gap.
+Report unavailable review or verification as a gap. Where stable contracts can
+be captured, compare baseline and replacement directly, including exported
+names, schemas, CLI behavior, and serialized shapes. Use exact comparison when
+representation is contractual; otherwise compare semantics and normalize only
+known nondeterminism.
 
 Add repeatable coverage at the smallest boundary that catches an uncovered
 regression risk. After replacing an implementation, retire obsolete internal and
