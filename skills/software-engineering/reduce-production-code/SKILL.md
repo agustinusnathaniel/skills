@@ -44,8 +44,11 @@ does not establish that a public name is removable. Resolve specific uncertainti
 
 Derive a substantial production target in lines and percentage from those
 candidates, then proceed with authorized implementation. Formatting compression,
-file moves, and redistributed complexity do not count as simplification. Approved
-feature retirement is separate and does not count toward the preservation target.
+file moves, and redistributed complexity do not count as simplification. Favor
+reductions that make behavior easier to locate and follow; splitting large files
+or unifying helpers is not an improvement when it adds indirection or obscures
+ownership. Approved feature retirement is separate and does not count toward
+the preservation target.
 
 Evaluate built-ins, existing dependencies, and established packages before
 rewriting utilities. Compare simpler library usage with removal, accounting for
