@@ -1,8 +1,8 @@
 ---
 name: reduce-production-code
 description: >
-  Use when the user asks to substantially reduce production code or strip
-  overengineering, including reduce-production-skills invocations.
+  Use when the user requests substantial production-code reduction or removal
+  of overengineering while preserving intended behavior.
 ---
 
 # Reduce Production Code
