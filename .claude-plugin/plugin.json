@@ -5,7 +5,6 @@
     "./skills/software-engineering/reduce-production-code",
     "./skills/software-engineering/tool-evaluation-and-adoption",
     "./skills/automation/autonomous-improvement-loop",
-    "./skills/research/domain-research",
-    "./skills/devops/coolify-debugging"
+    "./skills/research/domain-research"
   ]
 }

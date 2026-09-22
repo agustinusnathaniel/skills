@@ -24,12 +24,6 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [domain-research](skills/research/domain-research/SKILL.md) | Research a domain via its canonical authorities and frameworks. |
 
-### devops
-
-| Skill | Description |
-|---|---|
-| [coolify-debugging](skills/devops/coolify-debugging/SKILL.md) | Fix misbehaving Coolify-managed containers via DB/API inspection, volumes, and deployments. |
-
 ## Installing Skills
 
 ```bash
