@@ -2,6 +2,9 @@
   "name": "agustinusnathaniel-skills",
   "skills": [
     "./skills/software-engineering/architecture-decision-framework",
-    "./skills/software-engineering/reduce-production-code"
+    "./skills/software-engineering/reduce-production-code",
+    "./skills/software-engineering/tool-evaluation-and-adoption",
+    "./skills/automation/autonomous-improvement-loop",
+    "./skills/research/domain-research"
   ]
 }
