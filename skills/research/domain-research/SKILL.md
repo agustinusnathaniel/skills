@@ -55,10 +55,9 @@ Build the synthesis document: executive framework first, per-domain sections wit
 
 Done when: the document opens with the conclusion, every domain section follows the same structure, every source appears in the references section as `[text](url)`, and the file is written to disk.
 
-## Specialized Variants
+## Worked Example
 
-- **First-party fee/tariff research** (marketplace commissions, seller fees): strict source hierarchy and formula normalization apply — see [references/fee-research.md](references/fee-research.md).
-- **Worked example** of this methodology applied end to end — see [references/company-os-example.md](references/company-os-example.md).
+A full end-to-end application of this methodology — see [references/company-os-example.md](references/company-os-example.md).
 
 ## Quality Standards
 
