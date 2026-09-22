@@ -8,9 +8,9 @@ When the user explicitly says "adopt X" after a prior no-go, implement the adopt
 
 ## Measure Impact Before/After Against a Clean Control
 
-1. Build the branch and record the affected output sizes (raw + compressed — report both).
+1. Build the branch with the project's package manager and record the affected output sizes (raw + compressed — report both).
 2. Build a control from the clean base branch in a separate worktree (`git worktree add /tmp/<repo>-control <base>`), install, and build there. A stash is not a control — build artifacts and dependency state leak across it. The control build doubles as proof that any failing step is pre-existing, not a regression.
-3. Report the delta table with code-splitting context: a lazily-loaded route chunk is paid only by that route — a large lazy chunk can be acceptable where the same size in the global bundle is not.
+3. Report the delta table with code-splitting context: a lazily-loaded chunk is paid only by the route that loads it — weight that is acceptable in a lazy chunk may be unacceptable in the global bundle.
 
 Done when: before/after numbers exist for the affected surfaces, measured against a clean-tree control build.
 

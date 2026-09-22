@@ -16,7 +16,7 @@ A collection of agent skills for AI coding agents.
 
 | Skill | Description |
 |---|---|
-| [autonomous-pr-loop](skills/automation/autonomous-pr-loop/SKILL.md) | Iterate one open draft improvement PR per repo on a recurring schedule. |
+| [autonomous-improvement-loop](skills/automation/autonomous-improvement-loop/SKILL.md) | Compound small improvements on a recurring schedule without per-cycle direction. |
 
 ### research
 

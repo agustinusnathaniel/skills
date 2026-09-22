@@ -22,7 +22,7 @@ A branch can look actionable (diff output vs `main`) while being fully merged: o
 git merge-base --is-ancestor "$branch" origin/main && echo "MERGED — skip" || echo "unique work — candidate"
 ```
 
-Merged means skip; unique work means proceed. Cross-check branches that are the head of the open loop PR — they share its diff and are not separate work.
+Merged means skip; unique work means proceed. Cross-check branches that are the head of the open delivery unit — they share its diff and are not separate work.
 
 Done when: every candidate branch is classified merged or unique by merge-base, and merged ones are skipped.
 
