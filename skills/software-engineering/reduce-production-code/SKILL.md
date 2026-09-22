@@ -42,12 +42,14 @@ costs. Trace scripts, hooks, entry points, bundled consumers, and downstream
 or plugin contracts before declaring code unused. Absence of internal callers
 does not establish that a public name is removable. Resolve specific uncertainties before dismissing major candidates.
 
+On the first pass, sweep every reduction class without waiting for the user to name one: ecosystem delegation, implementation simplification, comment triage, and test deduplication. Account for each class with concrete candidates or an evidence-based retention reason.
+
 Derive a substantial production target in lines and percentage from those
 candidates, then proceed with authorized implementation. Formatting compression,
 file moves, and redistributed complexity do not count as simplification. Favor
 reductions that make behavior easier to locate and follow; splitting large files
 or unifying helpers is not an improvement when it adds indirection or obscures
-ownership. Approved feature retirement is separate and does not count toward
+ownership. Bound each restructure to the smallest unit with checks green before and after; a net-small diff that adds indirection, tables, or cross-module coupling is redistribution and gets reverted. Approved feature retirement is separate and does not count toward
 the preservation target.
 
 Evaluate built-ins, existing dependencies, and established packages before
@@ -67,6 +69,7 @@ representative semantic variants, especially exception scope, cleanup,
 evaluation order, and side effects. Review the affected variants, not just one
 successful example. Before removing a defense, identify the boundary or equivalent
 protection that enforces its invariant and verify relevant invalid inputs.
+Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment.
 
 For behavior-sensitive reductions, establish representative real inputs before
 editing, including cases served by the mechanism being removed. Compare baseline
@@ -129,7 +132,4 @@ private/shared packages. Verify required delivery checks at the final revision;
 distinguish local checks from remote CI. Write release notes around user-visible
 changes, keeping implementation accounting in the PR report.
 
-Report target and actual deltas over the full delivery range: production first,
-tests/support, combined maintained code, then reconciled overall totals. Label
-round subtotals. Explain eliminated mechanisms, dependency tradeoffs, corrected
-defects, verification gaps, and remaining candidates.
+Re-count deltas at the current head when reporting, never at an earlier revision. Report target and actual deltas over the full delivery range: production, tests/support, combined maintained code, and reconciled overall totals led together so production-only savings never stand alone as the result. Label round subtotals. Keep generated/vendor and lockfile churn on their own line; they never count as production savings. Explain eliminated mechanisms, dependency tradeoffs, corrected defects, verification gaps, and remaining candidates.
