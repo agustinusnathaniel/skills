@@ -10,6 +10,25 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
 | [reduce-production-code](skills/software-engineering/reduce-production-code/SKILL.md) | Reduce production code through substantive simplification and ecosystem reuse while preserving intended behavior. |
+| [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
+
+### automation
+
+| Skill | Description |
+|---|---|
+| [autonomous-pr-loop](skills/automation/autonomous-pr-loop/SKILL.md) | Run a scheduled recurring PR-improvement loop across repos, iterating the one open draft loop PR per repo each cycle. |
+
+### research
+
+| Skill | Description |
+|---|---|
+| [domain-research](skills/research/domain-research/SKILL.md) | Research a business or organizational domain via its authoritative voices and canonical frameworks, then synthesize into a structured knowledge document. |
+
+### devops
+
+| Skill | Description |
+|---|---|
+| [coolify-debugging](skills/devops/coolify-debugging/SKILL.md) | Fix unhealthy Coolify-managed containers via DB and API inspection, persistent volumes, and programmatic deployments. |
 
 ## Installing Skills
 
