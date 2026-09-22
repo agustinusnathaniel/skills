@@ -1,6 +1,6 @@
 ---
 name: autonomous-pr-loop
-description: Run a scheduled recurring PR-improvement loop across repos, iterating the one open draft loop PR per repo each cycle. Use when maintaining a repo portfolio with autonomous improvement cycles on a recurring schedule.
+description: Iterate one open draft improvement PR per repo on a recurring schedule. Use when running autonomous improvement cycles across a repo portfolio.
 ---
 
 # Autonomous PR Loop

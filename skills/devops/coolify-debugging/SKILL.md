@@ -1,6 +1,6 @@
 ---
 name: coolify-debugging
-description: Fix unhealthy Coolify-managed containers via DB and API inspection. Use when a Coolify-deployed container is stuck, unhealthy, or slow to start; inspecting service config via the Coolify database or API; adding persistent volumes to a service; or triggering deployments programmatically.
+description: Fix misbehaving Coolify-managed containers. Use when a Coolify-deployed service is stuck or unhealthy; inspecting service config via the DB or API; adding persistent volumes; or triggering deployments.
 ---
 
 # Coolify Debugging

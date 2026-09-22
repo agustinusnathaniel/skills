@@ -1,6 +1,6 @@
 ---
 name: domain-research
-description: Research a business or organizational domain via its authoritative voices and canonical frameworks, then synthesize into a structured knowledge document. Use when asked for deep research on how to build or run something (company systems, department SOPs, operational best practices), for the definitive thinkers and resources in a field, or for multi-domain knowledge synthesis.
+description: Research a domain via its canonical authorities and frameworks. Use when asked for deep research on how to build or run something, or to synthesize knowledge across domains.
 ---
 
 # Domain Research

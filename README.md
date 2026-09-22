@@ -16,19 +16,19 @@ A collection of agent skills for AI coding agents.
 
 | Skill | Description |
 |---|---|
-| [autonomous-pr-loop](skills/automation/autonomous-pr-loop/SKILL.md) | Run a scheduled recurring PR-improvement loop across repos, iterating the one open draft loop PR per repo each cycle. |
+| [autonomous-pr-loop](skills/automation/autonomous-pr-loop/SKILL.md) | Iterate one open draft improvement PR per repo on a recurring schedule. |
 
 ### research
 
 | Skill | Description |
 |---|---|
-| [domain-research](skills/research/domain-research/SKILL.md) | Research a business or organizational domain via its authoritative voices and canonical frameworks, then synthesize into a structured knowledge document. |
+| [domain-research](skills/research/domain-research/SKILL.md) | Research a domain via its canonical authorities and frameworks. |
 
 ### devops
 
 | Skill | Description |
 |---|---|
-| [coolify-debugging](skills/devops/coolify-debugging/SKILL.md) | Fix unhealthy Coolify-managed containers via DB and API inspection, persistent volumes, and programmatic deployments. |
+| [coolify-debugging](skills/devops/coolify-debugging/SKILL.md) | Fix misbehaving Coolify-managed containers via DB/API inspection, volumes, and deployments. |
 
 ## Installing Skills
 

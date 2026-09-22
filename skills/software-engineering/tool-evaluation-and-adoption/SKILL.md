@@ -1,6 +1,6 @@
 ---
 name: tool-evaluation-and-adoption
-description: Vet an open-source tool before adopting it. Use when asked to check out, review, vet, or install a tool, library, or package.
+description: Vet an open-source tool before adopting it. Use when asked to evaluate a tool, library, or package — or to install one.
 ---
 
 # Tool Evaluation & Adoption
