@@ -45,7 +45,7 @@ Done when: `SELECT is_api_enabled FROM instance_settings;` returns `t`.
 
 ## API endpoints
 
-Base URL: `http://<coolify-host>:<port>/api/v1/` (default installs map the app to port 8000). Headers: `Authorization: Bearer <token>`, `Accept: application/json`.
+Base URL: `http://<coolify-host>:<port>/api/v1/` (default installs map the app to port 8000). Headers: `Authorization: Bearer <token>` and `Accept: application/json`.
 
 | Endpoint | Method | Purpose |
 |----------|--------|---------|

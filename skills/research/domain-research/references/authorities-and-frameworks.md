@@ -16,7 +16,7 @@ Starting points for common business domains (verify each before relying on it â€
 
 | Domain | Authority | Core Framework | Why Canonical |
 |---|---|---|---|
-| Engineering leadership | LeadDev | Shape Up, ADRs | Named home of eng leadership |
+| Engineering leadership | LeadDev | Eng org design, 1:1s, career ladders | Named home of eng leadership |
 | Product | Lenny's Newsletter | RICE, PMF, JTBD | Large practitioner subscriber base |
 | Sales | SaaStr | MEDDIC, Challenger | SaaS sales reference |
 | Marketing | HubSpot Blog | Inbound, growth loops | Defined inbound marketing |

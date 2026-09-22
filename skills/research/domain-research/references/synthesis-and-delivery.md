@@ -28,7 +28,7 @@ Done when: summary, sections, tables, actionable conclusion, and saved file are 
 
 ## References Section
 
-Every multi-source research deliverable includes a dedicated references section cataloguing all sources, organized by category (domain or topic). Each entry uses proper markdown anchor syntax `[text](url)` — never bare URLs in tables or lists, which render as unclickable plain text.
+Every multi-source research deliverable includes a dedicated references section cataloguing all sources, organized by category (domain or topic). Each entry uses proper markdown link syntax `[text](url)` — never bare URLs in tables or lists, which render inconsistently across viewers.
 
 Done when: every source cited in the body appears in the references section as a clickable link.
 
