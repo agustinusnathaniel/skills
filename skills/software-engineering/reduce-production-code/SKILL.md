@@ -15,7 +15,6 @@ When the user explicitly applies this skill to documentation, follow
 [documentation reduction](references/documentation.md). For docs-only work, use
 that workflow instead of the production targets below; for mixed work, report docs
 separately. Ordinary feature work and minor cleanup do not need this skill.
-For directive and instruction files, shorten wording only when every workflow still holds; passing a static check alone does not prove adherence.
 
 ## Establish scope and evidence
 
