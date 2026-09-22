@@ -7,6 +7,12 @@ description: Fix misbehaving Coolify-managed containers. Use when a Coolify-depl
 
 Diagnose and reconfigure Coolify-managed Docker services when the Coolify UI is unreachable. Confirm actual names and ports with `docker ps` first — use those live values in every command below.
 
+## Safety rules (every run)
+
+1. **Snapshot before mutating.** Before any `UPDATE`/`INSERT`, `SELECT` the current row into a file (`\copy (SELECT ...) TO '/tmp/coolify-backup-<table>-<id>.sql'`). A DB write with no rollback path is not attempted.
+2. **Least-privilege token.** Create the temp token with only the abilities the run needs (`read` for diagnosis; add `deploy` to trigger deploys; add `write` only for API-side mutations). The `*` wildcard works but is root-equivalent — prefer the minimal set. The acting user must be a team admin/owner; member-owned tokens get `403` on write/deploy.
+3. **Short-lived tokens.** Set `expires_at` at creation and delete the token when the run ends. Never print the raw token into reports or logs — capture once, reference by ID afterwards.
+
 ## Triage
 
 1. List state: `docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Ports}}'` — identifies the target container and whether it is restarting, unhealthy, or merely slow.

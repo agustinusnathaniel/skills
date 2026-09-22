@@ -16,12 +16,12 @@ Done when: `SELECT config_hash FROM services WHERE id = <service_id>;` returns a
 ## Trigger the deploy
 
 ```bash
-curl -s -X POST "http://<coolify-host>:8000/api/v1/deploy?uuid=<resource_uuid>&type=service" \
+curl -s -X POST "http://<coolify-host>:8000/api/v1/deploy?uuid=<resource_uuid>" \
   -H "Authorization: Bearer <token>" \
   -H "Accept: application/json"
 ```
 
-Use `type=application` with the application UUID for standalone apps. Confirm the API is enabled (`is_api_enabled` in `instance_settings`) before calling.
+The endpoint resolves any resource type by UUID — no `type` parameter needed. Alternatives: `?uuid=<a>,<b>` for several resources at once, `?tag=<tag>` for tag-based deploys, `&force=true` to redeploy without changes. Confirm the API is enabled (`is_api_enabled` in `instance_settings`) before calling.
 Done when: the API returns success and the Coolify dashboard shows a running deployment, or `docker ps` shows the container recreating.
 
 ## Timing rules

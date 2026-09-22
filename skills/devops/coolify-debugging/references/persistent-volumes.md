@@ -1,6 +1,17 @@
 # Adding a Persistent Volume
 
-Persist a directory across redeploys of a Compose-based Coolify service. Both the volume-tracking table and the stored Compose template need updating — either one alone leaves the volume unmounted. Resolve IDs first via [coolify-db-api.md](coolify-db-api.md).
+Persist a directory across redeploys of a Compose-based Coolify service. Both the volume-tracking table and the stored Compose template need updating — either one alone leaves the volume unmounted. Resolve IDs first via [coolify-db-api.md](coolify-db-api.md). Snapshot both rows before mutating (per the parent skill's safety rules).
+
+## Step 0: Check for an existing volume
+
+`local_persistent_volumes` has a unique constraint on `(name, resource_id, resource_type)` — re-running the insert errors. Check first:
+
+```bash
+docker exec coolify-db psql -U coolify -d coolify -c \
+  "SELECT id, name, mount_path FROM local_persistent_volumes WHERE resource_id = <app_id>;"
+```
+
+Done when: the volume is confirmed absent (proceed), or present (skip to Step 3).
 
 ## Step 1: Register the volume
 
@@ -17,6 +28,8 @@ Use `resource_type = 'App\Models\Application'` with the `applications` row ID fo
 Done when: `SELECT * FROM local_persistent_volumes WHERE resource_id = <app_id>;` returns the new row.
 
 ## Step 2: Update the stored Compose template
+
+Edit the `services.docker_compose` field — this is the parsed template Coolify actually deploys (distinct from `docker_compose_raw`, the user-editable source the UI may regenerate it from; prefer the UI for compose changes whenever it is reachable).
 
 Edit the `services.docker_compose` field with a `PL/pgSQL` block that adds the mount to the service's `volumes` list and declares the top-level volume. Write the SQL to a file and pipe it via stdin to avoid shell-quoting breakage:
 

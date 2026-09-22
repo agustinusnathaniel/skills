@@ -15,7 +15,14 @@ Done when: each container's live name is confirmed from `docker ps` output.
 
 ## Creating a temporary API token
 
-Insert a token directly into the database (the app user with `id = 0` breaks some in-app token flows, so direct insertion is the reliable path):
+Resolve the owning team first — the token is team-scoped and only works if the acting user belongs to that team (on single-team instances this is typically id `0`):
+
+```bash
+docker exec coolify-db psql -U coolify -d coolify -c "SELECT id, name FROM teams;"
+docker exec coolify-db psql -U coolify -d coolify -c "SELECT id, email FROM users;"
+```
+
+Insert a short-lived token with only the needed abilities (the app user with `id = 0` breaks some in-app token flows, so direct insertion is the reliable path):
 
 ```bash
 docker exec coolify-db psql -U coolify -d coolify -c "SELECT id, email FROM users;"
@@ -25,14 +32,25 @@ TOKEN_HASH=$(echo -n "$API_TOKEN" | sha256sum | cut -d' ' -f1)
 
 docker exec coolify-db psql -U coolify -d coolify -c "
 INSERT INTO personal_access_tokens
-(tokenable_type, tokenable_id, name, token, abilities, created_at, updated_at, team_id)
-VALUES ('App\\Models\\User', <user_id>, 'temp-api-token', '$TOKEN_HASH', '[\"*\"]', NOW(), NOW(), 0);
+(tokenable_type, tokenable_id, name, token, abilities, created_at, updated_at, expires_at, team_id)
+VALUES ('App\\Models\\User', <user_id>, 'temp-api-token', '$TOKEN_HASH', '[\"read\", \"deploy\"]', NOW(), NOW(), NOW() + INTERVAL '2 hours', <team_id>)
+RETURNING id;
 "
-
-echo "API Token: $API_TOKEN"
 ```
 
+Record the returned row ID and keep the raw `$API_TOKEN` out of reports and logs. Abilities needed per task: `read` for diagnosis, plus `deploy` to trigger deploys, plus `write` for API-side mutations.
+
 Done when: a subsequent authenticated API call returns `200`.
+
+## Deleting the temp token
+
+When the run ends (or the token expires), remove it:
+
+```bash
+docker exec coolify-db psql -U coolify -d coolify -c "DELETE FROM personal_access_tokens WHERE id = <token_row_id>;"
+```
+
+Done when: the row is gone and no token value remains in logs or state.
 
 ## Enabling the API
 
