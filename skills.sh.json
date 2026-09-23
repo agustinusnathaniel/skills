@@ -1,0 +1,25 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Software Engineering",
+      "description": "Skills for architecture decisions, lean production code, and tool adoption.",
+      "skills": [
+        "architecture-decision-framework",
+        "reduce-production-code",
+        "tool-evaluation-and-adoption"
+      ]
+    },
+    {
+      "title": "Automation",
+      "description": "Recurring improvement loops that run without per-cycle direction.",
+      "skills": ["autonomous-improvement-loop"]
+    },
+    {
+      "title": "Research",
+      "description": "Deep domain research via canonical authorities and frameworks.",
+      "skills": ["domain-research"]
+    }
+  ]
+}
