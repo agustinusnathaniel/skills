@@ -110,7 +110,10 @@ regression risk. After replacing an implementation, retire obsolete internal and
 upstream-algorithm tests while preserving application contracts, integration
 coverage, and compatibility pins. Retain cases exercising removed mechanisms until
 their behavior is protected at the replacement boundary. Remove obsolete test-only
-exports while preserving public APIs. Simplify any new glue, test setup, and docs.
+exports while preserving public APIs. Prefer retiring tautological tests that
+restate the implementation and change-detector tests that lock in output without
+a behavior contract. Avoid adding a regression test for a bug fix without a
+genuine behavior gap it would have caught. Simplify any new glue, test setup, and docs.
 
 ## Continue and finish
 
