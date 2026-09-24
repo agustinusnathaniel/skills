@@ -16,11 +16,14 @@ Done when: `git status --short` is clean by commit or deliberate discard — nev
 
 ## Confirm whether work already landed
 
-A branch can look actionable while its changes have already landed. Fetch the
-delivery's actual base branch and check the forge's PR state. An ancestor check
-can establish that the head is merged:
+A branch can look actionable while its changes have already landed. Resolve the
+delivery's actual base ref, fetch it, and check the forge's PR state before the
+ancestor check:
 
 ```bash
+git fetch origin
+base_ref="origin/$(gh pr view "$branch" --json baseRefName -q .baseRefName)"
+gh pr view "$branch" --json state,mergedAt,headRefOid
 git merge-base --is-ancestor "$branch" "$base_ref"
 ```
 
@@ -32,7 +35,8 @@ Without forge evidence, compare patches and resulting code against the base;
 Branches backing the same open delivery are one unit of work.
 
 Done when: landed work is skipped, remaining work has an identified diff, or an
-unresolved classification is recorded for follow-up.
+unresolved classification is recorded in the target's state entry (branch, base
+ref checked, evidence seen, and next step).
 
 ## Refresh a branch behind main with merge, not rewrite
 
@@ -77,4 +81,5 @@ ready or merge only when the current instruction or recorded standing authority
 covers that action, after the [completion checklist](loop-cycle.md) passes.
 Use the repository's merge policy when merging is authorized.
 
-Done when: state records the authorized delivery status and any pending owner action.
+Done when: state records the authorized delivery status and any pending owner action
+(see `authority` and `delivery_status` in the [loop-cycle.md](loop-cycle.md) state schema).

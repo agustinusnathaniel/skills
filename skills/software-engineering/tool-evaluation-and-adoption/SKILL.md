@@ -64,9 +64,12 @@ For evaluate-only scope, deliver the assessment and ask whether to adopt. When
 installation is already authorized, carry relevant findings into Step 7 and report
 the result after verification. Ask only if a newly discovered blocker requires a
 user decision, such as accepting a material capability loss or expanding scope.
+A No-go verdict or unresolved security or license concern is always a blocker
+requiring an explicit user decision, even when installation was previously authorized.
 
 Done when: the verdict and its evidence are clear, and either adoption proceeds
-under existing authorization or the unresolved decision is presented concretely.
+under existing authorization or the unresolved decision is presented concretely
+(the decision needed plus the options).
 
 ## Step 7: Install (when authorized)
 
