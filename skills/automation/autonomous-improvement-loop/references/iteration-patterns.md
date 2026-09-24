@@ -14,17 +14,25 @@ Branch metadata only sees committed diff. Before writing off a branch as merged 
 
 Done when: `git status --short` is clean by commit or deliberate discard — never by assumption.
 
-## Merge-base is the arbiter for "already merged"
+## Confirm whether work already landed
 
-A branch can look actionable (diff output vs `main`) while being fully merged: on an ancestor branch the two-dot diff shows the reverse diff, not unmerged work. Before investing effort, run:
+A branch can look actionable while its changes have already landed. Fetch the
+delivery's actual base branch and check the forge's PR state. An ancestor check
+can establish that the head is merged:
 
 ```bash
-git merge-base --is-ancestor "$branch" origin/main && echo "MERGED — skip" || echo "unique work — candidate"
+git merge-base --is-ancestor "$branch" "$base_ref"
 ```
 
-Merged means skip; unique work means proceed. Cross-check branches that are the head of the open delivery unit — they share its diff and are not separate work.
+Exit 0 proves ancestry; exit 1 is inconclusive after squash or rebase merges;
+other exits indicate a failed check. For a non-ancestor, use the PR's merged state
+and inspect any work added after its recorded head before treating it as new.
+Without forge evidence, compare patches and resulting code against the base;
+`git cherry` can help with equivalent commits but does not prove squash equivalence.
+Branches backing the same open delivery are one unit of work.
 
-Done when: every candidate branch is classified merged or unique by merge-base, and merged ones are skipped.
+Done when: landed work is skipped, remaining work has an identified diff, or an
+unresolved classification is recorded for follow-up.
 
 ## Refresh a branch behind main with merge, not rewrite
 
@@ -62,8 +70,11 @@ Done when: every file in the diff maps to a body bullet, every body claim traces
 - Lint passes
 ```
 
-## Un-draft and merge deliberately
+## Respect the delivery boundary
 
-Draft PRs cannot merge until marked ready: `gh pr ready <number>`, then merge (squash by default). Un-draft only a PR that passes the PR-complete checklist in [loop-cycle.md](loop-cycle.md) — readiness is a verified state, not a timer.
+Draft delivery is complete when the verified PR is available for review. Mark it
+ready or merge only when the current instruction or recorded standing authority
+covers that action, after the [completion checklist](loop-cycle.md) passes.
+Use the repository's merge policy when merging is authorized.
 
-Done when: the PR is merged and its state entry records the merge, or it remains draft with the reason recorded.
+Done when: state records the authorized delivery status and any pending owner action.
