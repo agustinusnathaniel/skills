@@ -44,7 +44,7 @@ Declare "no iteration needed" only when all of these hold:
 2. The full gate suite exits 0.
 3. CI check-runs on the head SHA all conclude success.
 4. Both comment threads are read: review comments and issue comments (bot and human feedback live in different threads).
-5. The branch is not behind the base (`git rev-list --count HEAD..origin/main` is 0).
+5. The branch is not behind the base (`git rev-list --count HEAD..<base-ref>` is 0; the base ref is usually `origin/main`, resolved per [iteration-patterns.md](iteration-patterns.md)).
 6. Repo-required checks (changelog entries, coverage gates, bot checks) are evaluated against merged-PR precedent before acting — warnings on no-behavior-change work are informational.
 
 Done when: all six checks pass (record "skipped — complete"), or the found work is implemented, gated green, pushed, and the description reconciled.
@@ -71,7 +71,9 @@ Track per-target state across cycles in a small JSON file kept on persistent sto
       "visited": "2026-09-22T00:00:00+00:00",
       "pr": 42,
       "pr_url": "https://github.com/<owner>/my-repo/pull/42",
-      "last_action": "iterated: fixed CI lint failure"
+      "last_action": "iterated: fixed CI lint failure",
+      "delivery_status": "draft: awaiting owner review",
+      "authority": "none (record scope and source here when standing delivery authority is granted)"
     }
   },
   "cursor": 0,

@@ -100,6 +100,11 @@ names, schemas, CLI behavior, and serialized shapes. Use exact comparison when
 representation is contractual; otherwise compare semantics and normalize only
 known nondeterminism.
 
+When CLI or integration flows change, exercise the affected user journey through
+the built entry point in an isolated environment. Check choices, cancellation,
+scope, and resulting state where relevant; help output and helper tests alone
+do not establish that the flow works. Report unexercised paths as verification gaps.
+
 Add repeatable coverage at the smallest boundary that catches an uncovered
 regression risk. After replacing an implementation, retire obsolete internal and
 upstream-algorithm tests while preserving application contracts, integration
