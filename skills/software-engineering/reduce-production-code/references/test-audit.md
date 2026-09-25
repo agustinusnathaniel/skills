@@ -11,10 +11,9 @@ change-detector tests that lock in output without a behavior contract. Also
 inspect tests that compute expected values with the code under test, duplicate
 a stronger test, or assert only a mock's behavior. Check whether each test
 reaches the path its name promises. Check that negative controls observe the
-intended rejection
-rather than an unrelated guard, and that fixtures or mocks do not supply
-behavior the production path should produce. Identify exports, wrappers, flags,
-and hooks with no production caller.
+intended rejection rather than an unrelated guard, and that fixtures or mocks
+do not supply behavior the production path should produce. Identify exports,
+wrappers, flags, and hooks with no production caller.
 
 For each candidate, record its exact test and location, then establish:
 
