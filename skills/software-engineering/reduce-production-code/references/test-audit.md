@@ -3,8 +3,6 @@
 Use this reference when replacing an implementation, reducing tests, or removing
 production code retained only for tests. Optimize for maintained code and
 confidence together; deletion count alone is not evidence of improvement.
-For a whole-subsystem test reduction, follow the
-[subsystem campaign](test-audit-campaign.md) before editing.
 
 ## Find and assess candidates
 
@@ -31,6 +29,10 @@ cheapest independent guard. Investigate a failing baseline test as a possible
 product defect before removing it.
 
 Done when: each proposed removal has evidence that its contract is protected elsewhere or is obsolete.
+
+For broad test removal, inventory affected contracts and name the retained
+proof or obsolescence reason for each before editing. Compare removed coverage
+against that proof at the final revision.
 
 ## Reduce and verify
 
