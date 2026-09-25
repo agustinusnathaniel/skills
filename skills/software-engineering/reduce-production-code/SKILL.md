@@ -106,14 +106,10 @@ scope, and resulting state where relevant; help output and helper tests alone
 do not establish that the flow works. Report unexercised paths as verification gaps.
 
 Add repeatable coverage at the smallest boundary that catches an uncovered
-regression risk. After replacing an implementation, retire obsolete internal and
-upstream-algorithm tests while preserving application contracts, integration
-coverage, and compatibility pins. Retain cases exercising removed mechanisms until
-their behavior is protected at the replacement boundary. Remove obsolete test-only
-exports while preserving public APIs. Prefer retiring tautological tests that
-restate the implementation and change-detector tests that lock in output without
-a behavior contract. Avoid adding a regression test for a bug fix without a
-genuine behavior gap it would have caught. Simplify any new glue, test setup, and docs.
+regression risk. When replacing an implementation, reducing tests, or removing
+test-only production support, follow [test audit](references/test-audit.md) to
+identify redundant proof and preserve behavioral contracts. Simplify any new
+glue, test setup, and docs.
 
 ## Continue and finish
 

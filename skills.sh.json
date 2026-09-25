@@ -4,10 +4,11 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, lean production code, and tool adoption.",
+      "description": "Skills for architecture decisions, code reduction, testing, and tool adoption.",
       "skills": [
         "architecture-decision-framework",
         "reduce-production-code",
+        "test-strategy",
         "tool-evaluation-and-adoption"
       ]
     },
