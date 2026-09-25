@@ -10,6 +10,7 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
 | [reduce-production-code](skills/software-engineering/reduce-production-code/SKILL.md) | Reduce production code through substantive simplification and ecosystem reuse while preserving intended behavior. |
+| [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
 
 ### automation

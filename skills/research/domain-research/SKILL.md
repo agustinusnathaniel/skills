@@ -27,9 +27,9 @@ Identify the canonical authority for each domain, extract core frameworks, and s
 
 ### Step 1: Clarify the frame
 
-Confirm what is being designed (org, product, process), what "authoritative" means to the requester (ask for an example of a source they respect — it sets the quality bar), the resource constraint (startup vs enterprise), and the time horizon.
+Identify what is being designed, the resource constraint, and the time horizon from the request. Use any supplied source example to calibrate authority. Ask for missing context only when it could change source selection or depth; otherwise state the assumption and proceed.
 
-Done when: system type, quality-bar example, resource constraint, and depth horizon are all stated.
+Done when: the research frame and depth are stated, with decision-changing unknowns resolved or identified.
 
 ### Step 2: Identify domain-level authorities
 
@@ -68,7 +68,7 @@ A full end-to-end application of this methodology — see [references/company-os
 
 ## Pitfalls
 
-- **First pass too shallow**: calibrate the depth bar early by asking what "good" looks like before diving deep.
+- **First pass too shallow**: calibrate depth against the requested decision and any source examples the requester supplied.
 - **Generic sources**: investor content is rarely the best source for department operations — prefer practitioner authorities.
 - **Framework vs blog post**: a blog post says what happened; a framework says what to do — prioritize frameworks.
 - **Blocked sources**: search engines and JS-heavy sites often block automated browsing — have fallbacks (direct URLs, subdomain variants, the site's own search) and note gaps honestly.
