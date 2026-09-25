@@ -3,6 +3,8 @@
 Use this reference when replacing an implementation, reducing tests, or removing
 production code retained only for tests. Optimize for maintained code and
 confidence together; deletion count alone is not evidence of improvement.
+For a whole-subsystem test reduction, follow the
+[subsystem campaign](test-audit-campaign.md) before editing.
 
 ## Find and assess candidates
 
