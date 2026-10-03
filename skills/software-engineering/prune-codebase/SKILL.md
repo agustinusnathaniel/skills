@@ -1,11 +1,13 @@
 ---
-name: reduce-production-code
+name: prune-codebase
 description: >
-  Use when the user requests substantial production-code reduction or removal
-  of overengineering while preserving intended behavior.
+  Use for substantial codebase reduction or removal of overengineering across
+  production code and supporting tests, documentation, configuration, and tooling.
+  Preserve intended behavior and useful rationale; exclude ordinary feature work
+  and minor cleanup.
 ---
 
-# Reduce Production Code
+# Prune Codebase
 
 Deliver substantially less live application code that humans and agents can
 understand and maintain. Preserve intended capabilities and correct confirmed
@@ -28,8 +30,10 @@ Record a fixed baseline without disturbing user changes. Count with one method i
 exclusive buckets: production, tests/support, docs/directives, generated/vendor,
 and other. Classify maintained registries, configuration, and templates with the
 behavior they implement; preserve retained component inventories unless pruning
-is requested. Include new/untracked work, reconcile with the complete diff, and
-explain classification corrections. Keep current-round and cumulative deltas
+is requested. Determine generated status from actual ownership and provenance,
+not mentions of generated headers in maintained source or tests. Include
+new/untracked work, reconcile with the complete diff, and explain classification
+corrections. Keep current-round and cumulative deltas
 distinct, using any comparison range the user specifies.
 
 ## Choose substantial reductions
