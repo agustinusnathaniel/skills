@@ -64,6 +64,8 @@ and editorial ledgers belong in the delivery report. Independently review
 consequential consolidation against the original boundary decisions, not only the
 rewritten summary or successful link/build checks.
 
+## Completion
+
 Finish when the scoped pages have been addressed, needed information remains
 accurate and findable, wording reads naturally, and applicable checks pass. Report
 docs deltas separately from production savings, summarize maintenance removed,
