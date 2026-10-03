@@ -1,12 +1,13 @@
 ---
-name: reduce-production-code
+name: prune-codebase
 description: >
-  Use when the user requests substantial production-code reduction or removal
-  of overengineering while preserving intended behavior, or explicitly applies
-  this skill to substantial documentation reduction.
+  Use for substantial codebase reduction or removal of overengineering across
+  production code and supporting tests, documentation, configuration, and tooling.
+  Preserve intended behavior and useful rationale; exclude ordinary feature work
+  and minor cleanup.
 ---
 
-# Reduce Production Code
+# Prune Codebase
 
 Deliver substantially less live application code that humans and agents can
 understand and maintain. Preserve intended capabilities and correct confirmed

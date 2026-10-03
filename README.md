@@ -9,7 +9,7 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
-| [reduce-production-code](skills/software-engineering/reduce-production-code/SKILL.md) | Reduce production code through substantive simplification and ecosystem reuse while preserving intended behavior. |
+| [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
 
@@ -32,6 +32,12 @@ npx skills add agustinusnathaniel/skills
 ```
 
 This will present an interactive picker of all available skills. Select the ones you want.
+
+### Skill rename
+
+`reduce-production-code` is now `prune-codebase`. Reinstall from this repository
+and select `prune-codebase`, then update saved invocations and links that use the
+old name. Existing installed copies retain their old name until migrated.
 
 ## Adding New Skills
 
