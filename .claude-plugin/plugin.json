@@ -3,6 +3,7 @@
   "skills": [
     "./skills/software-engineering/architecture-decision-framework",
     "./skills/software-engineering/bulk-import-engineering",
+    "./skills/software-engineering/external-integration-engineering",
     "./skills/software-engineering/prune-codebase",
     "./skills/software-engineering/test-strategy",
     "./skills/software-engineering/tool-evaluation-and-adoption",
