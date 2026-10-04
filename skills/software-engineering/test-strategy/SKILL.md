@@ -7,41 +7,37 @@ description: >
 
 # Test Strategy
 
-Choose the smallest test boundary that pins a genuine behavior gap, with a
-preference for E2E coverage on complex features where feasible.
+Choose the smallest test boundary that proves the observable behavior at risk.
+For complex features, prefer repeatable end-to-end coverage where practical,
+especially when a failure crosses system boundaries or only the assembled
+product can expose it. A smaller boundary is cheaper and clearer for a local,
+stable failure mode; account for end-to-end runtime and flakiness costs.
 
-## Avoid low-value tests
+## Establish the failure contract
 
-Retire or avoid tautological tests that restate the implementation, so a
-rewrite that preserves behavior does not break the suite. Retire or avoid
-change-detector tests that snapshot output without a behavior contract the
-reader can defend. Avoid adding a regression test for a bug fix unless it
-names the genuine behavior gap it would have caught.
+Before choosing checks or changing behavior, state the externally observable
+result and invariant at risk. Identify plausible failure modes, then select
+only the cases that expose a real gap at the chosen boundary.
 
-## Work failure-modes-first
+## Check, implement, verify
 
-Avoid writing isolated unit tests after the code as routine practice. Instead:
+When practical, express the most important gap as the smallest meaningful
+check and run it before the fix to confirm it can expose the failure. Then
+implement the change and rerun that check plus relevant existing verification.
+This is a useful red-before-green tactic, not a requirement to use test-driven
+development on every change. If a check cannot run or fail before new behavior
+exists, keep the failure contract explicit and verify the observable result
+after implementation.
 
-1. List how the system could fail (wrong input, missing dependency, ordering,
-   concurrency, partial failure).
-2. Write the smallest code that handles those modes.
-3. Pin the modes that matter with tests at the chosen boundary.
+Avoid tautological tests that restate implementation, snapshots without a
+defensible behavior contract, and regression tests that do not protect a
+genuine gap. Do not create tests, fixtures, or scripts solely to satisfy a
+sequence; each should protect an in-scope behavior or failure mode.
 
-When isolated testing is needed, enumerate failure modes first, then test the
-modes with a real behavior gap.
-
-## Prefer artifact-producing E2E where feasible
-
-For complex features, prefer E2E as the primary mechanism where feasible:
-exercise the built entry point in an isolated environment and produce a
-verifiable repeatable artifact (script output, report, state diff, recording,
-or log excerpt).
-
-Each E2E states its setup, action, expected observable result, and where the
-artifact lives.
-
-## Tradeoffs
-
-E2E coverage costs more to run and can be flaky; when the failure mode is
-local and stable, a smaller boundary is cheaper and clearer. Choose the
-boundary that catches the risk with the least ownership cost.
+For complex behavior where end-to-end coverage is the chosen boundary, make
+the run repeatable and record its setup, action, expected observable result,
+and artifact location. Keep artifacts limited to relevant, redacted evidence.
+For retried external effects, durable workflows, or compatibility risks, use
+[workflow failure guidance](references/workflow-failures.md). For UI state
+changes involving navigation, async state, permissions, sessions or accounts,
+or keyboard and focus, use [UI state guidance](references/ui-state-verification.md).
