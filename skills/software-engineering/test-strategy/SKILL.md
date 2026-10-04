@@ -41,3 +41,5 @@ For retried external effects, durable workflows, or compatibility risks, use
 [workflow failure guidance](references/workflow-failures.md). For UI state
 changes involving navigation, async state, permissions, sessions or accounts,
 or keyboard and focus, use [UI state guidance](references/ui-state-verification.md).
+For static SPA builds, host routing, or release compatibility checks, use
+[SPA deployment verification](references/spa-deployment-verification.md).
