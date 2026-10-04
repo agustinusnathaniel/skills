@@ -15,7 +15,8 @@ behavior contract.
 - **Permissions, sessions, and accounts:** when access or identity transitions
   change, check the visible affordance and the resulting action at its
   enforcement boundary. Where account switching is supported, verify that
-  stale account state does not remain visible or actionable.
+  stale account state does not remain visible or actionable. For report-specific
+  activation and request paths, use [permission-gated report checks](permission-gated-reports.md).
 - **Keyboard and focus:** when dialogs, menus, forms, or state changes affect
   keyboard use, verify the relevant tab sequence, focus entry and return, and
   focus behavior after errors or dismissal. Check accessible status or error
