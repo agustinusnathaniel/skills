@@ -1,11 +1,12 @@
 ---
-name: bulk-import-workflows
+name: bulk-import-engineering
 description: >
-  Build or audit bulk file imports with validation previews and explicit
-  execution. Use for import workflows rather than ordinary uploads or analysis.
+  Plan, build, or audit bulk file import features with validation previews,
+  execution identity, job status, and safe recovery. Excludes ordinary uploads
+  and file analysis.
 ---
 
-# Bulk Import Workflows
+# Bulk Import Engineering
 
 Keep validation, preview, execution, and status tied to the same import operation.
 
