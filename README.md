@@ -11,6 +11,7 @@ A collection of agent skills for AI coding agents.
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
+| [operational-data-tables](skills/software-engineering/operational-data-tables/SKILL.md) | Keep URL state, server paging, cache identity, and export scope consistent. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
 
 ### automation
@@ -41,4 +42,6 @@ old name. Existing installed copies retain their old name until migrated.
 
 ## Adding New Skills
 
-Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`.
+Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, the appropriate `skills.sh.json` grouping, and the table above.
+
+Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.

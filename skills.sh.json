@@ -4,11 +4,12 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, code reduction, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, codebase pruning, testing, tool adoption, and operational workflows.",
       "skills": [
         "architecture-decision-framework",
         "prune-codebase",
         "test-strategy",
+        "operational-data-tables",
         "tool-evaluation-and-adoption"
       ]
     },
