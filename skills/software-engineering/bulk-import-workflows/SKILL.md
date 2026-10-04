@@ -21,7 +21,16 @@ If preview rows are editable, establish how the server validates the edited
 revision and binds execution to it. Ignore obsolete validation responses so an
 earlier selection cannot replace the current preview.
 
-Represent pending, in-progress, successful, partial, and failed outcomes according to the server contract. Define retry and reset behavior from that contract, including whether retry applies to failed items or the whole operation. Do not assume every import is atomic. If a connection fails after execution may have started, reconcile the existing operation and its status before submitting again; a lost response does not prove that no work occurred.
+Represent pending, in-progress, successful, partial, and failed outcomes according to the server contract. Define retry and reset behavior from that contract, including whether retry applies to failed items or the whole operation. Do not assume every import is atomic. A lost response does not prove that no work occurred.
+
+Recover an uncertain outcome through the backend's supported mechanism. When
+the server guarantees idempotent replay for the same operation key and unchanged
+payload, and the operation remains within that guarantee's retention window,
+replay that existing intent without requiring a separate status lookup.
+Otherwise reconcile through an available
+status or recovery path before creating another intent. If neither safe replay
+nor reconciliation is supported, keep the outcome unknown and surface the
+contract gap; generating a fresh key does not resolve it.
 
 Use a stable operation identity when the backend supports one. A disabled button or client-generated identifier improves the interface but does not enforce duplicate handling, authorization, or concurrency. Keep those decisions authoritative at the server boundary, and associate displayed progress and results with the correct operation.
 
