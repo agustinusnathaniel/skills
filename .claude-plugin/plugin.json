@@ -1,5 +1,10 @@
 {
   "name": "agustinusnathaniel-skills",
+  "version": "1.0.0",
+  "description": "Reusable skills for software engineering, automation, and research.",
+  "author": {
+    "name": "Agustinus Nathaniel"
+  },
   "skills": [
     "./skills/software-engineering/architecture-decision-framework",
     "./skills/software-engineering/bulk-import-engineering",
