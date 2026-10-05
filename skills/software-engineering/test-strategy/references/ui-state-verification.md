@@ -6,6 +6,9 @@ behavior contract.
 
 ## Choose observable transitions
 
+- **Forms and uploads:** when conditional fields, edit prefill, payload mapping,
+  or persisted attachments change, use [form and upload checks](form-upload-contracts.md).
+
 - **URL navigation:** when routes, query state, or history behavior change,
   verify direct entry and the affected refresh, back, or forward transitions.
   Check both the resulting URL and rendered state.
