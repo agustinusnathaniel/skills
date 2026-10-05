@@ -10,7 +10,7 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
 | [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery. |
-| [external-integration-engineering](skills/software-engineering/external-integration-engineering/SKILL.md) | Preserve operation intent across provider calls, callbacks, local publication, and recovery. |
+| [external-integration-engineering](skills/software-engineering/external-integration-engineering/SKILL.md) | Plan, build, or audit safe retries and recovery for third-party writes, webhooks, and database-to-provider work. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |

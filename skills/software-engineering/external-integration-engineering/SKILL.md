@@ -1,14 +1,25 @@
 ---
 name: external-integration-engineering
 description: >
-  Plan, build, or audit webhook and external API workflows with retried
-  mutations, duplicate events, uncertain outcomes, or local publication gaps.
-  Excludes read-only API calls and provider setup.
+  Use when planning, building, or auditing recovery for third-party writes
+  that time out or retry, duplicated or delayed webhooks, or database changes
+  that must reliably trigger external work. Covers safe replay, effect
+  deduplication, and reconciliation; excludes read-only calls and provider setup.
 ---
 
 # External integration engineering
 
-Preserve the business intent across every boundary between the application and an external provider. Start by identifying the side effect, the state that is authoritative, what counts as a duplicate, and what the caller must be able to know after a failure.
+Build integrations that recover from interruption without repeating a business effect or losing accepted work. Determine what the provider actually completed, what local state should reflect, and how to recover when the result is still unknown.
+
+Reach for this skill when:
+
+- A create, send, or update request times out, and retrying could perform the action twice.
+- A provider sends duplicate or delayed webhooks, and processing them could repeat an action or restore stale state.
+- A database change succeeds but the process stops before scheduling or sending the required external work.
+
+The result is an implementation or review with explicit retry, duplicate-handling, and recovery rules for the boundaries in scope. For a plan, identify those rules and the evidence needed to verify them. Apply the provider's setup guidance for credentials and SDK installation; use this skill when the operation's failure behavior needs engineering decisions.
+
+Start by identifying the side effect, the state that is authoritative, what counts as a duplicate, and what the caller must be able to know after a failure.
 
 For planning, building, or auditing, inspect the current implementation and the provider's official documentation for the exact API and SDK in use. Verify the guarantee's scope and retention, payload constraints, supported lookups, authentication protocol, delivery behavior, and SDK retry policy. State observed behavior separately from proposed contracts. Label a contract as proposed until repository evidence shows it already exists.
 
