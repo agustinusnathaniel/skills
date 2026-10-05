@@ -1,0 +1,15 @@
+{
+  "name": "agustinusnathaniel-skills",
+  "description": "Reusable skills for software engineering, automation, and research.",
+  "owner": {
+    "name": "Agustinus Nathaniel"
+  },
+  "plugins": [
+    {
+      "name": "agustinusnathaniel-skills",
+      "source": "./",
+      "version": "1.0.0",
+      "description": "Skills for software engineering, automation, and research."
+    }
+  ]
+}

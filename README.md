@@ -28,11 +28,36 @@ A collection of agent skills for AI coding agents.
 
 ## Installing Skills
 
+### Interactive picker
+
 ```bash
 npx skills add agustinusnathaniel/skills
 ```
 
 This will present an interactive picker of all available skills. Select the ones you want.
+
+### Bundled plugin
+
+The repository also packages all maintained skills as one plugin for Claude Code, Codex CLI, and ZCode.
+The root `marketplace.json` is a compatibility mirror of `.claude-plugin/marketplace.json`; keep their plugin entries and versions aligned.
+
+In Claude Code, add the marketplace and install the bundled plugin:
+
+```text
+/plugin marketplace add agustinusnathaniel/skills
+/plugin install agustinusnathaniel-skills@agustinusnathaniel-skills
+```
+
+In Codex CLI, add the marketplace and install the same plugin:
+
+```bash
+codex plugin marketplace add agustinusnathaniel/skills
+codex plugin add agustinusnathaniel-skills@agustinusnathaniel-skills
+```
+
+In ZCode, open a workspace, then go to **Settings > Plugins > Create > Add marketplace** and enter `agustinusnathaniel/skills`. Find the marketplace in the **Personal** section and install the bundled plugin.
+
+When publishing an update, bump the version in `.claude-plugin/plugin.json` and the matching plugin entry in every `marketplace.json` file.
 
 ### Skill rename
 
