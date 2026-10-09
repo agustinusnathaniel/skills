@@ -1,0 +1,13 @@
+{
+  "name": "agustinusnathaniel-skills",
+  "version": "1.0.0",
+  "description": "Software engineering skills: architecture decisions, bulk imports, codebase pruning, test strategy, and tool evaluation.",
+  "author": {
+    "name": "Agustinus Nathaniel"
+  },
+  "homepage": "https://github.com/agustinusnathaniel/skills",
+  "repository": "https://github.com/agustinusnathaniel/skills",
+  "skills": [
+    "skills/software-engineering"
+  ]
+}
