@@ -57,7 +57,15 @@ codex plugin add agustinusnathaniel-skills@agustinusnathaniel-skills
 
 In ZCode, open a workspace, then go to **Settings > Plugins > Create > Add marketplace** and enter `agustinusnathaniel/skills`. Find the marketplace in the **Personal** section and install the bundled plugin.
 
-When publishing an update, bump the version in `.claude-plugin/plugin.json` and the matching plugin entry in every `marketplace.json` file.
+In Devin, install it from **Customize → Plugins → Add plugin → From repository** with `agustinusnathaniel/skills`, or with the CLI:
+
+```bash
+devin plugins install agustinusnathaniel/skills
+```
+
+The Devin manifest (`.devin-plugin/plugin.json`) takes precedence over `.claude-plugin/plugin.json` in Devin and loads only the `software-engineering` skills.
+
+When publishing an update, bump the version in `.claude-plugin/plugin.json`, `.devin-plugin/plugin.json`, and the matching plugin entry in every `marketplace.json` file.
 
 ### Skill rename
 
