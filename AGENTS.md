@@ -26,10 +26,10 @@ Improve skills from observed runs, not imagined ones.
    of anything committed.
 2. Check each finding against the current text and git history; a finding the
    skill already answers is a triggering or wording problem, not a missing rule.
-3. Add or update an eval case under `evals/` that fails on the observed behavior,
-   then edit the skill.
-4. Run the suite with and without the plugin:
-   `claude plugin eval . --allow-tools Read --model <pinned model>`; without the
-   `Read` grant the sandbox can block skills from opening their reference files.
-   Keep a change when the with-plugin arm improves on its case without
-   regressing others.
+3. Generalize the finding into the skill that owns the behavior, then watch the
+   next sessions where it loads.
+4. When a change's effect is uncertain, such as a description edit meant to fix
+   triggering, run a one-shot eval: a few cases under an untracked `evals/`, run
+   once with and without the skill (`claude plugin eval . --allow-tools Read`, or
+   the same prompts through opencode). Record the result in the PR description,
+   and keep the eval files out of git.

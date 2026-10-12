@@ -79,4 +79,4 @@ Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
 
-Behavior evals live in `evals/` and run with `claude plugin eval .`; [AGENTS.md](AGENTS.md) covers authoring standards and the feedback loop that feeds them.
+[AGENTS.md](AGENTS.md) covers authoring standards and the feedback loop for improving skills from real sessions.
