@@ -78,3 +78,5 @@ old name. Existing installed copies retain their old name until migrated.
 Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, the appropriate `skills.sh.json` grouping, and the table above.
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
+
+Behavior evals live in `evals/` and run with `claude plugin eval .`; [AGENTS.md](AGENTS.md) covers authoring standards and the feedback loop that feeds them.

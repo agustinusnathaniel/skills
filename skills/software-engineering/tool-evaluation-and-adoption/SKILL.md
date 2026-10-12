@@ -1,6 +1,6 @@
 ---
 name: tool-evaluation-and-adoption
-description: Vet an open-source tool before adopting it. Use when asked to evaluate a tool, library, or package — or to install one.
+description: Vet an open-source tool, library, package, plugin, skill, or MCP server before adopting it. Use when asked whether to adopt, switch to, or upgrade one, or to install one.
 ---
 
 # Tool Evaluation & Adoption
@@ -13,18 +13,18 @@ Match the user's language to the scope before doing anything else:
 
 | User says | Scope |
 |-----------|-------|
-| "see if it fits", "check it out", "review this", "vet this", "is it good?", "can we use this?" | Evaluate only — full analysis, deliver, wait for a decision |
+| "see if it fits", "check it out", "review this", "vet this", "is it good?", "can we use this?", "should we switch to / upgrade to X?" | Evaluate only — full analysis, deliver, wait for a decision |
 | "install this", "set it up", "go ahead", or equivalent | Install authorized — evaluation may be abbreviated, proceed to Step 7 after review |
 
-During evaluate-only scope, do not run install commands, binary downloads, or package installs — even "just downloading to check" counts as installing.
+Evaluate-only scope is read-only: inspect source, docs, and registry metadata without installing or downloading the tool, even "just to check".
 
 Done when: the scope (evaluate-only or install-authorized) is established from the current request and prior authorization.
 
 ## Step 1: Reconnaissance
 
-Follow [references/reconnaissance.md](references/reconnaissance.md): repo metadata, README, docs/registry cross-check, codebase layout.
+Follow [references/reconnaissance.md](references/reconnaissance.md): repo metadata, README, docs/registry cross-check, current usage, codebase layout.
 
-Done when: a metadata table exists (stars, forks, license, language, last commit, open issues) plus a one-paragraph statement of what the tool does and who it is for.
+Done when: a metadata table exists (stars, forks, license, language, last commit, open issues) plus a one-paragraph statement of what the tool does and who it is for, and, when the project already uses the tool or an alternative, its current version and usage sites.
 
 ## Step 2: Security and Dependency Review
 
@@ -60,12 +60,18 @@ Write the assessment report:
 - Fit assessment (pros/cons for this environment)
 - Verdict: **Go** or **No-go** with rationale
 
+Check every capability claim the verdict relies on against the tool's source or
+docs, including claims from delegated research or memory. File upstream reports
+only after reproducing the problem.
+
 For evaluate-only scope, deliver the assessment and ask whether to adopt. When
 installation is already authorized, carry relevant findings into Step 7 and report
 the result after verification. Ask only if a newly discovered blocker requires a
 user decision, such as accepting a material capability loss or expanding scope.
 A No-go verdict or unresolved security or license concern is always a blocker
 requiring an explicit user decision, even when installation was previously authorized.
+Once the user explicitly chooses adoption over a No-go, implement it and let
+measured evidence carry any remaining argument.
 
 Done when: the verdict and its evidence are clear, and either adoption proceeds
 under existing authorization or the unresolved decision is presented concretely
@@ -83,11 +89,5 @@ Done when: the tool is installed from a verified source, configured, and a smoke
 
 ## Pitfalls
 
-1. **Installing before approval** — evaluate-only language means analyze and wait.
-2. **Piping install scripts blindly** — read the script or verify checksums first.
-3. **Missing the auth model** — local-first tools may have a server mode with auth off by default; warn when deploying.
-4. **Skipping the telemetry check** — confirm whether the tool phones home before installing.
-5. **Assuming offline means no network** — some offline tools download models on first run; disclose it.
-6. **Assuming working means spec-compliant** — check whether validation enforces the standard's rules or only structural sanity.
-7. **Flagging staleness without classifying the domain** — report the classification alongside the date.
-8. **Re-litigating a rejection after directed adoption** — when the user explicitly overrides a prior no-go, implement the integration and let measured evidence carry the argument.
+1. **Missing the auth model**: local-first tools may have a server mode with auth off by default; warn when deploying.
+2. **Offline tools that still fetch**: some download models or assets on first run; disclose it.

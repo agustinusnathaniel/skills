@@ -21,9 +21,10 @@ Labels such as “MVP” or “production” alone do not establish acceptable r
 or scope.
 
 Verify premises that could change the recommendation against relevant code,
-configuration, or current official sources. Distinguish observed facts, estimates,
-and unknowns. Read existing decisions when they constrain this choice; preserve
-their rationale while checking whether their assumptions still hold.
+configuration, or current official sources. Treat claims relayed by delegated
+research as leads until checked against their source. Distinguish observed facts,
+estimates, and unknowns. Read existing decisions when they constrain this choice;
+preserve their rationale while checking whether their assumptions still hold.
 
 Ask only for missing information that could change the recommendation or establish
 required authority; inspect discoverable facts before asking the user. Keep
@@ -73,6 +74,12 @@ Treat feedback as evidence to examine. Correct a false premise and reconsider th
 affected comparison; retain supported conclusions when challenged without new
 evidence. Revise priorities when the user changes them. Keep weights tied to those
 priorities rather than tuning them to a preferred answer.
+
+Treat a named example in feedback as a symptom: audit the whole artifact against
+the user's stated reference model and constraints, not only the named item. Keep
+a running list of user-stated constraints and recheck each revision against all
+of them. When a recommendation changes, state what changed from the prior one and
+why.
 
 A recommendation is ready when the relevant constraints are accounted for,
 decisive claims have evidence or explicit uncertainty, and the choice, consequence,
