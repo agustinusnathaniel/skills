@@ -1,9 +1,10 @@
 ---
 name: test-strategy
 description: >
-  Use when deciding what to test for a change and at which boundary (unit,
-  integration, E2E), planning failure-first coverage, requiring artifact-producing
-  E2E for complex features, or judging whether existing tests earn their keep.
+  Use when deciding what to test or verify for a change and at which boundary
+  (unit, integration, E2E), planning failure-first coverage, requiring
+  artifact-producing E2E for complex features, or judging whether existing tests
+  earn their keep.
 ---
 
 # Test Strategy

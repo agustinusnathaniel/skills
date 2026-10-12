@@ -4,8 +4,10 @@ tags: [prune-codebase, behavior]
 max_turns: 6
 ---
 
-Prune this AGENTS.md as far as possible without changing how agents behave. Reply with
-the reduced file and a short note on what you removed and why.
+Our agent instructions have grown across AGENTS.md, CLAUDE.md, and three skills, and agents
+keep missing rules. Prune them substantially without changing how agents behave. Start
+with AGENTS.md below: reply with the reduced file and a short note on what you removed
+and why.
 
 ```markdown
 # Repo rules

@@ -1,10 +1,11 @@
 ---
 name: prune-codebase
 description: >
-  Use for substantial codebase reduction or removal of overengineering across
-  production code and supporting tests, documentation, agent instructions,
-  configuration, and tooling. Preserve intended behavior and useful rationale;
-  exclude ordinary feature work and minor cleanup.
+  Use for substantial codebase pruning, reduction, or removal of overengineering
+  across production code and supporting tests, documentation, agent instructions,
+  configuration, and tooling, including follow-up passes after a reduction PR.
+  Preserve intended behavior and useful rationale; exclude ordinary feature work
+  and minor cleanup.
 ---
 
 # Prune Codebase

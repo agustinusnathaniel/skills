@@ -29,6 +29,7 @@ Improve skills from observed runs, not imagined ones.
 3. Add or update an eval case under `evals/` that fails on the observed behavior,
    then edit the skill.
 4. Run the suite with and without the plugin:
-   `claude plugin eval . --model <pinned model> --json evals/results/latest.json`.
+   `claude plugin eval . --allow-tools Read --model <pinned model>`; without the
+   `Read` grant the sandbox can block skills from opening their reference files.
    Keep a change when the with-plugin arm improves on its case without
    regressing others.
