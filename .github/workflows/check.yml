@@ -1,0 +1,22 @@
+name: Check
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-plugin-version:
+    name: Plugin versions in sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check plugin manifests match package.json
+        run: node scripts/sync-plugin-version.mjs --check
