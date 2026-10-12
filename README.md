@@ -55,7 +55,7 @@ codex plugin marketplace add agustinusnathaniel/skills
 codex plugin add agustinusnathaniel-skills@agustinusnathaniel-skills
 ```
 
-In ZCode, open a workspace, then go to **Settings > Plugins > Create > Add marketplace** and enter `agustinusnathaniel/skills`. Find the marketplace in the **Personal** section and install the bundled plugin.
+In ZCode, open a workspace, then go to **Settings > Plugins > Create > Add marketplace** and enter `agustinusnathaniel/skills`. Find the marketplace in the **Personal** section and install the bundled plugin. ZCode loads `.zcode-plugin/plugin.json`, which lists the same skills as the Claude manifest.
 
 In Cursor, test the plugin locally before publishing. Copy this repository to
 `~/.cursor/plugins/local/agustinusnathaniel-skills` (the `.cursor-plugin/plugin.json`
@@ -101,7 +101,7 @@ old name. Existing installed copies retain their old name until migrated.
 
 ## Adding New Skills
 
-Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `kimi.plugin.json`, the appropriate `skills.sh.json` grouping, and the table above. Add a changeset (`pnpm changeset`) following the bump policy under Versioning.
+Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.zcode-plugin/plugin.json`, `kimi.plugin.json`, the appropriate `skills.sh.json` grouping, and the table above. Add a changeset (`pnpm changeset`) following the bump policy under Versioning.
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
 
@@ -112,7 +112,8 @@ Validate the skill frontmatter and relative reference links. Keep the directory,
 `package.json` is the single source of truth for the plugin version. Every host
 manifest mirrors it: `.claude-plugin/plugin.json`, the matching plugin entry in
 `.claude-plugin/marketplace.json` and the root `marketplace.json` mirror,
-`.devin-plugin/plugin.json`, `.cursor-plugin/plugin.json`, and `kimi.plugin.json`.
+`.devin-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.zcode-plugin/plugin.json`, and
+`kimi.plugin.json`.
 (`.claude-plugin/plugin.json` wins when both it and a marketplace entry set a
 version, so they are kept identical to avoid a validator warning.) Never edit those
 version fields by hand; `scripts/sync-plugin-version.mjs` copies the version over,

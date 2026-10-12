@@ -1,0 +1,19 @@
+{
+  "name": "agustinusnathaniel-skills",
+  "version": "1.0.0",
+  "description": "Reusable skills for software engineering, automation, and research.",
+  "author": {
+    "name": "Agustinus Nathaniel"
+  },
+  "homepage": "https://github.com/agustinusnathaniel/skills",
+  "repository": "https://github.com/agustinusnathaniel/skills",
+  "skills": [
+    "./skills/software-engineering/architecture-decision-framework",
+    "./skills/software-engineering/bulk-import-engineering",
+    "./skills/software-engineering/prune-codebase",
+    "./skills/software-engineering/test-strategy",
+    "./skills/software-engineering/tool-evaluation-and-adoption",
+    "./skills/automation/autonomous-improvement-loop",
+    "./skills/research/domain-research"
+  ]
+}

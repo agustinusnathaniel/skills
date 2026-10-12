@@ -20,6 +20,7 @@ const TARGETS = [
   { file: ".devin-plugin/plugin.json", kind: "version" },
   { file: ".cursor-plugin/plugin.json", kind: "version" },
   { file: "kimi.plugin.json", kind: "version" },
+  { file: ".zcode-plugin/plugin.json", kind: "version" },
 ];
 
 const { version } = JSON.parse(readFileSync(join(repo, "package.json"), "utf8"));
