@@ -10,20 +10,20 @@ Registration steps live in the README under "Adding New Skills".
   reference behind a pointer. A new skill needs a trigger no existing description
   covers.
 - Generalize to the mechanism behind an incident. A rule earns its line when the
-  failure recurs across sessions or repos, or one miss is costly; repo names,
-  tools, and one-off details stay in the PR description.
-- Skills install into Claude Code, Codex, opencode, and Devin. Use plain Markdown
-  and portable frontmatter, and name tools generically.
+  failure recurs across sessions or repos, or one miss is costly. Private project
+  names and one-off details stay out of skill text and PR descriptions alike;
+  this repo is public.
+- Skills install into several agent hosts (see the README). Use plain Markdown and
+  portable frontmatter, and name tools generically.
 
 ## Feedback loop
 
 Improve skills from observed runs, not imagined ones.
 
-1. Mine recent sessions where a skill loaded: user corrections, re-asks, and "why
-   did you stop" after the load, plus tasks where a skill fit but never loaded.
-   Local stores: `~/.local/share/opencode/opencode.db` (SQLite, `part` table),
-   `~/.codex/sessions/`, `~/.claude/projects/`. Keep secrets and personal data out
-   of anything committed.
+1. Review recent agent sessions where a skill loaded: user corrections, re-asks,
+   and "why did you stop" after the load, plus tasks where a skill fit but never
+   loaded. Transcripts can hold secrets and private project details; only the
+   generalized finding enters the repo.
 2. Check each finding against the current text and git history; a finding the
    skill already answers is a triggering or wording problem, not a missing rule.
 3. Generalize the finding into the skill that owns the behavior, then watch the
