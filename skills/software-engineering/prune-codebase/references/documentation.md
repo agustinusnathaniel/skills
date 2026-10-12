@@ -17,7 +17,9 @@ new mandatory structure.
    shortens navigation.
 3. Remove repetition, stale detail, and facts cheaply discoverable from maintained
    sources. Keep setup commands, supported behavior, prerequisites, and caveats
-   readers need to act. Distinguish historical decisions from current behavior.
+   readers need to act. Keep navigation that helps readers discover pages, such
+   as a docs map or grouped index, even when its links also appear elsewhere.
+   Distinguish historical decisions from current behavior.
    Put changing file inventories, line counts, and verification transcripts in source or delivery
    reports unless they serve a concrete reader need.
 4. Rewrite for comprehension. Use natural sentences and descriptive headings and

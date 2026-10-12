@@ -1,8 +1,9 @@
 ---
 name: prune-codebase
 description: >
-  Use for substantial codebase reduction or removal of overengineering across
-  production code and supporting tests, documentation, configuration, and tooling.
+  Use for substantial codebase pruning, reduction, or removal of overengineering
+  across production code and supporting tests, documentation, agent instructions,
+  configuration, and tooling, including follow-up passes after a reduction PR.
   Preserve intended behavior and useful rationale; exclude ordinary feature work
   and minor cleanup.
 ---
@@ -16,7 +17,9 @@ defects. Judge savings by eliminated maintenance, with line counts as evidence.
 When the user explicitly applies this skill to documentation, follow
 [documentation reduction](references/documentation.md). For docs-only work, use
 that workflow instead of the production targets below; for mixed work, report docs
-separately. Ordinary feature work and minor cleanup do not need this skill.
+separately. When the scope includes text agents follow as instructions (`AGENTS.md`,
+`CLAUDE.md`, directives, prompts, skills), follow
+[agent instruction reduction](references/agent-instructions.md) for that text.
 
 ## Establish scope and evidence
 
@@ -53,16 +56,17 @@ candidates, then proceed with authorized implementation. Formatting compression,
 file moves, and redistributed complexity do not count as simplification. Favor
 reductions that make behavior easier to locate and follow; splitting large files
 or unifying helpers is not an improvement when it adds indirection or obscures
-ownership. Bound each restructure to the smallest unit with checks green before and after; a net-small diff that adds indirection, tables, or cross-module coupling is redistribution and gets reverted. Approved feature retirement is separate and does not count toward
+ownership, and inlining a cohesive module into its consumer is not a saving when
+it blurs module boundaries. Bound each restructure to the smallest unit with checks green before and after; a net-small diff that adds indirection, tables, or cross-module coupling is redistribution and gets reverted. Approved feature retirement is separate and does not count toward
 the preservation target.
 
 Evaluate built-ins, existing dependencies, and established packages before
 rewriting utilities. Compare simpler library usage with removal, accounting for
-replacement glue, error handling, concurrency, and ongoing costs. Use available
-source and docs; browse current official sources when an unanswered capability,
-compatibility, or maintenance question affects the decision. Choose the option
-with lower ownership cost and verify its application contract, including invalid
-inputs, side effects, and failure semantics.
+replacement glue, error handling, concurrency, and ongoing costs. Ground each
+ecosystem candidate, and each claim that none exists, in a current registry,
+source, or official-docs lookup rather than memory, and record what was checked.
+Choose the option with lower ownership cost and verify its application contract,
+including invalid inputs, side effects, and failure semantics.
 
 ## Implement and correct defects
 
@@ -73,7 +77,7 @@ representative semantic variants, especially exception scope, cleanup,
 evaluation order, and side effects. Review the affected variants, not just one
 successful example. Before removing a defense, identify the boundary or equivalent
 protection that enforces its invariant and verify relevant invalid inputs.
-Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment.
+Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment. Hold comments your own changes add to the same bar; a reviewer asking why a comment exists is evidence it fails the bar.
 
 For behavior-sensitive reductions, establish representative real inputs before
 editing, including cases served by the mechanism being removed. Compare baseline
@@ -86,6 +90,9 @@ Keep the mechanism or find a smaller replacement when preservation is unproven.
 Correct encountered defects within scope when intended behavior is established
 and the fix can be verified, preferably by eliminating their causes. Distinguish
 corrections from refactoring; report unresolved issues with evidence and impact.
+Keep the delivery a reduction: larger work it uncovers, such as security
+remediation, new test harnesses, or permission and policy changes, becomes a
+separate, named delivery the user decides on.
 
 Amend affected docs, instructions, or ADRs that would recreate the complexity.
 Preserve decision history and record durable rationale; keep transient line counts
@@ -105,9 +112,9 @@ representation is contractual; otherwise compare semantics and normalize only
 known nondeterminism.
 
 When CLI or integration flows change, exercise the affected user journey through
-the built entry point in an isolated environment. Check choices, cancellation,
-scope, and resulting state where relevant; help output and helper tests alone
-do not establish that the flow works. Report unexercised paths as verification gaps.
+the built or published entry point the user actually runs, in an isolated
+environment. Check choices, cancellation, scope, and resulting state where
+relevant; help output and helper tests alone do not establish that the flow works. Report unexercised paths as verification gaps.
 
 Add repeatable coverage at the smallest boundary that catches an uncovered
 regression risk. When replacing an implementation, reducing tests, or removing
@@ -117,10 +124,13 @@ glue, test setup, and docs.
 
 ## Continue and finish
 
-Continue through known worthwhile reductions within scope and budget after meeting
-the target. Each further pass needs a credible candidate or unresolved uncertainty.
-Revise targets only when evidence invalidates an estimate or reveals a constraint;
-report both targets and the reason.
+An opened PR is a checkpoint, not the finish line. Continue through known
+worthwhile reductions across the whole requested scope and range within budget,
+after meeting the target and without waiting to be asked. Land a candidate that
+fits the current scope in this delivery or the next stacked PR rather than an
+unscheduled later one. Each further pass needs a credible candidate or unresolved
+uncertainty. Revise targets only when evidence invalidates an estimate or reveals
+a constraint; report both targets and the reason.
 
 Completion requires all of the following:
 
@@ -130,14 +140,19 @@ Completion requires all of the following:
   verification is complete, and actionable review findings are resolved.
 - Known significant candidates are implemented or have concrete evidence-based
   retention or deferral reasons; meeting the target alone is not such a reason.
+  A report that nothing worthwhile remains lists the strongest rejected
+  candidates with those reasons.
 
 Correctness and budget limits take precedence. Report partial progress and the
 concrete limitation when completion criteria remain unmet.
 
 For generated projections, edit canonical sources and verify regeneration. For
 PRs/releases, apply release policy through affected shipped consumers, including
-private/shared packages. Verify required delivery checks at the final revision;
+private/shared packages bundled into published ones: any change that reaches a
+published package needs the changeset or release note the repository requires.
+Split large reductions into reviewable stacked PRs and give their merge order in
+the handoff. Verify required delivery checks at the final revision;
 distinguish local checks from remote CI. Write release notes around user-visible
 changes, keeping implementation accounting in the PR report.
 
-Re-count deltas at the current head when reporting, never at an earlier revision. Report target and actual deltas over the full delivery range: production, tests/support, combined maintained code, and reconciled overall totals led together so production-only savings never stand alone as the result. Label round subtotals. Keep generated/vendor and lockfile churn on their own line; they never count as production savings. Explain eliminated mechanisms, dependency tradeoffs, corrected defects, verification gaps, and remaining candidates.
+Re-count deltas at the current head of every delivered branch when reporting, never at an earlier revision or before a rebase. Report target and actual deltas over the full delivery range: production, tests/support, combined maintained code, and reconciled overall totals led together so production-only savings never stand alone as the result. Label round subtotals. Keep generated/vendor and lockfile churn on their own line; they never count as production savings. Explain eliminated mechanisms, dependency tradeoffs, corrected defects, verification gaps, and remaining candidates.

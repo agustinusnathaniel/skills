@@ -7,3 +7,6 @@ node_modules/
 .env
 .env.local
 .env.*.local
+
+# One-shot eval cases and results stay local
+evals/

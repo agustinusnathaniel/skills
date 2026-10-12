@@ -105,6 +105,8 @@ Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
 
+[AGENTS.md](AGENTS.md) covers authoring standards and the feedback loop for improving skills from real sessions.
+
 ## Versioning
 
 `package.json` is the single source of truth for the plugin version. Every host
