@@ -38,8 +38,8 @@ This will present an interactive picker of all available skills. Select the ones
 
 ### Bundled plugin
 
-The repository also packages all maintained skills as one plugin for Claude Code, Codex CLI, and ZCode.
-The root `marketplace.json` is a compatibility mirror of `.claude-plugin/marketplace.json`; keep their plugin entries and versions aligned.
+The repository also packages all maintained skills as one plugin for Claude Code, Codex CLI, ZCode, Cursor, Kimi Code CLI, and omp.
+The root `marketplace.json` is a compatibility mirror of `.claude-plugin/marketplace.json`; keep their plugin entries aligned (versions sync automatically; see Versioning).
 
 In Claude Code, add the marketplace and install the bundled plugin:
 
@@ -57,6 +57,34 @@ codex plugin add agustinusnathaniel-skills@agustinusnathaniel-skills
 
 In ZCode, open a workspace, then go to **Settings > Plugins > Create > Add marketplace** and enter `agustinusnathaniel/skills`. Find the marketplace in the **Personal** section and install the bundled plugin.
 
+In Cursor, test the plugin locally before publishing. Copy this repository to
+`~/.cursor/plugins/local/agustinusnathaniel-skills` (the `.cursor-plugin/plugin.json`
+manifest loads the same skills the Claude manifest lists), restart Cursor or run
+**Developer: Reload Window**, then confirm the skills under **Customize**. See
+[Plugins](https://cursor.com/docs/plugins) and the
+[Plugins reference](https://cursor.com/docs/reference/plugins.md).
+
+In Kimi Code CLI, install directly from the repository URL:
+
+```text
+/plugins install https://github.com/agustinusnathaniel/skills
+```
+
+then run `/reload` or open a new session. The `kimi.plugin.json` manifest loads the
+same skills the Claude manifest lists. See
+[Plugins](https://www.kimi.com/code/docs/en/kimi-code-cli/customization/plugins.html).
+
+In omp, add this repository as a marketplace catalog (omp reads the
+Claude-compatible `.claude-plugin/marketplace.json` as a fallback) and install the
+bundled plugin:
+
+```bash
+omp plugin marketplace add agustinusnathaniel/skills
+omp plugin install --scope project agustinusnathaniel-skills@agustinusnathaniel-skills
+```
+
+See [Plugins](https://omp.sh/docs/plugins).
+
 In Devin, install it from **Customize → Plugins → Add plugin → From repository** with `agustinusnathaniel/skills`, or with the CLI:
 
 ```bash
@@ -64,8 +92,6 @@ devin plugins install agustinusnathaniel/skills
 ```
 
 The Devin manifest (`.devin-plugin/plugin.json`) takes precedence over `.claude-plugin/plugin.json` in Devin and loads only the `software-engineering` skills.
-
-When publishing an update, bump the version in `.claude-plugin/plugin.json`, `.devin-plugin/plugin.json`, and the matching plugin entry in every `marketplace.json` file.
 
 ### Skill rename
 
@@ -75,8 +101,32 @@ old name. Existing installed copies retain their old name until migrated.
 
 ## Adding New Skills
 
-Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, the appropriate `skills.sh.json` grouping, and the table above.
+Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `kimi.plugin.json`, the appropriate `skills.sh.json` grouping, and the table above. Add a changeset (`pnpm changeset`) following the bump policy under Versioning.
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
 
 [AGENTS.md](AGENTS.md) covers authoring standards and the feedback loop for improving skills from real sessions.
+
+## Versioning
+
+`package.json` is the single source of truth for the plugin version. Every host
+manifest mirrors it: `.claude-plugin/plugin.json`, the matching plugin entry in
+`.claude-plugin/marketplace.json` and the root `marketplace.json` mirror,
+`.devin-plugin/plugin.json`, `.cursor-plugin/plugin.json`, and `kimi.plugin.json`.
+(`.claude-plugin/plugin.json` wins when both it and a marketplace entry set a
+version, so they are kept identical to avoid a validator warning.) Never edit those
+version fields by hand; `scripts/sync-plugin-version.mjs` copies the version over,
+and `node scripts/sync-plugin-version.mjs --check` (also run in CI on every PR)
+fails when any manifest drifts.
+
+Each PR that changes skills should add a changeset:
+
+```bash
+pnpm changeset
+```
+
+The release workflow then versions the package, syncs every manifest, and opens a
+`chore: version skills` PR; merging it tags the release.
+
+Bump policy: patch for wording fixes, minor for new or changed skill behavior,
+major for skill renames or removals.
