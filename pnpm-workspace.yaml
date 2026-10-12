@@ -1,0 +1,2 @@
+# Match the pnpm default so local installs never lock a release CI would reject.
+minimumReleaseAge: 1440
