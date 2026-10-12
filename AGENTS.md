@@ -4,7 +4,7 @@ Every `SKILL.md` and reference here is a document agents load. Write and edit th
 with the `writing-for-agents` skill, and calibrate against current model guidance:
 [OpenAI on skills for GPT-6 Astra](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)
 and [Claude prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
-Registration steps live in the README under "Adding New Skills".
+Registration and versioning steps live in the README.
 
 - Fold a learning into the skill that owns the behavior, or a conditional
   reference behind a pointer. A new skill needs a trigger no existing description
