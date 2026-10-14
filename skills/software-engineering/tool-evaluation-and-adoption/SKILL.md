@@ -59,6 +59,7 @@ Write the assessment report:
 - Security findings table (pass / concerns)
 - Fit assessment (pros/cons for this environment)
 - Verdict: **Go** or **No-go** with rationale
+- For a replacement or a workaround (patch, pinned version, non-registry source): the measured reason, and the condition that would reverse it. Record both with the adoption change, so the next upgrade or switch can check them instead of guessing.
 
 Check every capability claim the verdict relies on against the tool's source or
 docs, including claims from delegated research or memory. File upstream reports

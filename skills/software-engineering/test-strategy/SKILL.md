@@ -37,6 +37,19 @@ shows only that the wrapper works. Before reporting a path as unverifiable,
 attempt its cheapest real run, such as an isolated temporary project or a local
 or sandbox host, and report the gap with that attempt's failure.
 
+Substitute only what crosses the process boundary. Run storage for real, in
+memory or in a container (for example `fake-indexeddb`), since mocks miss
+key-path, constraint, and partial-update semantics. Stub the network at the
+request layer and fail on unhandled requests. Take expected values from the
+real consumer, such as the host's live command or tool registry, not from the
+constant the code under test also reads; a self-consistent test cannot see
+drift. A test that needs a build fails with a build instruction when the
+artifact is missing, rather than skipping.
+
+When a change turns an existing test red, fix the code, or change the test with
+a stated reason its contract no longer holds. Loosening assertions, lowering
+thresholds, or deleting the test to get green hides the regression it caught.
+
 Each test, fixture, or script earns its place by protecting an in-scope
 behavior or failure mode. Tests that restate the implementation, snapshots
 without a defensible behavior contract, and regression tests without a genuine

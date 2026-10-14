@@ -49,7 +49,9 @@ costs. Trace scripts, hooks, entry points, bundled consumers, and downstream
 or plugin contracts before declaring code unused. Absence of internal callers
 does not establish that a public name is removable. Resolve specific uncertainties before dismissing major candidates.
 
-On the first pass, sweep every reduction class without waiting for the user to name one: ecosystem delegation, implementation simplification, comment triage, and test deduplication. Account for each class with concrete candidates or an evidence-based retention reason.
+On the first pass, sweep every reduction class without waiting for the user to name one: ecosystem delegation, implementation simplification, comment triage, test deduplication, and inherited scaffold. Account for each class with concrete candidates or an evidence-based retention reason.
+
+Inherited scaffold is what a starter template or fork brought in that the product never used: auth flows, API clients, carts, error reporting, sample content, and the tests and docs describing them as real. In forks, also find the upstream's demo API keys, CDN and asset URLs, analytics IDs, verification tokens, credits, and default locale. Delete unused capability rather than hardening it, and rewrite docs that present it as the product.
 
 Derive a substantial production target in lines and percentage from those
 candidates, then proceed with authorized implementation. Formatting compression,
