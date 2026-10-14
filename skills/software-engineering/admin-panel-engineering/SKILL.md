@@ -2,10 +2,11 @@
 name: admin-panel-engineering
 description: >
   Build or change admin panels, backoffice apps, and internal tools. Use when
-  adding a role-gated page, menu item, or action; touching login, logout,
-  session expiry, or role edits; scoping data to a tenant, partner, or
-  organization; building filtered list pages, exports, audit trails, or
-  approval flows; or fixing a bug in an app that has a copied sibling repo.
+  adding a page, sidebar or menu entry, route, or action that only some
+  permissions or roles may see; touching login, logout, session expiry, or
+  role edits; scoping data to a tenant, partner, or organization; building
+  filtered list pages, exports, audit trails, or approval flows; or fixing a
+  bug in an app that has a copied sibling repo.
 ---
 
 # Admin Panel Engineering

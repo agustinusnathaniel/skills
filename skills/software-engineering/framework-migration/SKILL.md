@@ -1,10 +1,12 @@
 ---
 name: framework-migration
 description: >
-  Carry out a migration across a codebase. Use when replacing a framework,
-  build tool, HTTP client, state or validation library, or linter; upgrading
-  across a major version; moving to another host or deploy adapter; or adopting
-  or removing an abstraction layer such as an effect system.
+  Replace one library, framework, tool, or host with another, or upgrade
+  across a major version, for example axios to ky or fetch, ESLint and
+  Prettier to Biome, Jest to Vitest, CRA to Vite, Redux to Zustand, or Vercel
+  to Cloudflare. Use for any "replace X with Y", "migrate to", "switch to", or
+  major upgrade, and when adopting or removing an abstraction layer such as an
+  effect system.
 ---
 
 # Framework Migration

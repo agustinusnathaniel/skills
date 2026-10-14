@@ -1,10 +1,10 @@
 ---
 name: bulk-import-engineering
 description: >
-  Plan, build, or audit bulk file import features with validation previews,
-  execution identity, job status, and safe recovery, including backup restore
-  and spreadsheet import or export in local-first apps. Excludes ordinary
-  uploads and file analysis.
+  Build, fix, or audit data import and export: bulk file imports with
+  validation previews, job status, and safe recovery; backup and restore; and
+  JSON, CSV, or spreadsheet import and export, including in offline-first and
+  local-first apps. Excludes ordinary single-file uploads and file analysis.
 ---
 
 # Bulk Import Engineering
