@@ -1,18 +1,21 @@
 ---
-name: prerender-safe-state
+name: hydration-safe-state
 description: >
-  Use browser-only state in apps whose HTML is prerendered or server-rendered.
-  Use when persisting state to localStorage or cookies, adding a theme toggle,
-  restoring an auth session from storage, showing viewer-local time or locale,
-  or debugging hydration mismatches, a flash of the wrong theme, or a page that
-  differs between navigation and reload.
+  Keep hydration consistent when server-rendered or prerendered HTML meets
+  browser-only state. Use when debugging hydration mismatches, a flash of the
+  wrong theme, or a page that differs between navigation and reload; or when
+  persisting state to localStorage or cookies, adding a theme toggle,
+  restoring an auth session from storage, or showing viewer-local time or
+  locale.
 ---
 
-# Prerender-Safe State
+# Hydration-Safe State
 
-Prerendered HTML is built once, without a viewer: no storage, no session, no
-viewer clock, timezone, or locale, no viewport. The first client render must
-reproduce that HTML exactly; the viewer's state arrives in a second phase.
+Prerendered HTML is built once, without a viewer; server-rendered HTML sees
+only what the request carries, such as cookies. Neither has browser storage,
+the viewer's clock, timezone, or locale, or the viewport. The first client
+render must reproduce that HTML exactly; the viewer's state arrives in a
+second phase.
 Dev servers usually skip prerendering, so these bugs show up only in a build.
 
 ## Render in two phases
@@ -35,11 +38,11 @@ repair mismatched children.
 
 ## Set pre-paint state outside React
 
-State that changes how the first frame looks, such as the theme or color
-scheme, is applied by a small blocking inline script in `<head>` that sets a
-class or attribute before paint. React state then reads it. A context provider
-that reads storage at the root causes a flash of the wrong theme and can break
-prerendering. A strict CSP must allow that script by hash or nonce.
+Apply state that changes the first frame (theme, color scheme) with a small
+blocking script in `<head>`, using the framework's helper where one exists,
+and let React read it afterwards. A root provider that reads storage flashes
+the wrong theme and has broken prerendering. A strict CSP must allow that
+script by hash or nonce.
 
 ## Treat stored state as untrusted input
 

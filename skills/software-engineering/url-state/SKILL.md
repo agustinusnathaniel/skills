@@ -1,5 +1,5 @@
 ---
-name: url-state-contract
+name: url-state
 description: >
   Put view state in the URL or read it back. Use when adding search params,
   filters, pagination, or sort to a URL; building shareable, bookmarkable, or
@@ -7,11 +7,15 @@ description: >
   shared link crashes, opens the wrong view, or leaks the sender's state.
 ---
 
-# URL State Contract
+# URL State
 
 A URL is a public contract: other people open it later, on other devices, in
 older or newer versions of the app. Decide what it carries, serialize it
 deliberately, and prove the round trip.
+
+When the router ships its own search-params guidance (for example, TanStack
+Router's bundled skills), load it for the API; this skill covers what holds
+across routers.
 
 ## Decide what belongs in the URL
 

@@ -70,7 +70,7 @@ plotting nulls or interpolating.
 - Allocate counters inside the write transaction with a row lock, and protect
   first use with a unique index; a lock on a missing row locks nothing.
 - For payment callbacks and other provider replays, use the
-  `third-party-integration` skill.
+  `webhook-integration` skill.
 
 ## Verify at the boundaries
 

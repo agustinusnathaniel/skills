@@ -1,16 +1,16 @@
 ---
-name: backoffice-dashboard-engineering
+name: admin-panel-engineering
 description: >
-  Build or change internal admin and backoffice apps. Use when adding a
-  role-gated page, menu item, or action; touching login, logout, session
-  expiry, or role edits; scoping data to a tenant, partner, or organization;
-  building filtered list pages and exports; or fixing a bug in an app that has
-  a copied sibling repo.
+  Build or change admin panels, backoffice apps, and internal tools. Use when
+  adding a role-gated page, menu item, or action; touching login, logout,
+  session expiry, or role edits; scoping data to a tenant, partner, or
+  organization; building filtered list pages, exports, audit trails, or
+  approval flows; or fixing a bug in an app that has a copied sibling repo.
 ---
 
-# Backoffice Dashboard Engineering
+# Admin Panel Engineering
 
-Backoffice apps fail at the seams between a client that hides things and a
+Admin apps fail at the seams between a client that hides things and a
 server that decides things. Read the server's contract before shaping the UI,
 and keep each client-side fact in one place.
 
@@ -68,7 +68,7 @@ Render a loading state while the permission map is unresolved; treating
   reading JSON, and read the filename from `Content-Disposition` with and
   without quotes.
 
-For filters and pagination in the URL, use the `url-state-contract` skill. For
+For filters and pagination in the URL, use the `url-state` skill. For
 upload-validate-execute flows, use `bulk-import-engineering`.
 
 ## Fix every copy
@@ -77,8 +77,12 @@ When the app was copied from a sibling, list the siblings and diff the shared
 files before fixing. Apply the fix to each copy, or extract the shared module,
 and say which copies were checked.
 
-## Stack references
+## References
 
+- Audit trails, destructive actions, approvals, and role design:
+  [admin domain](references/admin-domain.md).
+- Client data caches with SWR or similar (keys, gating, logout, revalidation):
+  [SWR](references/swr.md).
 - React with Ant Design forms and tables: [antd](references/antd.md).
 - Laravel with Filament panels and multi-tenancy:
   [Filament tenancy](references/filament-tenancy.md).

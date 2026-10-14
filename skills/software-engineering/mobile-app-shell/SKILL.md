@@ -4,8 +4,8 @@ description: >
   Build or change the shell of a React Native or Expo app. Use when setting up
   environments, release channels, or over-the-air updates; adding remote
   config, forced updates, or feature flags; handling token refresh, push
-  notifications, or deep links; embedding web views; adding native modules,
-  config plugins, or permissions; or upgrading the SDK.
+  notifications, or deep links; embedding web views; or adding native
+  modules, config plugins, or permissions.
 ---
 
 # Mobile App Shell
@@ -14,6 +14,10 @@ A shipped binary lives for months and cannot be patched quickly. Build the
 shell so most incidents are handled remotely, and test the paths a simulator
 in the foreground never exercises: cold starts, killed apps, signed-out users,
 and flaky networks.
+
+For Expo's own APIs (EAS Update, SDK upgrades, Expo Router, data fetching),
+load Expo's official skills when available; this skill covers the shell
+decisions they leave to the app.
 
 ## Separate environments from channels
 
@@ -24,8 +28,9 @@ and flaky networks.
   channel may run the production environment.
 - Give each environment its own app identifier and storage namespace, so a
   staging build cannot read a production session on the same device.
-- For over-the-air updates, see the `config-drift` skill's client version skew
-  reference.
+- Keep the build's environment and the over-the-air update's environment
+  pointed at the same values; the `config-drift` skill's client version skew
+  reference covers how old binaries pick up updates.
 
 ## Ship escape hatches first
 
@@ -36,10 +41,12 @@ open when remote config is unreachable; a launch must never block on it.
 
 ## Refresh tokens once
 
-Refresh before expiry, with a single refresh in flight; requests that arrive
-meanwhile wait for it. Make the refresh call bypass the interceptor that
-triggers it. When the shell hosts services or web views with their own auth,
-exempt them from the shell's 401 logout.
+Refresh shortly before expiry rather than after a 401, with a single refresh
+in flight that waiting requests share. Make the refresh call bypass the
+interceptor that triggers it. Web views and screens that carry the token
+subscribe to refreshes and reload with the new one. When the shell hosts
+services or web views with their own auth, exempt them from the shell's 401
+logout.
 
 ## Route notifications and deep links from any state
 
@@ -72,8 +79,6 @@ asynchronously. Model them as loading, available, or unavailable; reading
   operations on server-side attestation.
 - Native config changes need a clean prebuild and a new binary. Toggling a
   capability such as push invalidates iOS provisioning profiles.
-- Upgrade the SDK one major version at a time with the framework's dependency
-  check, apply its companion flags, and pin exact versions until stable.
 
 ## Verify on release builds
 
