@@ -85,8 +85,9 @@ Follow [references/install-compatibility.md](references/install-compatibility.md
 1. Prefer checksum-verified release assets or a package manager; read install scripts before running them.
 2. Configure auth, ports, directories, and integrations from environment-provided values.
 3. For bundle-sensitive adoptions, follow [references/adoption-verification.md](references/adoption-verification.md) to measure impact before/after against a clean-tree control build.
+4. When the adoption replaces a tool, list what the old one did implicitly (defaults such as retries, timeouts, and serialization) and match it or record the intended change. Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
 
-Done when: the tool is installed from a verified source, configured, and a smoke test confirms it works end to end.
+Done when: the tool is installed from a verified source, configured, a smoke test confirms it works end to end, and no trace of a replaced tool remains.
 
 ## Pitfalls
 
