@@ -1,0 +1,83 @@
+---
+name: mobile-app-shell
+description: >
+  Build or change the shell of a React Native or Expo app. Use when setting up
+  environments, release channels, or over-the-air updates; adding remote
+  config, forced updates, or feature flags; handling token refresh, push
+  notifications, or deep links; embedding web views; adding native modules,
+  config plugins, or permissions; or upgrading the SDK.
+---
+
+# Mobile App Shell
+
+A shipped binary lives for months and cannot be patched quickly. Build the
+shell so most incidents are handled remotely, and test the paths a simulator
+in the foreground never exercises: cold starts, killed apps, signed-out users,
+and flaky networks.
+
+## Separate environments from channels
+
+- Select the environment with one explicit variable per build, and turn off
+  implicit `.env` loading so a stray file cannot switch it. Validate client
+  and build-time variables with a schema.
+- Treat the release channel and the environment as separate names: a beta
+  channel may run the production environment.
+- Give each environment its own app identifier and storage namespace, so a
+  staging build cannot read a production session on the same device.
+- For over-the-air updates, see the `config-drift` skill's client version skew
+  reference.
+
+## Ship escape hatches first
+
+Before the first release, serve from remote config: a minimum supported
+version that forces an update, feature flags, the API base URL, and static
+links. Give every key a typed default so a missing key fails safe, and fail
+open when remote config is unreachable; a launch must never block on it.
+
+## Refresh tokens once
+
+Refresh before expiry, with a single refresh in flight; requests that arrive
+meanwhile wait for it. Make the refresh call bypass the interceptor that
+triggers it. When the shell hosts services or web views with their own auth,
+exempt them from the shell's 401 logout.
+
+## Route notifications and deep links from any state
+
+- On cold start, hold the target until the navigator is ready.
+- When the user is signed out, stash the target and replay it after login.
+- Handle foreground receipt and the user's tap as separate events.
+- Refresh the push token on launch, after checking for a physical device and
+  notification permission.
+
+## Contain web views
+
+Decide which hosts stay in the app and which open externally. Classify load
+errors as offline, retryable, or fatal, retry with capped exponential backoff,
+and show a retry action. A token in a web view URL is a credential: rebuild
+the URL when the token changes and keep it out of logs. Handle the Android
+back button inside the web view's history.
+
+## Check capabilities in three states
+
+Biometrics, notification permission, and similar checks resolve
+asynchronously. Model them as loading, available, or unavailable; reading
+"not yet known" as "unavailable" disables the feature on launch.
+
+## Audit native changes
+
+- After adding a library or config plugin, diff the merged Android manifest
+  and iOS `Info.plist` permissions, and remove ones the app does not need.
+- Block screen capture on screens that show secrets, not app-wide.
+- Client-side root and jailbreak detection can be bypassed; gate sensitive
+  operations on server-side attestation.
+- Native config changes need a clean prebuild and a new binary. Toggling a
+  capability such as push invalidates iOS provisioning profiles.
+- Upgrade the SDK one major version at a time with the framework's dependency
+  check, apply its companion flags, and pin exact versions until stable.
+
+## Verify on release builds
+
+Done when each changed path works in a release build of each environment:
+cold start from a notification while signed out, a web view in airplane mode,
+an expired token mid-session, and a forced update with remote config both
+reachable and unreachable.
