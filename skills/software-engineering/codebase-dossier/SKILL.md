@@ -2,6 +2,7 @@
 name: codebase-dossier
 description: Write an evidence-cited dossier of a codebase or a family of related repos, covering purpose, architecture, operations, history, decisions, and sharp edges.
 disable-model-invocation: true
+triggers: ["user"]
 ---
 
 # Codebase Dossier

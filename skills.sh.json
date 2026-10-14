@@ -4,10 +4,10 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, backoffice and mobile apps, calculations, configuration, CI workflows, integrations, migrations, plan execution, client trust, prerendered state, URL state, changelogs, codebase dossiers, pruning, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, admin panels, mobile app shells, calculations, client trust, configuration, CI workflows, webhooks, migrations, hydration, URL state, release notes, codebase dossiers, pruning, testing, and tool adoption.",
       "skills": [
+        "admin-panel-engineering",
         "architecture-decision-framework",
-        "backoffice-dashboard-engineering",
         "bulk-import-engineering",
         "calculation-correctness",
         "client-trust-boundary",
@@ -15,15 +15,14 @@
         "config-drift",
         "framework-migration",
         "github-actions-authoring",
+        "hydration-safe-state",
         "mobile-app-shell",
-        "plan-execution",
-        "prerender-safe-state",
         "prune-codebase",
+        "release-notes",
         "test-strategy",
-        "third-party-integration",
         "tool-evaluation-and-adoption",
-        "url-state-contract",
-        "user-facing-changelog"
+        "url-state",
+        "webhook-integration"
       ]
     },
     {

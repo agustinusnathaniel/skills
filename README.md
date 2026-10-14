@@ -8,24 +8,23 @@ A collection of agent skills for AI coding agents.
 
 | Skill | Description |
 |---|---|
+| [admin-panel-engineering](skills/software-engineering/admin-panel-engineering/SKILL.md) | Build admin panels and backoffice apps whose permissions, sessions, tenancy, audit trails, and list contracts match the server. |
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
-| [backoffice-dashboard-engineering](skills/software-engineering/backoffice-dashboard-engineering/SKILL.md) | Build admin and backoffice apps whose permissions, sessions, tenancy, and list contracts match the server. |
 | [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery, including local-first import and export. |
 | [calculation-correctness](skills/software-engineering/calculation-correctness/SKILL.md) | Keep money, dates, units, counters, and derived metrics correct across retries, timezones, and edits. |
 | [client-trust-boundary](skills/software-engineering/client-trust-boundary/SKILL.md) | Keep secrets and authorization on the server; treat everything the client holds as public and editable. |
 | [codebase-dossier](skills/software-engineering/codebase-dossier/SKILL.md) | Write an evidence-cited dossier of a codebase or a family of related repos (user-invoked). |
 | [config-drift](skills/software-engineering/config-drift/SKILL.md) | Verify that a configuration change is what the running system actually uses. |
-| [framework-migration](skills/software-engineering/framework-migration/SKILL.md) | Migrate frameworks, libraries, hosts, or major versions one step at a time with nothing of the old foundation left behind. |
+| [framework-migration](skills/software-engineering/framework-migration/SKILL.md) | Migrate libraries, linters, hosts, or major versions one step at a time with nothing of the old foundation left behind. |
 | [github-actions-authoring](skills/software-engineering/github-actions-authoring/SKILL.md) | Write GitHub Actions workflows whose timeouts, caches, gates, permissions, and shared inputs behave as written. |
+| [hydration-safe-state](skills/software-engineering/hydration-safe-state/SKILL.md) | Keep hydration consistent when prerendered or server-rendered HTML meets browser-only state. |
 | [mobile-app-shell](skills/software-engineering/mobile-app-shell/SKILL.md) | Build React Native and Expo app shells that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |
-| [plan-execution](skills/software-engineering/plan-execution/SKILL.md) | Execute a phased plan task by task against its tracker, or audit a tracker whose done marks are suspect (user-invoked). |
-| [prerender-safe-state](skills/software-engineering/prerender-safe-state/SKILL.md) | Use browser-only state in prerendered or server-rendered apps without hydration mismatches. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
+| [release-notes](skills/software-engineering/release-notes/SKILL.md) | Write changelogs and release notes for end users, developers, or maintainers, verified against what shipped. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
-| [third-party-integration](skills/software-engineering/third-party-integration/SKILL.md) | Handle provider callbacks, partner APIs, queues, and sync jobs so replays and failures are recoverable. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
-| [url-state-contract](skills/software-engineering/url-state-contract/SKILL.md) | Carry filters, pagination, and share links in the URL with a tested string round trip. |
-| [user-facing-changelog](skills/software-engineering/user-facing-changelog/SKILL.md) | Write changelog entries and release notes in the reader's words, verified against what shipped. |
+| [url-state](skills/software-engineering/url-state/SKILL.md) | Carry filters, pagination, and share links in the URL with a tested string round trip. |
+| [webhook-integration](skills/software-engineering/webhook-integration/SKILL.md) | Handle provider webhooks, payment settlement and reconciliation, partner APIs, queues, and sync jobs so replays and failures are recoverable. |
 
 ### automation
 
@@ -115,6 +114,8 @@ old name. Existing installed copies retain their old name until migrated.
 ## Adding New Skills
 
 Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.zcode-plugin/plugin.json`, `kimi.plugin.json`, the appropriate `skills.sh.json` grouping, and the table above. Add a changeset (`pnpm changeset`) following the bump policy under Versioning.
+
+Keep frontmatter to the portable [Agent Skills](https://agentskills.io/specification) fields (`name` matching the directory, `description` up to 1024 characters). A skill that should run only when a user invokes it needs three settings, because hosts read different keys: `disable-model-invocation: true` (Claude Code, Cursor, Kimi, omp), `triggers: ["user"]` (Devin), and `agents/openai.yaml` with `policy.allow_implicit_invocation: false` (Codex). ZCode has no manual-only setting, so the description must still read as a trigger.
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
 
