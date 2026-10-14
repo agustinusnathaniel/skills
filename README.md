@@ -15,7 +15,6 @@ A collection of agent skills for AI coding agents.
 | [client-trust-boundary](skills/software-engineering/client-trust-boundary/SKILL.md) | Keep secrets and authorization on the server; treat everything the client holds as public and editable. |
 | [codebase-dossier](skills/software-engineering/codebase-dossier/SKILL.md) | Write an evidence-cited dossier of a codebase or a family of related repos (user-invoked). |
 | [config-drift](skills/software-engineering/config-drift/SKILL.md) | Verify that a configuration change is what the running system actually uses. |
-| [framework-migration](skills/software-engineering/framework-migration/SKILL.md) | Migrate libraries, linters, hosts, or major versions one step at a time with nothing of the old foundation left behind. |
 | [github-actions-authoring](skills/software-engineering/github-actions-authoring/SKILL.md) | Write GitHub Actions workflows whose timeouts, caches, gates, permissions, and shared inputs behave as written. |
 | [hydration-safe-state](skills/software-engineering/hydration-safe-state/SKILL.md) | Keep hydration consistent when prerendered or server-rendered HTML meets browser-only state. |
 | [mobile-app-shell](skills/software-engineering/mobile-app-shell/SKILL.md) | Build React Native and Expo app shells that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |

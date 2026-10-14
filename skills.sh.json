@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, admin panels, mobile app shells, calculations, client trust, configuration, CI workflows, webhooks, migrations, hydration, URL state, release notes, codebase dossiers, pruning, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, admin panels, mobile app shells, calculations, client trust, configuration, CI workflows, webhooks, hydration, URL state, release notes, codebase dossiers, pruning, testing, and tool adoption.",
       "skills": [
         "admin-panel-engineering",
         "architecture-decision-framework",
@@ -13,7 +13,6 @@
         "client-trust-boundary",
         "codebase-dossier",
         "config-drift",
-        "framework-migration",
         "github-actions-authoring",
         "hydration-safe-state",
         "mobile-app-shell",
