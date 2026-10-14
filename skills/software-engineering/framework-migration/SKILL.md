@@ -32,13 +32,19 @@ Done when the scope, reason, success measure, and known defects are stated.
 ## Inventory the old surface
 
 List every consumer of the old API and every behavior it supplied implicitly:
-defaults (timeouts, retries, base URL joining, serialization), error shapes,
+defaults (timeouts, retries, URL joining, serialization), error shapes,
 interceptors and hooks, binary and streaming responses, and environment
 access. Defaults differ between libraries, so a drop-in replacement changes
-behavior silently. For example, `ky` retries and times out by default where
-`axios` does not, and its URL joining changed across majors: 1.x `prefixUrl`
-throws on a leading slash, while a standard `baseUrl` resolves `/users`
-against the origin and drops the base path.
+behavior silently.
+
+Read the reference for the kind of move:
+
+- HTTP clients: [HTTP client](references/http-client.md).
+- Linters and formatters: [lint and format](references/lint-and-format.md).
+- Hosts, deploy adapters, rendering modes, and site frameworks:
+  [hosting move](references/hosting-move.md).
+- Framework and SDK major versions: follow the project's official upgrade
+  guide, codemods, and any upgrade skill it ships, one major at a time.
 
 ## Migrate in verified steps
 
