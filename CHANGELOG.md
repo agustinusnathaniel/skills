@@ -1,5 +1,15 @@
 # agustinusnathaniel-skills
 
+## 2.0.0
+
+### Major Changes
+
+- [#29](https://github.com/agustinusnathaniel/skills/pull/29) [`134daf0`](https://github.com/agustinusnathaniel/skills/commit/134daf032b2a1e1ce306c27d9f81e9b48e0b93f4) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Remove the **framework-migration** skill. In testing, agents did not load it for routine migrations such as replacing axios with ky, even when its description named that exact case, and results matched runs without it.
+  
+  Its most useful rule moves into **tool-evaluation-and-adoption**: when an adoption replaces a tool, match the old tool's implicit defaults (retries, timeouts, serialization) and remove the old tool everywhere in the same change, including dependencies, scripts, hooks, CI, editor settings, and docs.
+  
+  If you invoked `framework-migration` by name, use `tool-evaluation-and-adoption` instead.
+
 ## 1.2.0
 
 ### Minor Changes
