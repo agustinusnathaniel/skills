@@ -4,13 +4,26 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, codebase pruning, testing, tool adoption, and operational workflows.",
+      "description": "Skills for architecture decisions, backoffice and mobile apps, calculations, configuration, CI workflows, integrations, migrations, plan execution, client trust, prerendered state, URL state, changelogs, codebase dossiers, pruning, testing, and tool adoption.",
       "skills": [
         "architecture-decision-framework",
+        "backoffice-dashboard-engineering",
         "bulk-import-engineering",
+        "calculation-correctness",
+        "client-trust-boundary",
+        "codebase-dossier",
+        "config-drift",
+        "framework-migration",
+        "github-actions-authoring",
+        "mobile-app-shell",
+        "plan-execution",
+        "prerender-safe-state",
         "prune-codebase",
         "test-strategy",
-        "tool-evaluation-and-adoption"
+        "third-party-integration",
+        "tool-evaluation-and-adoption",
+        "url-state-contract",
+        "user-facing-changelog"
       ]
     },
     {

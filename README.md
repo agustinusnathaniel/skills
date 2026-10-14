@@ -9,10 +9,23 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
-| [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery. |
+| [backoffice-dashboard-engineering](skills/software-engineering/backoffice-dashboard-engineering/SKILL.md) | Build admin and backoffice apps whose permissions, sessions, tenancy, and list contracts match the server. |
+| [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery, including local-first import and export. |
+| [calculation-correctness](skills/software-engineering/calculation-correctness/SKILL.md) | Keep money, dates, units, counters, and derived metrics correct across retries, timezones, and edits. |
+| [client-trust-boundary](skills/software-engineering/client-trust-boundary/SKILL.md) | Keep secrets and authorization on the server; treat everything the client holds as public and editable. |
+| [codebase-dossier](skills/software-engineering/codebase-dossier/SKILL.md) | Write an evidence-cited dossier of a codebase or a family of related repos (user-invoked). |
+| [config-drift](skills/software-engineering/config-drift/SKILL.md) | Verify that a configuration change is what the running system actually uses. |
+| [framework-migration](skills/software-engineering/framework-migration/SKILL.md) | Migrate frameworks, libraries, hosts, or major versions one step at a time with nothing of the old foundation left behind. |
+| [github-actions-authoring](skills/software-engineering/github-actions-authoring/SKILL.md) | Write GitHub Actions workflows whose timeouts, caches, gates, permissions, and shared inputs behave as written. |
+| [mobile-app-shell](skills/software-engineering/mobile-app-shell/SKILL.md) | Build React Native and Expo app shells that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |
+| [plan-execution](skills/software-engineering/plan-execution/SKILL.md) | Execute a phased plan task by task against its tracker, or audit a tracker whose done marks are suspect (user-invoked). |
+| [prerender-safe-state](skills/software-engineering/prerender-safe-state/SKILL.md) | Use browser-only state in prerendered or server-rendered apps without hydration mismatches. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
+| [third-party-integration](skills/software-engineering/third-party-integration/SKILL.md) | Handle provider callbacks, partner APIs, queues, and sync jobs so replays and failures are recoverable. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
+| [url-state-contract](skills/software-engineering/url-state-contract/SKILL.md) | Carry filters, pagination, and share links in the URL with a tested string round trip. |
+| [user-facing-changelog](skills/software-engineering/user-facing-changelog/SKILL.md) | Write changelog entries and release notes in the reader's words, verified against what shipped. |
 
 ### automation
 

@@ -7,10 +7,23 @@
   },
   "skills": [
     "./skills/software-engineering/architecture-decision-framework",
+    "./skills/software-engineering/backoffice-dashboard-engineering",
     "./skills/software-engineering/bulk-import-engineering",
+    "./skills/software-engineering/calculation-correctness",
+    "./skills/software-engineering/client-trust-boundary",
+    "./skills/software-engineering/codebase-dossier",
+    "./skills/software-engineering/config-drift",
+    "./skills/software-engineering/framework-migration",
+    "./skills/software-engineering/github-actions-authoring",
+    "./skills/software-engineering/mobile-app-shell",
+    "./skills/software-engineering/plan-execution",
+    "./skills/software-engineering/prerender-safe-state",
     "./skills/software-engineering/prune-codebase",
     "./skills/software-engineering/test-strategy",
+    "./skills/software-engineering/third-party-integration",
     "./skills/software-engineering/tool-evaluation-and-adoption",
+    "./skills/software-engineering/url-state-contract",
+    "./skills/software-engineering/user-facing-changelog",
     "./skills/automation/autonomous-improvement-loop",
     "./skills/research/domain-research"
   ]
