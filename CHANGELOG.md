@@ -1,5 +1,34 @@
 # agustinusnathaniel-skills
 
+## 1.2.0
+
+### Minor Changes
+
+- [#27](https://github.com/agustinusnathaniel/skills/pull/27) [`cd2a164`](https://github.com/agustinusnathaniel/skills/commit/cd2a164a44943bb191162950281df7cd8ee9ea68) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Update five existing skills:
+  
+  - **bulk-import-engineering** now also covers backup and restore and JSON, CSV, or spreadsheet import and export in offline-first apps, so it loads for those tasks too. Imports validate the whole file before writing, can roll back a failed restore, and merge rows field by field instead of skipping existing ids.
+  - **test-strategy** prefers real storage over mocks, fails tests on unhandled network requests, and takes expected values from the real consumer. When a change breaks a test, the agent fixes the code or states why the test's contract changed, instead of weakening the test.
+  - **prune-codebase** also removes what a starter template or fork brought in but the product never used, such as demo keys, sample auth, and upstream URLs.
+  - **autonomous-improvement-loop** keeps per-target rules learned from merged and closed deliveries, treats a cycle that changes nothing as valid, and pins the model for each scheduled job.
+  - **tool-evaluation-and-adoption** records why a tool was switched and what would reverse that decision, and covers evaluating a platform that client work will be built on.
+  
+  If you installed these skills individually into a user-level skills folder, reinstall them. Some hosts load a user-level copy in place of the plugin's newer one.
+
+- [#27](https://github.com/agustinusnathaniel/skills/pull/27) [`cd2a164`](https://github.com/agustinusnathaniel/skills/commit/cd2a164a44943bb191162950281df7cd8ee9ea68) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Add twelve software-engineering skills. Each is listed with the tasks it applies to:
+  
+  - **admin-panel-engineering**: building admin panels, backoffice apps, and internal tools, covering permission-gated pages and menus, login and logout, tenant scoping, list pages, exports, and audit trails. Includes Ant Design, Filament, and SWR references.
+  - **client-trust-boundary**: exposing environment variables or API keys to a web or mobile client, calling Firebase, Supabase, or Convex from the client, or gating features by role in the UI.
+  - **calculation-correctness**: code that computes money, dates, units, counters, or derived metrics.
+  - **config-drift**: changing environment variables, build or header config, service workers, hosting config, or CI, and when a setting seems to have no effect.
+  - **framework-migration**: replacing a library, linter, framework, or host, or upgrading across a major version. Includes HTTP client, lint and format, and hosting references.
+  - **github-actions-authoring**: writing or debugging GitHub Actions workflows and reusable workflows.
+  - **hydration-safe-state**: hydration mismatches, theme flashes, and browser state (localStorage, sessions, viewer time) in prerendered or server-rendered apps.
+  - **mobile-app-shell**: React Native and Expo app shells covering environments and release channels, remote config and forced updates, token refresh, push notifications and deep links, and web views.
+  - **release-notes**: changelogs and release notes for end users, developers, or maintainers. It asks which reader to write for when the target doesn't say.
+  - **url-state**: filters, pagination, and share links stored in the URL.
+  - **webhook-integration**: payment and other provider webhooks, settlement and reconciliation, partner APIs, queues, and scheduled sync jobs.
+  - **codebase-dossier**: writing an evidence-cited dossier of a codebase. It runs only when you invoke it by name, on every host that supports manual-only skills.
+
 ## 1.1.0
 
 ### Minor Changes
