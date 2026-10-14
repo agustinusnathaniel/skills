@@ -41,13 +41,13 @@ Done when: exactly one target is named, and the reason is recorded.
 
 ### 2. Observe
 
-Read current state: in-flight work and its verification status, plus any feedback since last cycle.
+Read current state: in-flight work and its verification status, any feedback since last cycle, and the target's learned rules (see [Learn from delivery outcomes](references/scheduler-ops.md#learn-from-delivery-outcomes)).
 
 Done when: you can state (a) whether in-flight work exists, (b) its verification state, (c) any unaddressed feedback — or that all three checks ran clean.
 
 ### 3. Decide: iterate or create
 
-In-flight work exists → iterate it ([references/iteration-patterns.md](references/iteration-patterns.md)). None exists → create one improvement ([references/loop-cycle.md](references/loop-cycle.md)).
+In-flight work exists → iterate it ([references/iteration-patterns.md](references/iteration-patterns.md)). None exists → create one improvement ([references/loop-cycle.md](references/loop-cycle.md)), or none when no candidate clears the target's learned rules. A cycle that changes nothing and reports briefly is a valid outcome.
 
 Done when: the mode is named and matches the observation from step 2.
 

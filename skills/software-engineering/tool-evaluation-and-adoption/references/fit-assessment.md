@@ -33,4 +33,13 @@ Always report the classification alongside the date.
 - Does it overlap existing capabilities, and what is the migration cost from alternatives?
 - Who benefits — the human operator, the agent workflow, both, or neither? State explicitly; a tool can be excellent in isolation but useless in this setup.
 
+## Platforms Built On for Clients
+
+When the tool is a platform (commerce engine, CRM, CMS) that client projects or a service business will be built on, the cost sits in operating it, not in its UI:
+
+- Data isolation per client: separate instances, workspaces, or row-level policy, and how API keys and agent access are scoped.
+- Operational ownership: upgrades, backups, incidents, and compliance you take on compared with the SaaS alternative.
+- Extension model: whether custom work lives in isolated modules or plugins, or requires modifying the core, which blocks upgrades.
+- Domain complexity the platform leaves to you, such as taxes, inventory concurrency, order and payment reconciliation, and webhooks.
+
 Done when: pros/cons are listed, every stale-looking dependency carries a domain classification, and stack overlap plus beneficiary are stated.

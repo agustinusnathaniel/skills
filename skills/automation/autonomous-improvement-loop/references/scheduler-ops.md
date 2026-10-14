@@ -11,6 +11,8 @@ Each scheduled run fires a self-contained agent session. The scheduled prompt ca
 - Which coding-agent CLI to delegate implementation to
 - Where to deliver the summary
 
+Pin the model on every agent job, so a change to the global default cannot silently move the loop onto a model it was never tested with. Run deterministic chores (backups, watchdogs, version checks) as plain scripts, and spend an agent run only where judgment is needed.
+
 Prefer a cadence with room to spare — the first cycle is the heaviest (scan plus create); later cycles are mostly check-and-iterate.
 
 Done when: a fired run needs no interactive input to complete steps 1–5 of the parent skill.
@@ -44,6 +46,12 @@ Done when: the failure is attributed to exactly one layer and the response match
 Use a token scoped to the target scope. Validate the token before API calls; when API calls return auth errors but git works, treat the token as degraded — push the branch and report the creation URL rather than burning the cycle on auth debugging.
 
 Done when: every run starts with a verified token and ends with no credentials in logs or state.
+
+## Learn from delivery outcomes
+
+Keep per-target learned rules where every scheduled run reads them: stop rules ("no dependency-only PRs unless a critical CVE", "never touch the agent directives") and patterns that merge, each with the deliveries that taught it. On a separate schedule, classify recent loop deliveries as merged, closed, or stale, read the owner's closing comments, and update the rules. Repeated closures of one kind of change become a stop rule. When nothing changed, the learning run reports nothing.
+
+Done when: each rule cites its deliveries, and the next cycle's observe step reads the updated rules.
 
 ## Stop conditions
 
