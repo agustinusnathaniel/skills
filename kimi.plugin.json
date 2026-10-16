@@ -11,6 +11,7 @@
     "./skills/software-engineering/architecture-decision-framework",
     "./skills/software-engineering/bulk-import-engineering",
     "./skills/software-engineering/calculation-correctness",
+    "./skills/software-engineering/challenge-every-guard",
     "./skills/software-engineering/client-trust-boundary",
     "./skills/software-engineering/codebase-dossier",
     "./skills/software-engineering/config-drift",
@@ -18,12 +19,15 @@
     "./skills/software-engineering/hydration-safe-state",
     "./skills/software-engineering/mobile-app-shell",
     "./skills/software-engineering/prune-codebase",
+    "./skills/software-engineering/pull-request-readiness",
+    "./skills/software-engineering/pull-request-review",
     "./skills/software-engineering/release-notes",
     "./skills/software-engineering/test-strategy",
     "./skills/software-engineering/tool-evaluation-and-adoption",
     "./skills/software-engineering/url-state",
     "./skills/software-engineering/webhook-integration",
     "./skills/automation/autonomous-improvement-loop",
+    "./skills/automation/delegating-to-coding-agents",
     "./skills/research/domain-research"
   ]
 }

@@ -12,6 +12,7 @@ A collection of agent skills for AI coding agents.
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
 | [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery, including local-first import and export. |
 | [calculation-correctness](skills/software-engineering/calculation-correctness/SKILL.md) | Keep money, dates, units, counters, and derived metrics correct across retries, timezones, and edits. |
+| [challenge-every-guard](skills/software-engineering/challenge-every-guard/SKILL.md) | Size defensive code to evidence, match sibling code, and check backend changes against recurring review findings. |
 | [client-trust-boundary](skills/software-engineering/client-trust-boundary/SKILL.md) | Keep secrets and authorization on the server; treat everything the client holds as public and editable. |
 | [codebase-dossier](skills/software-engineering/codebase-dossier/SKILL.md) | Write an evidence-cited dossier of a codebase or a family of related repos (user-invoked). |
 | [config-drift](skills/software-engineering/config-drift/SKILL.md) | Verify that a configuration change is what the running system actually uses. |
@@ -19,6 +20,8 @@ A collection of agent skills for AI coding agents.
 | [hydration-safe-state](skills/software-engineering/hydration-safe-state/SKILL.md) | Keep hydration consistent when prerendered or server-rendered HTML meets browser-only state. |
 | [mobile-app-shell](skills/software-engineering/mobile-app-shell/SKILL.md) | Build React Native and Expo app shells that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
+| [pull-request-readiness](skills/software-engineering/pull-request-readiness/SKILL.md) | Shape PRs and stacks, check readiness against evidence, and hand over the merge checklist before anyone merges. |
+| [pull-request-review](skills/software-engineering/pull-request-review/SKILL.md) | Review others' PRs for critical findings only, and draft comments the user approves before they are posted. |
 | [release-notes](skills/software-engineering/release-notes/SKILL.md) | Write changelogs and release notes for end users, developers, or maintainers, verified against what shipped. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
@@ -30,6 +33,7 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [autonomous-improvement-loop](skills/automation/autonomous-improvement-loop/SKILL.md) | Compound small improvements on a recurring schedule without per-cycle direction. |
+| [delegating-to-coding-agents](skills/automation/delegating-to-coding-agents/SKILL.md) | Brief, own, watch, and verify coding agent sessions that push to pull requests. |
 
 ### research
 
