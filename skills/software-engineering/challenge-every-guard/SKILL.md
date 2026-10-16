@@ -32,12 +32,11 @@ cite the line.
 
 Prefer the platform's native option or a library the repository already uses
 over hand-rolled code. A service gets the security mechanisms its siblings
-have; an internal-only service trusts its callers unless the owner says
-otherwise. Justify anything new in the PR body: a dependency, an environment
-variable beside an existing flag system, an abstraction, an interface with one
-implementation, test infrastructure, a new service. When it cannot be
-justified, leave it out. Keep design-document labels out of code, comments,
-and identifiers.
+have; adding or removing one is the owner's decision, not a side effect of
+the change. Justify anything new in the PR body: a dependency, a second
+configuration mechanism beside an existing one, an abstraction, an interface
+with one implementation, test infrastructure, a new service. When it cannot
+be justified, leave it out.
 
 ## Triage each guarded case
 
@@ -54,24 +53,24 @@ that reaches it.
 
 Risks a person decides (confirmation, routing, timing, undo) belong in the
 runbook. Code keeps guards for failures with no human in the loop:
-unreachable services, legal hold, concurrency, data loss. Rollback is a
-runbook procedure by default and a coded path only when the owner asks.
+unreachable dependencies, concurrency, data loss. Whether rollback is a coded
+path or a runbook procedure is the owner's decision.
 
 Validate early, in a dry run or the UI, so invalid data never reaches
 execution; that removes the need to handle it downstream.
 
 ## Shape what survives
 
-- **Check the plain write first.** An idempotent write from the source of
-  truth converges under last-write-wins; it needs no lock and no "already
-  done" check.
+- **Check the plain write first.** When every writer derives the value from
+  the current source of truth, an idempotent write converges under
+  last-write-wins; it needs no lock and no "already done" check.
 - **One computation, one write.** Decide in memory with pure functions, then
   write once. A loop of awaited writes with re-check passes is the shape to
   replace.
 - **Guard at the boundary, trust inside.** Validate where data enters; inner
   functions take it as given.
-- **Owner invariants are given.** Record a data bug in an owning service as
-  theirs. An owner's review ask is a decision to revisit with them, never a
+- **Owner invariants are given.** Record a data bug in a system another
+  team owns as theirs. An owner's review ask is a decision to revisit with them, never a
   silent removal.
 - **Reshape when a review round adds mechanism.** Two fixes failing on the
   same assumption mean the assumption is wrong; find it before adding a third.

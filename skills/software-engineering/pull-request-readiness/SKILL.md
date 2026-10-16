@@ -20,11 +20,10 @@ the body must promise and keep true.
 
 ## Shape the PR list first
 
-Write the list of PRs before writing code, one purpose each:
-
-1. Fixes first.
-2. Each redesign, or reversal of an earlier reviewed decision, in its own PR.
-3. Behaviour-free refactors and dead-code removal last.
+Write the list of PRs before writing code, one purpose each, ordered so each
+merges safely on its own. Keep behaviour-free refactors and dead-code removal
+out of PRs that change behaviour, and give each redesign, or reversal of an
+earlier reviewed decision, its own PR.
 
 Changes to shared behaviour (authentication, shared clients, retry strategy)
 never ride along with a feature. A fix for unsafe live behaviour is a
@@ -33,19 +32,18 @@ standalone hotfix on the base branch, never stacked on unmerged work.
 Before proposing a new PR, check whether an open PR already covers the scope.
 Fold a follow-up into an open PR only when it fits that PR's stated purpose.
 Question size, including test size; leave unrelated files alone and raise
-pre-existing cross-cutting problems separately. Split for risk
-(reviewability, blast radius, staged rollout), never by estimated human
-effort or time.
+pre-existing cross-cutting problems separately. Split for risk:
+reviewability, blast radius, staged rollout.
 
 ## Keep stacks correct
 
-- Fix a problem in the lowest PR that introduced the code, then merge it
-  forward through the stack. Where the repository forbids rebasing or force
-  pushes, merge forward plainly.
+- Fix a problem in the lowest PR that introduced the code, then carry it up
+  the stack the way the repository does (rebase, or merge where force pushes
+  are not allowed).
 - Each PR is correct at its own head: tests and checks pass with only the PRs
   below it.
-- Shared contract files are byte-identical across the branches that carry
-  them; compare hashes.
+- When a contract file (schema, API spec) is copied into several branches or
+  repositories, keep the copies identical and compare hashes.
 - Generated code goes in its own commit.
 - The body of each stacked PR names the PR it is stacked on.
 - Merge bottom-up. Some hosts' native stacks require the bottom PR to be up
@@ -53,10 +51,10 @@ effort or time.
 
 ## Make the body a contract
 
-The body names the owner (the person or agent session that pushes to the
-branch), follows the repository's template, carries a size line split into
-`code / tests / generated`, and lists anything new the change introduces with
-its justification. After any push, re-read the title and body against the new
+The body follows the repository's template, states the PR's size with
+generated code counted separately so reviewers know what to read, and lists
+anything new the change introduces with its justification. When several
+people or agent sessions work on the same branch, it names the one who pushes. After any push, re-read the title and body against the new
 head and remove what is no longer true.
 
 ## Check readiness
@@ -74,14 +72,15 @@ Run every check before marking a PR ready or requesting review:
   scores, and some repeat items already decided.
 - Every human reviewer's last comment is resolved, and lessons from earlier
   reviewers are applied across the PR, not only at the commented line.
-- Feature flags: whether one is needed, whether it exists, whether it
-  defaults to off. Shared paths are safe to merge with the flag off.
+- Where the repository uses feature flags: whether one is needed, whether it
+  exists, whether it defaults to off. Shared paths are safe to merge with the
+  flag off.
 - Quality gates the repository uses: an independent review of the diff from a
   clean checkout, cleanup of leftover scaffolding and restating comments,
   lint scoped to the diff.
 
-Then read the merge box itself. Commits authored by bots can need extra
-approvals, and the API may not say whose. Once everything is green, mark
+Then read the merge box itself. Branch protection can require approvals or
+checks that a summary or API response does not name. Once everything is green, mark
 ready promptly; marking ready and requesting review stay the user's call
 unless they have delegated it.
 
@@ -90,10 +89,12 @@ unless they have delegated it.
 Before the user merges, give the complete checklist for each PR in one
 message:
 
-- **Pre-merge:** flags to create and their default, indexes built and query
-  plans attached, approvals still missing.
-- **Deploy order:** which services deploy first (consumers before producers)
-  and which PRs must be live before the next merges.
+- **Pre-merge:** approvals still missing, and anything that must exist
+  before the code lands, such as flags with their defaults or database
+  indexes.
+- **Deploy order:** when several services or PRs depend on each other, which
+  deploys first (consumers before producers) and which must be live before
+  the next merges.
 - **Post-merge:** flags to turn on and in which environment, backfills or
   scripts to run (dry run first), what to watch and for how long, and
   follow-up PRs or tickets.

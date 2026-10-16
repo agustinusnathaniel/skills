@@ -15,17 +15,17 @@ and verify the pushed head before telling anyone it is done.
 
 ## One owner per PR
 
-- Each PR, including each PR in a stack, has exactly one owner session. The
-  first line of the PR body names it, and only it pushes.
-- Every other session is watch-only: it verifies and records, and never
-  pushes or replies on the PR.
-- Send fixes to the session that opened the PR; review notifications usually
-  route to the opener. Start a new session only for a new PR, or when the
-  opener is truly stuck.
+- Each PR, including each PR in a stack, has exactly one owner session, and
+  only it pushes. Record the owner where every session and reviewer sees it,
+  such as the PR body.
+- Every other session is watch-only: it verifies and records, and leaves
+  pushing and replying to the owner.
+- Send fixes to the owner session, which holds the PR's context. Start a new
+  session only for a new PR, or when the owner is truly stuck.
 - Before briefing a session, read its recent messages; someone else may have
   messaged it.
-- Never archive a session whose PR is still open, and ask before archiving
-  any session.
+- Keep the owner session available while its PR is open, and ask the user
+  before ending or archiving any session they started.
 - Settings and rules changed mid-run reach new sessions only. Running
   sessions keep what they loaded.
 
@@ -40,8 +40,8 @@ When a session grows long or expensive:
 4. The new owner reads the handoff and the PR first, and pushes only after an
    explicit go.
 
-Review events still reach the old opener after a handoff, so every sweep
-forwards them to the new owner.
+Some hosts deliver review events only to the session that opened the PR.
+On those, every sweep forwards the old opener's events to the new owner.
 
 ## Write briefs the delegate can follow literally
 
@@ -55,30 +55,27 @@ session, saved somewhere durable, with numbered items. Each item carries:
 - The tests that fail before the fix.
 
 Inline the rubric the work is judged by (engineering bar, guard rules,
-testing rules): a remote agent cannot read your local files, and an
-automation running under an organization account does not load personal
-rules. Leave out rules the delegate already has. A plan that spans
-repositories lists every repository it touches; create the tracker items
-first and reference them in the briefs.
+testing rules): a delegate running elsewhere loads only what its own
+environment provides, not your local files or personal rules. Leave out
+rules the delegate already has. A plan that spans repositories lists every
+repository it touches, and each brief links the issue or tracker item it
+serves.
 
 Answer a delegate's routine questions yourself, with the reasoning, and tell
 the user what you answered.
 
-## Watch without polling agents
+## Watch on a timer
 
-Polling agents misreport, time out on long waits, and lose notifications. Set
-a background timer instead, and when it fires, check each session's status,
-latest messages, and PR head yourself.
+Watch delegates yourself rather than through another agent: a watcher's
+report is one more claim you would have to verify. Set a background timer,
+and when it fires, check each session's status, latest messages, and PR head
+yourself. Quiet time is not a stall; check for new pushes before concluding
+anything.
 
-- Quiet time is not a stall; check for new pushes before concluding anything.
-- A session waiting on the user may mean someone else is pushing to its
-  branch.
-- Question prompts from a delegate may not appear in message events; search
-  for them.
-
-A **sweep** is one pass over the delegate sessions, the code host (bots
-listed separately from humans), agent inboxes, and chat. Report the items
-that need the user one at a time, then set the timer for the next sweep.
+A **sweep** is one pass over everywhere delegates and reviewers report: the
+delegate sessions, the code host (bots listed separately from humans), and
+any channel where they post. Report the items that need the user one at a
+time, then set the timer for the next sweep.
 
 ## Verify before reporting
 
