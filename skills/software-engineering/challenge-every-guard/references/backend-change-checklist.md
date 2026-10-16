@@ -1,91 +1,89 @@
 # Backend Change Checklist
 
-Failure classes that recur in review of backend changes. Walk every section the
-diff touches and record, per item, where the change handles it or why it does
-not apply. For webhooks, payment providers, and partner APIs, also use the
-`webhook-integration` skill.
+Failure classes that recur when a backend change touches shared records,
+background work, events, queries, or deploys. Each item is a candidate, not a
+mandate: for every section the diff touches, tier each item by evidence like
+any other guard, then record where the change handles a **real** one or why
+an item does not apply.
 
-## Owner records
+Related skills own neighbouring checks: `webhook-integration` for external
+providers and scheduled jobs, `client-trust-boundary` for caller-supplied ids
+and authorization, and `config-drift` for whether a deploy or config change
+took effect.
 
-- Re-read the owning service's record by id before acting on it. A copy held
-  elsewhere is a cache.
-- Put each checked precondition inside the write's filter, so the check and
-  the write cannot drift apart.
-- Write only the fields that changed, or fence the write by version. Writing
-  back a whole record read earlier overwrites concurrent changes.
-- Before matching records across services, check which id each service stores.
-- A new API has no legacy callers: make its inputs required at the boundary.
-- Never trust a caller-supplied id without an authorization check.
+## Writes to shared records
 
-## Outbound calls
+- Re-read the record from its source of truth before acting on it; a copy held
+  elsewhere may be stale.
+- Put each checked precondition in the write's own condition, such as a
+  conditional update or a `WHERE` clause. A separate read, then write, lets
+  the state change between the two.
+- Write only the fields that changed, or fence the write with a version.
+  Writing back a whole record read earlier overwrites concurrent edits.
+- Before matching records across systems, confirm which identifier each one
+  stores; two systems can key the same entity differently.
+- Make a new API's inputs required at the boundary. It has no legacy callers,
+  and optional inputs grow defaults nobody chose.
 
-- Every outbound call in a job or consumer has a deadline.
-- A preflight uses the same lookup and key as the path it predicts.
-- When a signal from another system is wrong, fix it in the owning repository
-  and land that fix before relying on it. An upstream authority wins over a
-  local workaround.
+## Calls to other systems
 
-## Events
+- Give every outbound call made from a job or consumer a timeout, so a hung
+  dependency cannot stall the worker.
+- A preflight check uses the same lookup and key as the operation it predicts;
+  otherwise it approves cases the real path rejects.
+- When another system sends a wrong value, fix it at its source before
+  building on it. A local workaround drifts from the authority.
 
-- One owner, one constant, one typed payload, and a fixed source set by the
-  server.
-- Publish before returning, and fail the operation when the publish fails.
-- Consumers are idempotent and re-read the owner rather than trusting the
-  payload.
-- Services holding copies update them from events, not from per-service sync
-  calls.
-- Before bulk-emitting an existing event, check every subscriber.
+## Events and messages
+
+- Make the state change and its event atomic, for example with an outbox
+  table written in the same transaction. Publishing separately can lose the
+  event, or report failure after the change has committed.
+- Give each event type one owner and one typed payload definition, so
+  producers cannot drift apart.
+- Make consumers idempotent; deliveries repeat and arrive out of order.
+- Before emitting an existing event in bulk or with a new meaning, check
+  every subscriber, since each one reacts.
 
 ## Data and queries
 
-- Every new query shape ships with its index built and its query plan on the
-  PR before the flag turns on.
-- Normalize at write time with a one-time backfill instead of querying
-  case-insensitively.
-- Scripts dry-run by default and write only with an explicit apply flag.
-- One entity plus its progress record per transaction.
-- Measure per-document work against the largest real documents, not fixtures.
+- Ship each new query shape with the index it needs, and check its plan
+  against production-sized data. A missing index passes tests and fails under
+  load.
+- Normalize values at write time with a one-time backfill, rather than in
+  every query; query-time normalization usually defeats the index.
+- Data scripts dry-run by default and write only with an explicit flag, so a
+  mistaken run changes nothing.
+- Size per-record work against the largest real records, not fixtures.
 
-## Background and scheduled work
+## Long-running work
 
-- Long work runs on the owning service, saves progress in the same write as
-  the work, and uses a shared rate limiter and a per-instance concurrency cap.
-- A failure in derived data does not fail the run.
-- Scheduled jobs take a lease or lock and are idempotent for their period.
+- Save progress in the same write as the work it records, so a restart
+  resumes instead of repeating or skipping.
+- Bound concurrency and request rate to what the called dependencies allow.
+- Log and retry a failure in derived or secondary data rather than failing
+  the whole run.
 
-## Audit, alerts, and logs
+## Audit and alerts
 
-- Every data-changing path, including replay and repair, writes the same audit
-  entry and log line.
-- Before adding an alert, name who acts on it. When the caller already alerts,
-  log context instead.
-- Logs never contain personal data, user content, or secrets.
+- Every path that changes data, including replays and repair scripts, writes
+  the same audit entry; a path that skips it leaves changes nobody can trace.
+- Name who acts on an alert before adding it. Alerts nobody owns teach people
+  to ignore alerts.
+- Give every state a record can get stuck in a way to detect it and a
+  documented way out.
+- Keep personal data, user content, and secrets out of logs.
 
 ## Rollback
 
-Rollback restores exactly what the forward run replaced and states what
-happens to records created after the forward run.
+Rollback restores exactly what the forward change replaced, and states what
+happens to records created after it ran. A rollback that restores too much
+loses newer data.
 
-## Deploy and flags
+## Deploy order and flags
 
-- Write the deploy order: consumers before producers.
-- Flags stay off until every dependency is live.
-- A change to an existing shared path is live on deploy, so it must be safe
-  with the flag off.
-- An irreversible capability gets its own flag.
-- Every state a record can get stuck in has an alert and a documented way out.
-- Bump published package versions past the base branch's latest.
-- A trivially revertible model or config swap ships as a direct change; flags
-  are for real kill switches such as a new data flow or new live behaviour.
-- A green deploy action does not mean healthy instances; check the
-  orchestrator. A CDN can take a while to reflect a deploy.
-- Changing a metric's threshold, denominator, or eligibility needs a human
-  decision.
-
-## LLM calls
-
-- Log the resolved model and the call duration.
-- Use low reasoning effort for short, latency-sensitive calls.
-- Keep system prompts byte-stable so prompt caching holds.
-- When prompts live in a database behind flags, editing the constant in code
-  may change nothing; find where the running prompt is read.
+- When services depend on each other, write the deploy order: consumers that
+  accept a new shape deploy before producers that send it.
+- A change to an existing shared path is live as soon as it deploys, so it
+  must be safe with any new flag off.
+- Keep a flag off until everything it depends on is live.

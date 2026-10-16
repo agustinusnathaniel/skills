@@ -93,8 +93,8 @@ checker, nesting deeper than the sibling's, and exports with no caller.
 When the change touches services, background jobs, events, queries, scripts,
 or deploy order, apply the
 [backend change checklist](references/backend-change-checklist.md). It lists
-the failure classes that recur in backend review; each is a **real** tier
-guard.
+failure classes that recur in backend review; tier each one by evidence like
+any other guard.
 
 ## Report
 
