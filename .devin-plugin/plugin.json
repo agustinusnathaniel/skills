@@ -1,7 +1,7 @@
 {
   "name": "agustinusnathaniel-skills",
   "version": "2.0.0",
-  "description": "Software engineering skills: architecture decisions, admin panels, mobile app shells, bulk imports, calculations, client trust, configuration drift, CI workflows, webhooks, hydration, URL state, release notes, codebase dossiers, pruning, test strategy, and tool evaluation.",
+  "description": "Software engineering skills: architecture decisions, admin panels, mobile app shells, bulk imports, calculations, client trust, configuration drift, CI workflows, webhooks, hydration, URL state, release notes, codebase dossiers, pruning, guard triage, pull request readiness and review, test strategy, and tool evaluation.",
   "author": {
     "name": "Agustinus Nathaniel"
   },
