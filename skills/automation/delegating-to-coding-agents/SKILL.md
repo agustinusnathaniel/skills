@@ -88,10 +88,10 @@ its base. A wrong premise costs the delegate a round. Also include:
   rather than polling. Relay final versions and signatures between sessions.
 
 Per session and topic, send one consolidated message that says what it
-replaces, and avoid reversing an instruction minutes later. Messages to a
-delegate usually appear under the user's name, and delegates copy their framing
-into PR replies, so write them in the user's first person without relay
-wording.
+replaces, and avoid reversing an instruction minutes later. On hosts where
+messages to a delegate post under the user's name, write them in the user's
+first person without relay wording, since delegates copy that framing into PR
+replies.
 
 Answer a delegate's routine questions yourself, with the reasoning, and tell
 the user what you answered.

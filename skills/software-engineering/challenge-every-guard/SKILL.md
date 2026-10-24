@@ -42,9 +42,7 @@ copying it elsewhere.
 
 Prefer letting the owning service reject invalid input, treating its
 invalid-argument error as that item failing, over copying its validator. A
-validator you must port needs proof of parity, such as differential fuzzing
-against the original, and a regular expression ported between engines needs a
-form that cannot backtrack exponentially, tested against the original.
+validator you must port needs proof it behaves like the original.
 
 ## Triage each guarded case
 
@@ -63,9 +61,9 @@ A case that needs an unlikely chain of events in normal use (a service far
 slower than usual at the exact moment two runs overlap, an admin undoing their
 own setup mid-run) is **impossible** for decisions: no code, and no question
 to the owner. If a reviewer raised it, add at most one known-limits line.
-This applies only when the outcome is tolerable: a case that would leave a
-real customer run wrong, locked out, or broken is **real** and gates launch,
-however rare.
+This applies only when the outcome is tolerable: a case that would leave
+real users with wrong data, locked out, or visibly broken is **real** and
+gates launch, however rare.
 
 Before claiming a guard or fix covers a flow, list every caller performing the
 same side effect (open PRs included), every reader and writer of a changed key

@@ -34,9 +34,10 @@ the same write. This skill adds the failure modes that checklist does not.
   dead-letter policy (maximum deliveries, backoff, what happens after the
   last one) and the consumer framework's error handling. Some framework
   wrappers ack a thrown error themselves after a few attempts, and without a
-  backoff policy a nacked message comes back immediately. When the event can be lost, fall back to the
-  event's own payload, or trace a real recovery path (a command an operator
-  can run, plus an alert) before naming one in the PR.
+  backoff policy a nacked message comes back immediately. When the event can
+  be lost, fall back to the event's own payload, or trace a real recovery
+  path (a command an operator can run, plus an alert) before naming one in
+  the PR.
 - A nack because something else holds the resource first releases any lease
   the handler took, then delays redelivery where the broker supports it
   (backoff policy, visibility timeout, delayed republish).

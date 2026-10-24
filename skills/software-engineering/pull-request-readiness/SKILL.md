@@ -81,10 +81,6 @@ Run every check before marking a PR ready or requesting review:
   remarks hide in them.
 - No unresolved review thread, bot threads included; hosts can block merge on
   them.
-- Dependency or supply-chain alerts are filtered to those needing action. Per
-  alert: the affected surface and whether it is reachable, then the upgrade
-  risk. Verified fixes split into PRs, runtime separate from dev-only, with a
-  major upgrade as its own follow-up.
 - Where the repository uses feature flags: whether one is needed, whether it
   exists, whether it defaults to off. Shared paths are safe to merge with the
   flag off.
@@ -111,9 +107,12 @@ message:
 
 - **Pre-merge:** approvals still missing, and anything that must exist
   before the code lands, such as flags with their defaults, database
-  indexes, or new environment variables in each environment. A package that
-  publishes on merge sets its version from the registry's latest, checked
-  right before merge.
+  indexes, or new environment variables in each environment. A shared
+  package's version in an open PR is a placeholder: right before merge, set
+  it to the registry's latest plus one minor, and give dependent work the
+  final number only after the publish succeeds. A change that needs a field
+  from another service's published client waits for that publish, confirms
+  the version on the registry, and pins it exactly.
 - **Production asks:** every ask to merge to production or turn on a
   production flag states what could go wrong, the blast radius, what will be
   watched, how to roll back, and what is unverified. For a promotion or deploy

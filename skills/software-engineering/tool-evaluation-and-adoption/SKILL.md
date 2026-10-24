@@ -1,6 +1,6 @@
 ---
 name: tool-evaluation-and-adoption
-description: Vet an open-source tool, library, package, plugin, skill, or MCP server before adopting it. Use when asked whether to adopt, switch to, or upgrade one, or to install one.
+description: Vet an open-source tool, library, package, plugin, skill, or MCP server before adopting it. Use when asked whether to adopt, switch to, or upgrade one, to install one, or to triage dependency and supply-chain alerts.
 ---
 
 # Tool Evaluation & Adoption
@@ -90,6 +90,10 @@ Follow [references/install-compatibility.md](references/install-compatibility.md
 5. When the adoption replaces a tool, list what the old one did implicitly (defaults such as retries, timeouts, and serialization) and match it or record the intended change. Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
 
 Done when: the tool is installed from a verified source, configured, a smoke test confirms it works end to end, and no trace of a replaced tool remains.
+
+## Dependency Alerts
+
+Triage dependency or supply-chain alerts by first filtering to those needing action. Per alert give the affected surface and whether it is reachable, then the upgrade risk. Split verified fixes into PRs, runtime separate from dev-only, with a major upgrade as its own follow-up.
 
 ## Pitfalls
 

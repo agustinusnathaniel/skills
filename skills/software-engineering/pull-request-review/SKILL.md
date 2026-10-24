@@ -31,8 +31,8 @@ before merge:
 - Large additions the feature does not need.
 
 Verify each finding against the code before drafting it. Fixtures and
-placeholder data looking realistic or unrealistic is not a finding, and data
-is never "a real user's" on its shape alone.
+placeholder data looking realistic or unrealistic is not a finding. Do not call
+test data a real user's from its shape alone.
 
 When the user asks for taste or style points too, put them in a separate
 group labelled not blocking, phrased as questions, after the must-fix items.
