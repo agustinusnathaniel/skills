@@ -87,10 +87,9 @@ against all of it. Recipients, tags, and cc lines change only on their say.
 1. For a draft with factual claims or one going outside the team, run a
    separate checker pass, a fresh subagent where available, given the draft,
    its destination and audience, and the author's earlier asks; a quick
-   self-check is enough otherwise. It
-   checks each fact against its source, each rule above, and that links and
-   formatting render. Fix every failure, and check again after any change
-   beyond wording.
+   self-check is enough otherwise. It checks each fact against its source,
+   each rule above, and that links and formatting render. Fix every failure,
+   and check again after any change beyond wording.
 2. Hand over a short note of what was checked and what could not be, then the
    full final text as the last thing in the message. Label several drafts by
    recipient and topic, not by number. When the author asks for the final
