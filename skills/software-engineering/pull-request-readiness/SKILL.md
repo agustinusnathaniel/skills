@@ -53,7 +53,10 @@ reviewability, blast radius, staged rollout.
 
 The body follows the repository's template, states the PR's size with
 generated code counted separately so reviewers know what to read, and lists
-anything new the change introduces with its justification. When several
+anything new the change introduces with its justification. When the change
+alters a shared helper's behaviour, it names every affected caller so their
+owners know. After a reviewer has reviewed or approved, a "Since review"
+section lists the commits added after the head they saw. When several
 people or agent sessions work on the same branch, it names the one who pushes. After any push, re-read the title and body against the new
 head and remove what is no longer true.
 
@@ -71,7 +74,17 @@ Run every check before marking a PR ready or requesting review:
   against the code and the plan. Some bots report real defects, some only
   scores, and some repeat items already decided.
 - Every human reviewer's last comment is resolved, and lessons from earlier
-  reviewers are applied across the PR, not only at the commented line.
+  reviewers are applied across the PR, not only at the commented line. Review
+  findings are fixed by default; leaving one as is needs evidence that it
+  cannot happen in production, given in its thread. Every part of a
+  multi-part finding is answered, and approval bodies are read too, since
+  remarks hide in them.
+- No unresolved review thread, bot threads included; hosts can block merge on
+  them.
+- Dependency or supply-chain alerts are filtered to those needing action. Per
+  alert: the affected surface and whether it is reachable, then the upgrade
+  risk. Verified fixes split into PRs, runtime separate from dev-only, with a
+  major upgrade as its own follow-up.
 - Where the repository uses feature flags: whether one is needed, whether it
   exists, whether it defaults to off. Shared paths are safe to merge with the
   flag off.
@@ -79,10 +92,17 @@ Run every check before marking a PR ready or requesting review:
   clean checkout, cleanup of leftover scaffolding and restating comments,
   lint scoped to the diff.
 
-Then read the merge box itself. Branch protection can require approvals or
-checks that a summary or API response does not name. Once everything is green, mark
+Then read the merge box itself, and read it again after every push, not only
+before merge: a push or a merge from the base can drop an approval. Branch
+protection can require approvals or checks that a summary or API response
+does not name. Once everything is green, mark
 ready promptly; marking ready and requesting review stay the user's call
 unless they have delegated it.
+
+A PR held on purpose (waiting on a dependency, a proof, or another PR) stays
+draft, and every status lists it as held with what it waits for. To put a PR
+on hold, convert it to draft and remove its requested reviewers; draft status
+alone leaves it in their queue.
 
 ## Hand over the merge checklist up front
 
@@ -90,8 +110,15 @@ Before the user merges, give the complete checklist for each PR in one
 message:
 
 - **Pre-merge:** approvals still missing, and anything that must exist
-  before the code lands, such as flags with their defaults or database
-  indexes.
+  before the code lands, such as flags with their defaults, database
+  indexes, or new environment variables in each environment. A package that
+  publishes on merge sets its version from the registry's latest, checked
+  right before merge.
+- **Production asks:** every ask to merge to production or turn on a
+  production flag states what could go wrong, the blast radius, what will be
+  watched, how to roll back, and what is unverified. For a promotion or deploy
+  PR approved earlier, list what landed after the approval and whether each
+  change ships dark or live.
 - **Deploy order:** when several services or PRs depend on each other, which
   deploys first (consumers before producers) and which must be live before
   the next merges.

@@ -4,7 +4,8 @@ description: >
   Use when deciding what to test or verify for a change and at which boundary
   (unit, integration, E2E), reproducing a bug before patching it, planning
   failure-first coverage, requiring artifact-producing E2E for complex
-  features, or judging whether existing tests earn their keep.
+  features, judging whether existing tests earn their keep, or planning an
+  eval before changing prompts or model settings.
 ---
 
 # Test Strategy
@@ -60,7 +61,31 @@ request layer and fail on unhandled requests. Take expected values from the
 real consumer, such as the host's live command or tool registry, not from the
 constant the code under test also reads; a self-consistent test cannot see
 drift. A test that needs a build fails with a build instruction when the
-artifact is missing, rather than skipping.
+artifact is missing, rather than skipping. Assert at the boundary that
+survives serialization (the response body, the serialized message payload,
+the arguments reaching a client), not the object one layer above it; a value
+that cannot cross that boundary has no behavior to test.
+
+Before adding a test, find what already covers the behavior at every boundary
+and extend that test with an assertion or case. "Fails without the fix" can be
+shown with an existing or extended test. Test every claim the change makes: a
+guard described as the real protection gets a case for each bad shape it
+rejects, and a new blocking condition is tested in both directions (blocked,
+then a retry that succeeds). When a coverage gate flags a branch for a state
+production cannot reach, simplify the guard rather than adding a test. Fix a
+flaky timing assertion by anchoring it to the values the code actually used,
+not by widening the tolerance.
+
+Before replacing an implementation with simpler code or a different library,
+pin today's output with a characterization test across its edge cases that
+passes before and after the swap.
+
+Before changing model-driven behavior or its latency settings (prompt or
+schema sections, step caps, effort or model choice), run an eval before
+opening the PR: named arms (the current setting and each candidate), realistic inputs
+from fixtures or staging only, and repeated runs per arm alongside a fresh
+control. Decide the stop rule first: if a candidate is clearly worse, stop and
+report instead of shipping it.
 
 When a change turns an existing test red, fix the code, or change the test with
 a stated reason its contract no longer holds. Loosening assertions, lowering

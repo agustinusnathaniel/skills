@@ -30,7 +30,12 @@ before merge:
 - Unrelated changes hidden in the commits.
 - Large additions the feature does not need.
 
-Verify each finding against the code before drafting it.
+Verify each finding against the code before drafting it. Fixtures and
+placeholder data looking realistic or unrealistic is not a finding, and data
+is never "a real user's" on its shape alone.
+
+When the user asks for taste or style points too, put them in a separate
+group labelled not blocking, phrased as questions, after the must-fix items.
 
 ## Draft the review
 
@@ -81,3 +86,8 @@ posts it.
 
 Agree with what is right first, then add the missing context. Credit whoever
 caught something, and flag corrections openly.
+
+Before drafting a thread reply, restate the reviewer's exact question and
+answer that, with evidence. When a PR has many reviewer points, draft one
+summary comment mapping each point to the commit that addressed it, so the
+reviewer can re-check in one pass.

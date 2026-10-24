@@ -16,14 +16,27 @@ visible and bounded, then read the run log to confirm what actually happened.
 
 ## Bound and order every job
 
-- Give every job a `timeout-minutes` sized to its work. A hung step otherwise
-  runs to the platform maximum. A job that calls a reusable workflow cannot set
-  it; the reusable workflow's own jobs must.
+- Give every job a `timeout-minutes` sized from run history, about two to three
+  times the longest of its recent successful runs, and report the numbers. A
+  hung step otherwise runs to the platform maximum. A job that calls a
+  reusable workflow cannot set it; the reusable workflow's own jobs must.
 - Restore a cache before the step that would fill it, and skip that step on a
   cache hit. A cache saved after an install never saves time.
 - Split independent checks into parallel jobs so one failure reports early.
 - Keep gates as gates: a check under `continue-on-error`, or piped into
   `|| true`, always passes and reports nothing.
+- A skipped required check counts as passing. To block merge on several jobs,
+  add one final job named exactly as the required check, with `needs` on those
+  jobs and `if: always()`, that fails unless `needs.<job>.result` is `success`
+  for each one, so skipped, cancelled, and failed jobs all fail it. Leave
+  advisory jobs out of its `needs`. When adding the pattern, prove it once by
+  breaking one needed job on a branch.
+- A `concurrency` group keyed on the PR alone with `cancel-in-progress`
+  lets a re-run of an older commit cancel the newest commit's run. Re-run at
+  the head, or give re-runs their own group.
+- A speed-up keeps every check (see `challenge-every-guard`): each test still
+  runs in exactly one job, and the gain is measured on real runs against a
+  stated baseline window.
 
 ## Move values across the shell boundary on purpose
 

@@ -36,7 +36,15 @@ have; adding or removing one is the owner's decision, not a side effect of
 the change. Justify anything new in the PR body: a dependency, a second
 configuration mechanism beside an existing one, an abstraction, an interface
 with one implementation, test infrastructure, a new service. When it cannot
-be justified, leave it out.
+be justified, leave it out. Add no configuration, flag, or placeholder for a
+feature that does not exist yet, and extend the original code rather than
+copying it elsewhere.
+
+Prefer letting the owning service reject invalid input, treating its
+invalid-argument error as that item failing, over copying its validator. A
+validator you must port needs proof of parity, such as differential fuzzing
+against the original, and a regular expression ported between engines needs a
+form that cannot backtrack exponentially, tested against the original.
 
 ## Triage each guarded case
 
@@ -50,6 +58,20 @@ that reaches it.
 | **rare** | Reachable but seldom, with a human able to respond | One early guard at the entry point with a named error, or a runbook entry or alert. Keep it off the main path |
 | **real** | Observed, or certain under normal load | Main path, in the sibling's shape |
 | **unknown** | Not yet established | Say so and ask. Build nothing until it is settled |
+
+A case that needs an unlikely chain of events in normal use (a service far
+slower than usual at the exact moment two runs overlap, an admin undoing their
+own setup mid-run) is **impossible** for decisions: no code, and no question
+to the owner. If a reviewer raised it, add at most one known-limits line.
+This applies only when the outcome is tolerable: a case that would leave a
+real customer run wrong, locked out, or broken is **real** and gates launch,
+however rare.
+
+Before claiming a guard or fix covers a flow, list every caller performing the
+same side effect (open PRs included), every reader and writer of a changed key
+across services, and sibling endpoints that need the same check. Say how both
+existing and newly created records end up right, and name in the PR the paths
+it does not cover.
 
 Risks a person decides (confirmation, routing, timing, undo) belong in the
 runbook. Code keeps guards for failures with no human in the loop:
@@ -74,9 +96,15 @@ execution; that removes the need to handle it downstream.
   silent removal.
 - **Reshape when a review round adds mechanism.** Two fixes failing on the
   same assumption mean the assumption is wrong; find it before adding a third.
+- **Optimizations keep every check.** A speed or cost change keeps every
+  check, test, and signal. Resolve a trade-off with a replacement check, and
+  name side costs up front.
 
-Preserve prior behaviour when refactoring. When something looks unused, say
-why before removing it, and list destructive deletions for approval first.
+Preserve prior behaviour when refactoring. Before removing a guard or test,
+find why it was added (the commit and the regression it guards) and whether
+removing it starts a retry or redelivery loop. Input any authorized publisher
+or caller can send counts as production input, even when only a forged or
+malformed message produces it. List destructive deletions for approval first.
 
 Tests follow the same tiers: a test for an impossible state goes with the
 branch it covered. Use the `test-strategy` skill for which tests to keep.

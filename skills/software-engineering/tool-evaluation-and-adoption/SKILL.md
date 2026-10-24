@@ -62,7 +62,8 @@ Write the assessment report:
 - For a replacement or a workaround (patch, pinned version, non-registry source): the measured reason, and the condition that would reverse it. Record both with the adoption change, so the next upgrade or switch can check them instead of guessing.
 
 Check every capability claim the verdict relies on against the tool's source or
-docs, including claims from delegated research or memory. File upstream reports
+docs, including claims from delegated research or memory, and every "latest" or
+"current version" claim against the registry or release page. File upstream reports
 only after reproducing the problem.
 
 For evaluate-only scope, deliver the assessment and ask whether to adopt. When
@@ -85,7 +86,8 @@ Follow [references/install-compatibility.md](references/install-compatibility.md
 1. Prefer checksum-verified release assets or a package manager; read install scripts before running them.
 2. Configure auth, ports, directories, and integrations from environment-provided values.
 3. For bundle-sensitive adoptions, follow [references/adoption-verification.md](references/adoption-verification.md) to measure impact before/after against a clean-tree control build.
-4. When the adoption replaces a tool, list what the old one did implicitly (defaults such as retries, timeouts, and serialization) and match it or record the intended change. Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
+4. When an install or upgrade breaks on mismatched versions within a package family, move every related package to the latest consistent stable release, regenerate the lockfile, and adapt the code to the new API, rather than pinning transitive dependencies back.
+5. When the adoption replaces a tool, list what the old one did implicitly (defaults such as retries, timeouts, and serialization) and match it or record the intended change. Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
 
 Done when: the tool is installed from a verified source, configured, a smoke test confirms it works end to end, and no trace of a replaced tool remains.
 

@@ -5,7 +5,8 @@ description: >
   adding a page, sidebar or menu entry, route, or action that only some
   permissions or roles may see; touching login, logout, session expiry, or
   role edits; scoping data to a tenant, partner, or organization; building
-  filtered list pages, exports, audit trails, or approval flows; or fixing a
+  filtered list pages, exports, audit trails, destructive confirmations,
+  operator status messages, or approval flows; or fixing a
   bug in an app that has a copied sibling repo.
 ---
 
@@ -80,8 +81,8 @@ and say which copies were checked.
 
 ## References
 
-- Audit trails, destructive actions, approvals, and role design:
-  [admin domain](references/admin-domain.md).
+- Audit trails, destructive actions and confirmations, approvals, operator
+  status copy, and role design: [admin domain](references/admin-domain.md).
 - Client data caches with SWR or similar (keys, gating, logout, revalidation):
   [SWR](references/swr.md).
 - React with Ant Design forms and tables: [antd](references/antd.md).
