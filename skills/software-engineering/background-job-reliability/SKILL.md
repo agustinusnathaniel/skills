@@ -34,10 +34,10 @@ the same write. This skill adds the failure modes that checklist does not.
   dead-letter policy (maximum deliveries, backoff, what happens after the
   last one) and the consumer framework's error handling. Some framework
   wrappers ack a thrown error themselves after a few attempts, and without a
-  backoff policy a nacked message comes back immediately. When the event can
-  be lost, fall back to the event's own payload, or trace a real recovery
-  path (a command an operator can run, plus an alert) before naming one in
-  the PR.
+  backoff policy a nacked message comes back immediately. Re-read the owner
+  as usual; fall back to the event's own payload only when that re-read fails
+  and the event would otherwise be lost. Trace a real recovery path (a
+  command an operator can run, plus an alert) before naming one in the PR.
 - A nack because something else holds the resource first releases any lease
   the handler took, then delays redelivery where the broker supports it
   (backoff policy, visibility timeout, delayed republish).
@@ -50,10 +50,10 @@ the same write. This skill adds the failure modes that checklist does not.
 
 ## Write the delta through one path
 
-- Membership-style events (join, leave, return) write only the affected
-  entity's delta: reuse stored ids, skip entries already written, and filter
-  in the query before taking per-item locks. A redelivery after one failed
-  item then costs reads, not a full walk.
+- Events about one member of a group or collection (joined, left, returned)
+  write only that member's delta: reuse stored ids, skip entries already
+  written, and filter in the query before taking per-item locks. A redelivery
+  after one failed item then costs reads, not a full walk.
 - Writes made under a lease or fence (item inserts, counter increments) carry
   the same fence condition as the progress write, inside the caller's
   transaction. Map each known outcome to a named counter field rather than
@@ -63,8 +63,11 @@ the same write. This skill adds the failure modes that checklist does not.
   a second pipeline. A storage helper shared by forward, retry, and rollback
   paths returns its raw result (moved, already there, absent, conflict), and
   each caller applies its own policy.
-- Write a new audit event after the existing follow-ups (log line,
-  notification), so a failed audit write loses only that event.
+- Decide whether the action counts without its audit record. If it does
+  not, commit the action and its audit entry together (same transaction or
+  outbox), so the action fails without it. If it does, write the audit entry
+  after the existing follow-ups (log line, notification) and record a failed
+  write, so it loses only that entry.
 
 ## Make failure loud
 
@@ -85,13 +88,14 @@ the same write. This skill adds the failure modes that checklist does not.
 - A new lookup inside a pipeline that has already deleted or replaced data
   falls back to the previous result and logs on failure. A catch that returns
   null without logging hides the error.
-- In a flow that owes a user a reply, a duplicate write or a visible conflict
-  beats a silent success with no answer.
+- In a flow that owes a user a reply, a duplicate reply or notification, or
+  a visible conflict, beats a silent success with no answer.
 
 ## Access data at the job's scale
 
-- Create indexes for new query shapes at service start, whether or not the
-  feature flag is on, so turning it on never runs unindexed.
+- The index for a new query shape exists before its feature flag can be
+  turned on, created the way the repository manages indexes (a migration or
+  at startup).
 - Per-row helpers reuse one shared connection or client and give each query a
   server-side time limit.
 - Resolve many ids through one batch call, extending it when it lacks a needed

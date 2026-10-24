@@ -74,13 +74,13 @@ Run every check before marking a PR ready or requesting review:
   against the code and the plan. Some bots report real defects, some only
   scores, and some repeat items already decided.
 - Every human reviewer's last comment is resolved, and lessons from earlier
-  reviewers are applied across the PR, not only at the commented line. Review
-  findings are fixed by default; leaving one as is needs evidence that it
-  cannot happen in production, given in its thread. Every part of a
-  multi-part finding is answered, and approval bodies are read too, since
-  remarks hide in them.
-- No unresolved review thread, bot threads included; hosts can block merge on
-  them.
+  reviewers are applied across the PR, not only at the commented line.
+  Correctness findings are fixed by default, and style suggestions stay the
+  author's call; leaving a correctness finding as is needs evidence, given in
+  its thread, that it cannot occur. Every part of a multi-part finding is
+  answered, and approval bodies are read too, since remarks hide in them.
+- Every review thread is answered, bot threads included, and resolved where
+  the host requires conversation resolution.
 - Where the repository uses feature flags: whether one is needed, whether it
   exists, whether it defaults to off. Shared paths are safe to merge with the
   flag off.
@@ -107,12 +107,14 @@ message:
 
 - **Pre-merge:** approvals still missing, and anything that must exist
   before the code lands, such as flags with their defaults, database
-  indexes, or new environment variables in each environment. A shared
-  package's version in an open PR is a placeholder: right before merge, set
-  it to the registry's latest plus one minor, and give dependent work the
-  final number only after the publish succeeds. A change that needs a field
-  from another service's published client waits for that publish, confirms
-  the version on the registry, and pins it exactly.
+  indexes, or new environment variables in each environment. Version
+  changes follow the repository's release tooling (changesets,
+  semantic-release, and the like). When the PR sets a published version by
+  hand, check it against the registry right before merge so it does not
+  collide, and give dependent work the final number only after the publish
+  succeeds. A change that needs a field from another package's published
+  client waits for that publish, confirms on the registry a version that has
+  the field, and depends on it in the repository's usual style.
 - **Production asks:** every ask to merge to production or turn on a
   production flag states what could go wrong, the blast radius, what will be
   watched, how to roll back, and what is unverified. For a promotion or deploy

@@ -14,6 +14,9 @@ A delegate's report is a lead. What it pushed is the fact. Give every PR one
 owner, brief it so the literal reading is the right one, watch it yourself,
 and verify the pushed head before telling anyone it is done.
 
+This applies when you run several agent sessions that open or push PRs. For a
+single agent session, most of it is unnecessary.
+
 ## One owner per PR
 
 - Each PR, including each PR in a stack, has exactly one owner session, and
@@ -25,12 +28,11 @@ and verify the pushed head before telling anyone it is done.
   session only for a new PR, or when the owner is truly stuck.
 - Before briefing a session, read its recent messages; someone else may have
   messaged it.
-- Keep the owner session available while its PR is open, and ask the user
-  before ending or archiving any session they started.
-- Split work that can run in parallel (independent fixes, test tracks,
-  proofs) into separate sessions from the first brief, each with its own data.
-  Keep steps in one session only when they share one object or flip one
-  switch in order.
+- Ask the user before ending or archiving any session they started.
+- When parallel tracks (independent fixes, test tracks, proofs) are
+  independent and worth the cost of another session, split them into separate
+  sessions from the first brief, each with its own data. Keep steps in one
+  session when they share one object or flip one switch in order.
 - Settings and rules changed mid-run reach new sessions only. Running
   sessions keep what they loaded. Put a standing rule in the delegate's
   persistent rules once and read it back, rather than pasting it into each
@@ -53,8 +55,9 @@ When a session grows long or expensive:
 4. The new owner reads the handoff and the PR first, and pushes only after an
    explicit go.
 
-Some hosts deliver review events only to the session that opened the PR.
-On those, every sweep forwards the old opener's events to the new owner.
+Some hosts deliver review events only to the session that opened the PR. On
+those, keep the opening session available while its PR is open, and every
+sweep forwards its events to the new owner.
 
 ## Write briefs the delegate can follow literally
 
@@ -65,7 +68,7 @@ session, saved somewhere durable, with numbered items. Each item carries:
 - The observable rule or behaviour to reach.
 - A suggested fix.
 - What is ruled out.
-- The tests that fail before the fix.
+- For a bug fix, the tests that fail before the fix.
 
 Inline the rubric the work is judged by (engineering bar, guard rules,
 testing rules): a delegate running elsewhere loads only what its own
@@ -98,11 +101,10 @@ the user what you answered.
 
 ## Watch on a timer
 
-Watch delegates yourself rather than through another agent: a watcher's
-report is one more claim you would have to verify. Set a background timer,
-and when it fires, check each session's status, latest messages, and PR head
-yourself. Quiet time is not a stall; check for new pushes before concluding
-anything.
+A watcher agent is fine, but its report is another claim: before acting on it,
+check each session's status, latest messages, and PR head yourself. Set a
+background timer, and when it fires, do the same check. Quiet time is not a
+stall; check for new pushes before concluding anything.
 
 A **sweep** is one pass over everywhere delegates and reviewers report: the
 delegate sessions, the code host (bots listed separately from humans), and
@@ -140,9 +142,9 @@ they stay aligned.
 After a human review, read the owner's reply on every thread before calling
 the review handled: every comment answered (the reviewer's main design point
 above all), each reply short and polite, and every claim in it true at the
-head. A delegate recommends leaving a finding unfixed only with evidence that
-it cannot happen in production. Have weak replies edited in place, and hold
-replies on design calls until the user decides.
+head. A delegate recommends leaving a correctness finding unfixed only with
+evidence that it cannot happen in production. Have weak replies edited in
+place, and hold replies on design calls until the user decides.
 
 Pick the correction channel deliberately: a follow-up to the owner session, a
 line comment on the PR, or a separate checker.

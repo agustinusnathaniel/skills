@@ -40,8 +40,10 @@ be justified, leave it out. Add no configuration, flag, or placeholder for a
 feature that does not exist yet, and extend the original code rather than
 copying it elsewhere.
 
-Prefer letting the owning service reject invalid input, treating its
-invalid-argument error as that item failing, over copying its validator. A
+For invariants another service owns, prefer letting that service reject
+invalid input, treating its invalid-argument error as that item failing,
+over copying its validator. Early validation in your own UI or dry run still
+applies. A
 validator you must port needs proof it behaves like the original.
 
 ## Triage each guarded case
@@ -59,8 +61,8 @@ that reaches it.
 
 A case that needs an unlikely chain of events in normal use (a service far
 slower than usual at the exact moment two runs overlap, an admin undoing their
-own setup mid-run) is **impossible** for decisions: no code, and no question
-to the owner. If a reviewer raised it, add at most one known-limits line.
+own setup mid-run) is handled like an **impossible** one: no code. If a
+reviewer raised it, add at most one known-limits line.
 This applies only when the outcome is tolerable: a case that would leave
 real users with wrong data, locked out, or visibly broken is **real** and
 gates launch, however rare.
@@ -94,9 +96,8 @@ execution; that removes the need to handle it downstream.
   silent removal.
 - **Reshape when a review round adds mechanism.** Two fixes failing on the
   same assumption mean the assumption is wrong; find it before adding a third.
-- **Optimizations keep every check.** A speed or cost change keeps every
-  check, test, and signal. Resolve a trade-off with a replacement check, and
-  name side costs up front.
+- **Optimizations lose no signal.** In a speed or cost change, every dropped
+  check is shown redundant or replaced, and side costs are named up front.
 
 Preserve prior behaviour when refactoring. Before removing a guard or test,
 find why it was added (the commit and the regression it guards) and whether

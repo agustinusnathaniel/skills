@@ -37,7 +37,8 @@ which owns choosing findings and posting them.
 - Commit the author or their team only to dates, estimates, and work they have
   stated for this audience.
 - Match the author's voice from their recent messages, and keep the text about
-  the subject rather than the tools or rounds that produced it.
+  the subject rather than the tools or rounds that produced it, unless the
+  author or the venue wants that disclosed.
 
 ## Edit the author's draft in place
 
@@ -50,11 +51,12 @@ against all of it. Recipients, tags, and cc lines change only on their say.
 
 - **Review requests.** One plain line per PR on its purpose and whether it
   blocks anything. The evidence answers what a reviewer will ask: is it real,
-  how often, who is affected, what the fix touches. Label each claim as
-  proven, strong but unproven, or inferred.
-- **Status posts.** Cover every open item in scope, parked and flag-off ones
-  included with why: what worked (with evidence), what is in progress, what
-  blocks, and the plan's next steps in order, not only the one PR that exists.
+  how often, who is affected, what the fix touches. Label each claim that
+  rests on a diagnosis as proven, strong but unproven, or inferred.
+- **Status posts.** Cover every item the audience tracks, parked and flag-off
+  ones included with why when they track them: what worked (with evidence),
+  what is in progress, what blocks, and the plan's next steps in order, not
+  only the one PR that exists.
 - **Asks to another team.** Give a concrete expectation and its reason ("this
   week if possible, because ...") rather than "no rush". Check whether an order
   or dependency is real before writing "once X lands"; when it is not, say
@@ -71,9 +73,10 @@ against all of it. Recipients, tags, and cc lines change only on their say.
   to the new one.
 - **Result posts.** Shorten words, not facts: keep the full table, the method,
   and the links.
-- **Meeting prep.** Group items as Share / Decide / Ask / Warn, at most about
-  seven, each one sentence the author can say aloud, links after it, and no ids
-  or jargon in the spoken part. Add short answers to the likely questions.
+- **Meeting prep.** One useful shape: group items as Share / Decide / Ask /
+  Warn, at most about seven, each one sentence the author can say aloud, links
+  after it, and no ids or jargon in the spoken part. Add short answers to the
+  likely questions.
 - **Go/no-go and "what's left" lists.** Build from the full source checklist
   (runbook and the plan's open items), never from a summary or an earlier list.
   Each item gets an owner, a status (done, not done, unknown), and evidence;
@@ -81,16 +84,19 @@ against all of it. Recipients, tags, and cc lines change only on their say.
 
 ## Check, then hand over
 
-1. Run a separate checker pass, a fresh subagent where available, given the
-   draft, its destination and audience, and the author's earlier asks. It
+1. For a draft with factual claims or one going outside the team, run a
+   separate checker pass, a fresh subagent where available, given the draft,
+   its destination and audience, and the author's earlier asks; a quick
+   self-check is enough otherwise. It
    checks each fact against its source, each rule above, and that links and
    formatting render. Fix every failure, and check again after any change
    beyond wording.
 2. Hand over a short note of what was checked and what could not be, then the
    full final text as the last thing in the message. Label several drafts by
-   recipient and topic, not by number. Whenever a draft is still pending or the
-   author asks for the final version, print the whole current text again, not
-   a list of edits.
+   recipient and topic, not by number. When the author asks for the final
+   version, or the draft changed since they last saw it, print the whole
+   current text, not a list of edits; show a short paste-ready draft in full
+   whenever it is still pending.
 3. Post or save only the exact approved text, through a channel you are
    authorized to use. Proofread it first, then read the rendered post back and
    compare.

@@ -34,9 +34,10 @@ visible and bounded, then read the run log to confirm what actually happened.
 - A `concurrency` group keyed on the PR alone with `cancel-in-progress`
   lets a re-run of an older commit cancel the newest commit's run. Re-run at
   the head, or give re-runs their own group.
-- A speed-up keeps every check (see `challenge-every-guard`): each test still
-  runs in exactly one job, and the gain is measured on real runs against a
-  stated baseline window.
+- A speed-up loses no signal (see `challenge-every-guard`): no test stops
+  running, and when sharding, each test lands in exactly one shard (a matrix
+  that deliberately runs tests across versions is fine). Measure the gain on
+  real runs against a stated baseline window.
 
 ## Move values across the shell boundary on purpose
 
