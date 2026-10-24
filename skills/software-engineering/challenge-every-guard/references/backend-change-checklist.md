@@ -7,7 +7,9 @@ any other guard, then record where the change handles a **real** one or why
 an item does not apply.
 
 Related skills own neighbouring checks: `webhook-integration` for external
-providers and scheduled jobs, `client-trust-boundary` for caller-supplied ids
+providers and scheduled jobs, `background-job-reliability` for ack and retry
+semantics, silent paths, and backfills in consumers and jobs,
+`client-trust-boundary` for caller-supplied ids
 and authorization, and `config-drift` for whether a deploy or config change
 took effect.
 
@@ -20,6 +22,9 @@ took effect.
   the state change between the two.
 - Write only the fields that changed, or fence the write with a version.
   Writing back a whole record read earlier overwrites concurrent edits.
+- Change one element of an array field with one positional update matched on
+  the old value, not a read, compare, and write-back of the whole array. A
+  replay or a concurrent change then matches nothing.
 - Before matching records across systems, confirm which identifier each one
   stores; two systems can key the same entity differently.
 - Make a new API's inputs required at the boundary. It has no legacy callers,
