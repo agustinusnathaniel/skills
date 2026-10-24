@@ -10,6 +10,7 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [admin-panel-engineering](skills/software-engineering/admin-panel-engineering/SKILL.md) | Build admin panels and backoffice apps whose permissions, sessions, tenancy, audit trails, and list contracts match the server. |
 | [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
+| [background-job-reliability](skills/software-engineering/background-job-reliability/SKILL.md) | Make message consumers, scheduled jobs, and backfills ack, retry, count, and fail where someone can see it. |
 | [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery, including local-first import and export. |
 | [calculation-correctness](skills/software-engineering/calculation-correctness/SKILL.md) | Keep money, dates, units, counters, and derived metrics correct across retries, timezones, and edits. |
 | [challenge-every-guard](skills/software-engineering/challenge-every-guard/SKILL.md) | Size defensive code to evidence, match sibling code, and check backend changes against recurring review findings. |
@@ -40,6 +41,12 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [domain-research](skills/research/domain-research/SKILL.md) | Research a domain via its canonical authorities and frameworks. |
+
+### communication
+
+| Skill | Description |
+|---|---|
+| [drafting-messages](skills/communication/drafting-messages/SKILL.md) | Draft messages, review requests, status updates, and meeting prep that someone else posts under their own name. |
 
 ## Installing Skills
 

@@ -4,10 +4,11 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, admin panels, mobile app shells, calculations, client trust, configuration, CI workflows, webhooks, hydration, URL state, release notes, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, admin panels, background jobs, mobile app shells, calculations, client trust, configuration, CI workflows, webhooks, hydration, URL state, release notes, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
       "skills": [
         "admin-panel-engineering",
         "architecture-decision-framework",
+        "background-job-reliability",
         "bulk-import-engineering",
         "calculation-correctness",
         "challenge-every-guard",
@@ -36,6 +37,11 @@
       "title": "Research",
       "description": "Deep domain research via canonical authorities and frameworks.",
       "skills": ["domain-research"]
+    },
+    {
+      "title": "Communication",
+      "description": "Messages, status updates, and meeting prep written for someone to post under their own name.",
+      "skills": ["drafting-messages"]
     }
   ]
 }
