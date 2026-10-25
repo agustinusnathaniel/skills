@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, admin panels, Expo app foundations, calculations, client trust, configuration, CI workflows, hydration, URL state, release notes, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, admin panels, Expo app foundations, calculations, client trust, configuration, CI workflows, hydration, URL state, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
       "skills": [
         "admin-panel-engineering",
         "architecture-decision-framework",
@@ -20,7 +20,6 @@
         "prune-codebase",
         "pull-request-readiness",
         "pull-request-review",
-        "release-notes",
         "test-strategy",
         "tool-evaluation-and-adoption",
         "url-state"
@@ -28,8 +27,8 @@
     },
     {
       "title": "Automation",
-      "description": "Recurring improvement loops and delegated coding agent sessions that run without per-step direction.",
-      "skills": ["autonomous-improvement-loop", "delegating-to-coding-agents"]
+      "description": "Recurring improvement loops that run without per-step direction.",
+      "skills": ["autonomous-improvement-loop"]
     }
   ]
 }

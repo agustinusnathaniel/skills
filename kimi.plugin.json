@@ -21,11 +21,9 @@
     "./skills/software-engineering/prune-codebase",
     "./skills/software-engineering/pull-request-readiness",
     "./skills/software-engineering/pull-request-review",
-    "./skills/software-engineering/release-notes",
     "./skills/software-engineering/test-strategy",
     "./skills/software-engineering/tool-evaluation-and-adoption",
     "./skills/software-engineering/url-state",
-    "./skills/automation/autonomous-improvement-loop",
-    "./skills/automation/delegating-to-coding-agents"
+    "./skills/automation/autonomous-improvement-loop"
   ]
 }

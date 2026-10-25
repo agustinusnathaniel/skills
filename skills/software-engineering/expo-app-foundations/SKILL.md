@@ -2,8 +2,8 @@
 name: expo-app-foundations
 description: >
   Build or change the foundations of an Expo or React Native app. Use when
-  setting up environments, release channels, or over-the-air updates; adding remote
-  config, forced updates, or feature flags; handling token refresh, push
+  setting up environments, release channels, or over-the-air updates; adding
+  remote config, forced updates, or feature flags; handling token refresh, push
   notifications, or deep links; embedding web views; or adding native
   modules, config plugins, or permissions.
 ---
@@ -28,9 +28,16 @@ foundation decisions they leave to the app.
   channel may run the production environment.
 - Give each environment its own app identifier and storage namespace, so a
   staging build cannot read a production session on the same device.
-- Keep the build's environment and the over-the-air update's environment
-  pointed at the same values; the `config-drift` skill's client version skew
-  reference covers how old binaries pick up updates.
+
+## Match over-the-air updates to binaries (Expo/EAS)
+
+- An update reaches only builds with a matching runtime version. Bump the
+  runtime version whenever native code or native config changes.
+- Build-time and update-time configuration come from different places unless
+  pinned together. With EAS, point the build profile's `environment` and the
+  update's `--environment` at the same EAS environment.
+- The remotely controlled minimum supported version below is the escape
+  hatch for binaries an update can no longer reach.
 
 ## Ship escape hatches first
 

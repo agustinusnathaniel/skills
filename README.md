@@ -22,7 +22,6 @@ A collection of agent skills for AI coding agents.
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [pull-request-readiness](skills/software-engineering/pull-request-readiness/SKILL.md) | Shape PRs and stacks, check readiness against evidence, and hand over the merge checklist before anyone merges. |
 | [pull-request-review](skills/software-engineering/pull-request-review/SKILL.md) | Review others' PRs, leading with must-fix findings and marking minor points non-blocking, and draft comments the user approves before they are posted. |
-| [release-notes](skills/software-engineering/release-notes/SKILL.md) | Write changelogs and release notes for end users, developers, or maintainers, verified against what shipped. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
 | [url-state](skills/software-engineering/url-state/SKILL.md) | Carry filters, pagination, and share links in the URL with a tested string round trip. |
@@ -32,7 +31,6 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [autonomous-improvement-loop](skills/automation/autonomous-improvement-loop/SKILL.md) | Compound small improvements on a recurring schedule without per-cycle direction. |
-| [delegating-to-coding-agents](skills/automation/delegating-to-coding-agents/SKILL.md) | Brief, own, and verify several coding agent sessions that push to pull requests. |
 
 ## Installing Skills
 
@@ -108,7 +106,8 @@ The Devin manifest (`.devin-plugin/plugin.json`) takes precedence over `.claude-
 then update saved invocations and links that use the old name. Existing
 installed copies retain their old name until migrated.
 
-`webhook-integration` and `domain-research` are retired. Uninstall them, or keep
+`webhook-integration`, `domain-research`, `release-notes`, and
+`delegating-to-coding-agents` are retired. Uninstall them, or keep
 an installed copy if you still rely on it.
 
 ## Adding New Skills
