@@ -7,9 +7,7 @@ any other guard, then record where the change handles a **real** one or why
 an item does not apply.
 
 Related skills own neighbouring checks: `webhook-integration` for external
-providers and scheduled jobs, `background-job-reliability` for ack and retry
-semantics, silent paths, and backfills in consumers and jobs,
-`client-trust-boundary` for caller-supplied ids
+providers and scheduled jobs, `client-trust-boundary` for caller-supplied ids
 and authorization, and `config-drift` for whether a deploy or config change
 took effect.
 
@@ -47,6 +45,11 @@ took effect.
 - Give each event type one owner and one typed payload definition, so
   producers cannot drift apart.
 - Make consumers idempotent; deliveries repeat and arrive out of order.
+- Acknowledge only final outcomes; make transient, lock, and stale-read
+  failures retryable, since an ack drops the message.
+- Before relying on redelivery, read the subscription's retry and dead-letter
+  policy and the consumer library's error handling.
+- Bound the work per delivery to what one lease or ack deadline covers.
 - Before emitting an existing event in bulk or with a new meaning, check
   every subscriber, since each one reacts.
 
@@ -78,6 +81,10 @@ took effect.
 - Give every state a record can get stuck in a way to detect it and a
   documented way out.
 - Keep personal data, user content, and secrets out of logs.
+- Fail closed when a safety input is missing, failed, or empty, rather than
+  defaulting it to safe.
+- Give every deliberately silent path (swallowed error, skip, give-up) a log
+  line and a durable counter that a status or alert reads.
 
 ## Rollback
 

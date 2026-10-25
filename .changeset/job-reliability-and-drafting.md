@@ -2,10 +2,10 @@
 "agustinusnathaniel-skills": minor
 ---
 
-Add two skills and fold recurring review lessons into existing ones:
+Add one skill and fold recurring review lessons into existing ones:
 
-- **background-job-reliability** (new): ack only finished or permanent outcomes and check the client's redelivery limit, bound work per delivery, write deltas through one fenced path, fail closed on missing safety inputs, count every silent path, cancel calls at their deadline, keep flag-off hot paths free, index and page at the job's scale, and prove irreversible backfills on staging first.
-- **drafting-messages** (new): write only what the author can defend, edit their draft in place, shape review requests, status posts, cross-team asks, breakage reports, meeting prep, and go/no-go lists, then check claims (with a separate checker for factual or outward drafts) and hand over the full final text last.
+- **drafting-messages** (new): write only what the author can defend, edit their draft in place, check before handover (scaled to stakes), hand over the full final text last, and post only the approved text, then read it back.
+- **challenge-every-guard** backend checklist: acknowledge only final outcomes, read retry and dead-letter policy before relying on redelivery, bound work per delivery, fail closed on missing safety inputs, and log and count every silent path.
 - **challenge-every-guard**: practically-never cases get no code, cases that leave real users with wrong data or locked out are gates however rare, enumerate every caller and reader before claiming coverage, find why a guard exists before cutting it, optimizations lose no signal, no placeholders for later phases, and let the owning service validate its own invariants.
 - **test-strategy**: assert at the serialized boundary, extend existing tests first, test every claim in both directions, pin output before swapping an implementation, and eval model-behavior changes with named arms and a stop rule.
 - **pull-request-readiness** and **pull-request-review**: re-read the merge box after every push, answer every thread, bots included, fix correctness findings by default, hold a PR by drafting it and removing reviewers, follow the repo's release tooling for versions, give the production safety answer, keep taste apart from correctness, and answer the reviewer's actual question.
