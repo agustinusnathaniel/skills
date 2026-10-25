@@ -1,7 +1,7 @@
 {
   "name": "agustinusnathaniel-skills",
   "version": "2.1.0",
-  "description": "Reusable skills for software engineering, automation, and research.",
+  "description": "Reusable skills for software engineering and automation.",
   "author": {
     "name": "Agustinus Nathaniel"
   },
@@ -17,17 +17,13 @@
     "./skills/software-engineering/config-drift",
     "./skills/software-engineering/github-actions-authoring",
     "./skills/software-engineering/hydration-safe-state",
-    "./skills/software-engineering/mobile-app-shell",
+    "./skills/software-engineering/expo-app-foundations",
     "./skills/software-engineering/prune-codebase",
     "./skills/software-engineering/pull-request-readiness",
     "./skills/software-engineering/pull-request-review",
-    "./skills/software-engineering/release-notes",
     "./skills/software-engineering/test-strategy",
     "./skills/software-engineering/tool-evaluation-and-adoption",
     "./skills/software-engineering/url-state",
-    "./skills/software-engineering/webhook-integration",
-    "./skills/automation/autonomous-improvement-loop",
-    "./skills/automation/delegating-to-coding-agents",
-    "./skills/research/domain-research"
+    "./skills/automation/autonomous-improvement-loop"
   ]
 }

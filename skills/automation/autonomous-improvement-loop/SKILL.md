@@ -7,7 +7,7 @@ description: Compound small improvements on a recurring schedule without per-cyc
 
 A recurring scheduled pattern where an agent improves code targets without per-cycle human direction. The core loop is **Observe → Orient → Decide → Act → Repeat**, plus one discipline: **finish in-flight work before starting new work**.
 
-This is distinct from one-shot task execution — it is a persistent process that compounds small improvements over many cycles.
+This is distinct from one-shot task execution: it is a persistent process that compounds small improvements over many cycles. The references target GitHub and the `gh` CLI; adapt the commands for another forge.
 
 ## Setup (once, then reuse)
 
@@ -15,7 +15,7 @@ Fix three decisions before the first cycle; record them where the schedule can s
 
 1. **Target scope** — a single repo, a round-robin portfolio list, or a priority queue.
 2. **Delivery vehicle** — draft PR, issue, direct commit (only with explicit standing approval), or report. Draft PRs are the default: reviewable, gated, reversible.
-3. **Identity convention** — how loop output is recognized later (branch prefix, label, title tag). Choose once; the references below illustrate with branch `autopr/improve/` + label `autopr`.
+3. **Identity convention**: how loop output is recognized later (branch prefix, label, title tag). Choose once; the references below illustrate with branch `loop/improve/` + label `improvement-loop`.
 
 Done when: scope, vehicle, and convention are written down and visible to every scheduled run.
 

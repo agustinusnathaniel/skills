@@ -11,7 +11,7 @@ Each scheduled run fires a self-contained agent session. The scheduled prompt ca
 - Which coding-agent CLI to delegate implementation to
 - Where to deliver the summary
 
-Pin the model on every agent job, so a change to the global default cannot silently move the loop onto a model it was never tested with. Run deterministic chores (backups, watchdogs, version checks) as plain scripts, and spend an agent run only where judgment is needed.
+Pin the model on every agent job, so a change to the global default cannot silently move the loop onto a model it was never tested with. Spend an agent run only where judgment is needed.
 
 Prefer a cadence with room to spare — the first cycle is the heaviest (scan plus create); later cycles are mostly check-and-iterate.
 
@@ -34,7 +34,7 @@ Done when: the run ends inside its total budget with state saved, even if that m
 Scheduled runs fail at three distinct layers — diagnose in this order:
 
 1. **Provider/scheduler layer.** Retried API errors, quota/rate-limit messages, broken streams, empty runs with zero changes after a cold start. Response: retry once; a second identical failure means wait for the next cycle, not rework the code.
-2. **Environment layer.** Missing CLIs, wrong binary versions, expired tokens, absent toolchains. Response: fix the environment, then re-run. Verify the forge CLI is genuine (`gh auth status` succeeds) and pin the coding-agent CLI version the loop was tested against.
+2. **Environment layer.** Missing CLIs, wrong binary versions, expired tokens, absent toolchains. Response: fix the environment, then re-run. Verify the forge CLI is installed and authenticated (`gh auth status` succeeds) and pin the coding-agent CLI version the loop was tested against.
 3. **Code layer.** Gate failures naming target files, red CI on the delivery's head SHA. Response: this is genuine iterate-mode work — fix it in the delivery.
 
 A red gate under concurrent load is suspect until re-run alone: contention timeouts are environment noise, not regressions.
@@ -49,7 +49,7 @@ Done when: every run starts with a verified token and ends with no credentials i
 
 ## Learn from delivery outcomes
 
-Keep per-target learned rules where every scheduled run reads them: stop rules ("no dependency-only PRs unless a critical CVE", "never touch the agent directives") and patterns that merge, each with the deliveries that taught it. On a separate schedule, classify recent loop deliveries as merged, closed, or stale, read the owner's closing comments, and update the rules. Repeated closures of one kind of change become a stop rule. When nothing changed, the learning run reports nothing.
+Keep per-target learned rules where every scheduled run reads them: stop rules ("no dependency-only PRs unless a critical CVE", "never touch the agent instruction files") and patterns that merge, each with the deliveries that taught it. On a separate schedule, classify recent loop deliveries as merged, closed, or stale, read the owner's closing comments, and update the rules. Repeated closures of one kind of change become a stop rule. When nothing changed, the learning run reports nothing.
 
 Done when: each rule cites its deliveries, and the next cycle's observe step reads the updated rules.
 

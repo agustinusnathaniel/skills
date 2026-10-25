@@ -1,23 +1,23 @@
 ---
-name: mobile-app-shell
+name: expo-app-foundations
 description: >
-  Build or change the shell of a React Native or Expo app. Use when setting up
-  environments, release channels, or over-the-air updates; adding remote
-  config, forced updates, or feature flags; handling token refresh, push
+  Build or change the foundations of an Expo or React Native app. Use when
+  setting up environments, release channels, or over-the-air updates; adding
+  remote config, forced updates, or feature flags; handling token refresh, push
   notifications, or deep links; embedding web views; or adding native
   modules, config plugins, or permissions.
 ---
 
-# Mobile App Shell
+# Expo App Foundations
 
 A shipped binary lives for months and cannot be patched quickly. Build the
-shell so most incidents are handled remotely, and test the paths a simulator
+app so most incidents are handled remotely, and test the paths a simulator
 in the foreground never exercises: cold starts, killed apps, signed-out users,
 and flaky networks.
 
 For Expo's own APIs (EAS Update, SDK upgrades, Expo Router, data fetching),
-load Expo's official skills when available; this skill covers the shell
-decisions they leave to the app.
+load Expo's official skills when available; this skill covers the
+foundation decisions they leave to the app.
 
 ## Separate environments from channels
 
@@ -28,25 +28,33 @@ decisions they leave to the app.
   channel may run the production environment.
 - Give each environment its own app identifier and storage namespace, so a
   staging build cannot read a production session on the same device.
-- Keep the build's environment and the over-the-air update's environment
-  pointed at the same values; the `config-drift` skill's client version skew
-  reference covers how old binaries pick up updates.
+
+## Match over-the-air updates to binaries (Expo/EAS)
+
+- An update reaches only builds with a matching runtime version. Bump the
+  runtime version whenever native code or native config changes.
+- Build-time and update-time configuration come from different places unless
+  pinned together. With EAS, point the build profile's `environment` and the
+  update's `--environment` at the same EAS environment.
+- The remotely controlled minimum supported version below is the escape
+  hatch for binaries an update can no longer reach.
 
 ## Ship escape hatches first
 
-Before the first release, serve from remote config: a minimum supported
-version that forces an update, feature flags, the API base URL, and static
-links. Give every key a typed default so a missing key fails safe, and fail
-open when remote config is unreachable; a launch must never block on it.
+Before the first release, make the minimum supported version remotely
+controllable, so an old binary can be forced to update. Serve feature flags,
+API endpoints, and links remotely too only when that channel is secured
+(authenticated or signed), since whoever controls it controls the app. Give
+every key a typed default so a missing key fails safe, and fail open when
+remote config is unreachable; a launch must never block on it.
 
 ## Refresh tokens once
 
-Refresh shortly before expiry rather than after a 401, with a single refresh
-in flight that waiting requests share. Make the refresh call bypass the
-interceptor that triggers it. Web views and screens that carry the token
-subscribe to refreshes and reload with the new one. When the shell hosts
-services or web views with their own auth, exempt them from the shell's 401
-logout.
+Where the device clock can be trusted, refresh shortly before expiry. Always
+handle a 401 too, with a single refresh in flight that waiting requests
+share. Make the refresh call bypass the interceptor that triggers it. Web
+views and screens that carry the token subscribe to refreshes and reload with
+the new one.
 
 ## Route notifications and deep links from any state
 
@@ -74,7 +82,8 @@ asynchronously. Model them as loading, available, or unavailable; reading
 
 - After adding a library or config plugin, diff the merged Android manifest
   and iOS `Info.plist` permissions, and remove ones the app does not need.
-- Block screen capture on screens that show secrets, not app-wide.
+- Block screen capture per screen, on screens that show secrets, unless a
+  policy requires it app-wide.
 - Client-side root and jailbreak detection can be bypassed; gate sensitive
   operations on server-side attestation.
 - Native config changes need a clean prebuild and a new binary. Toggling a
