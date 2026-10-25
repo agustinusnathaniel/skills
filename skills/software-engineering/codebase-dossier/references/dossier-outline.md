@@ -1,7 +1,8 @@
-# Dossier outline
+# Example dossier outline
 
-One page per section for a large codebase; one page with these headings for a
-small one.
+One example shape to adapt: drop sections that do not apply and add what the
+audience needs. One page per section for a large codebase; one page with
+these headings for a small one.
 
 ## Index
 

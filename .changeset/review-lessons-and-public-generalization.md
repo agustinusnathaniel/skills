@@ -13,4 +13,6 @@ Fold recurring review lessons into the skills that own them, and generalize skil
 - **tool-evaluation-and-adoption**: version claims checked against the registry; prefer aligning a package family on one release and pin back only with a recorded reason; static source inspection allowed in evaluate-only; a jurisdiction and licensing check; dependency and supply-chain alert triage.
 - **delegating-to-coding-agents**: re-check and stamp the premises in each brief, give a size budget, and verify a watcher agent's report yourself.
 - **prune-codebase**: list remaining reductions at the first PR and continue within the user's scope or budget; split into independently reviewable PRs.
-- **release-notes**, **client-trust-boundary**, **codebase-dossier**, **config-drift** (including the vite-plugin-pwa reload behavior), **hydration-safe-state**, **url-state**, **bulk-import-engineering**, **calculation-correctness**, and **architecture-decision-framework**: generalized wording and stack labels.
+- **codebase-dossier**: the outline is an example to adapt, not a required format.
+- **config-drift**: the client version skew reference covers detecting and refreshing stale clients in general, with service workers (vite-plugin-pwa and Workbox, including its reload behavior) labelled as one stack.
+- **release-notes**, **client-trust-boundary**, **hydration-safe-state**, **url-state**, **bulk-import-engineering**, **calculation-correctness**, and **architecture-decision-framework**: generalized wording and stack labels.

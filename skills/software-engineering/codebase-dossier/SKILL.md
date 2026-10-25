@@ -40,13 +40,14 @@ claim. Done when every shared claim names the repos it was checked in.
 
 ## Write
 
-Follow the [dossier outline](references/dossier-outline.md). Lead each page
-with a plain summary. Describe what the code does today; history explains it
-but does not replace it. Fetch every external link before placing it, and
-replace any that fail.
+Adapt the [example outline](references/dossier-outline.md) to the audience
+and the codebase; it is one shape that works, not a required format. Lead
+each page with a plain summary. Describe what the code does today; history
+explains it but does not replace it. Fetch every external link before placing
+it, and replace any that fail.
 
 ## Finish
 
-Done when every section of the outline is filled or marked not applicable,
-every claim is cited or tagged inferred, and the evidence-gaps section lists
-what could not be checked and why.
+Done when every section of the chosen outline is filled or marked not
+applicable, every claim is cited or tagged inferred, and an evidence-gaps
+section lists what could not be checked and why.
