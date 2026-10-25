@@ -51,7 +51,7 @@ does not establish that a public name is removable. Resolve specific uncertainti
 
 On the first pass, sweep every reduction class without waiting for the user to name one: ecosystem delegation, implementation simplification, comment triage, test deduplication, and inherited scaffold. Account for each class with concrete candidates or an evidence-based retention reason.
 
-Inherited scaffold is what a starter template or fork brought in that the product never used: auth flows, API clients, carts, error reporting, sample content, and the tests and docs describing them as real. In forks, also find the upstream's demo API keys, CDN and asset URLs, analytics IDs, verification tokens, credits, and default locale. Delete unused capability rather than hardening it, and rewrite docs that present it as the product.
+Inherited scaffold is what a starter template or fork brought in that the product never used: sample features, integrations, configuration, and content, plus the tests and docs describing them as real. In forks, also find the upstream's own keys, identifiers, and defaults. Delete unused capability rather than hardening it, and rewrite docs that present it as the product.
 
 Derive a substantial production target in lines and percentage from those
 candidates, then proceed with authorized implementation. Formatting compression,
@@ -79,7 +79,7 @@ representative semantic variants, especially exception scope, cleanup,
 evaluation order, and side effects. Review the affected variants, not just one
 successful example. Before removing a defense, identify the boundary or equivalent
 protection that enforces its invariant and verify relevant invalid inputs.
-Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment. Hold comments your own changes add to the same bar; a reviewer asking why a comment exists is evidence it fails the bar.
+Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment. Hold comments your own changes add to the same bar.
 
 For behavior-sensitive reductions, establish representative real inputs before
 editing, including cases served by the mechanism being removed. Compare baseline
@@ -126,13 +126,12 @@ glue, test setup, and docs.
 
 ## Continue and finish
 
-An opened PR is a checkpoint, not the finish line. Continue through known
-worthwhile reductions across the whole requested scope and range within budget,
-after meeting the target and without waiting to be asked. Land a candidate that
-fits the current scope in this delivery or the next stacked PR rather than an
-unscheduled later one. Each further pass needs a credible candidate or unresolved
-uncertainty. Revise targets only when evidence invalidates an estimate or reveals
-a constraint; report both targets and the reason.
+An opened PR is a checkpoint, not the finish line. At the first PR, list the
+remaining worthwhile reductions across the requested scope, and continue
+through them only where the user's scope or budget covers them. Each further
+pass needs a credible candidate or unresolved uncertainty. Revise targets only
+when evidence invalidates an estimate or reveals a constraint; report both
+targets and the reason.
 
 Completion requires all of the following:
 
@@ -149,12 +148,13 @@ Correctness and budget limits take precedence. Report partial progress and the
 concrete limitation when completion criteria remain unmet.
 
 For generated projections, edit canonical sources and verify regeneration. For
-PRs/releases, apply release policy through affected shipped consumers, including
-private/shared packages bundled into published ones: any change that reaches a
-published package needs the changeset or release note the repository requires.
-Split large reductions into reviewable stacked PRs and give their merge order in
-the handoff. Verify required delivery checks at the final revision;
-distinguish local checks from remote CI. Write release notes around user-visible
-changes, keeping implementation accounting in the PR report.
+PRs/releases, apply release policy through affected shipped consumers,
+including private/shared packages bundled into published ones: any change that
+reaches a published package needs the changeset or release note the repository
+requires. Split large reductions into independently reviewable PRs, stacked
+only when one depends on another, and give any merge order in the handoff.
+Verify required delivery checks at the final revision; distinguish local
+checks from remote CI. Write release notes around user-visible changes,
+keeping implementation accounting in the PR report.
 
 Re-count deltas at the current head of every delivered branch when reporting, never at an earlier revision or before a rebase. Report target and actual deltas over the full delivery range: production, tests/support, combined maintained code, and reconciled overall totals led together so production-only savings never stand alone as the result. Label round subtotals. Keep generated/vendor and lockfile churn on their own line; they never count as production savings. Explain eliminated mechanisms, dependency tradeoffs, corrected defects, verification gaps, and remaining candidates.

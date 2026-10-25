@@ -4,7 +4,7 @@ Post-decision workflow: once adoption is approved, the deliverable is measured e
 
 ## Principle: Explicit Approval Overrides Prior Rejection
 
-When the user explicitly says "adopt X" after a prior no-go, implement the adoption and let the resulting code, UX, bundle numbers, and tests speak. Do not conclude "should not be adopted" again from reasoning the user already overruled. The evaluation lesson that survives: verify edge-case behavior during integration, not as a rejection gate.
+When the user explicitly says "adopt X" after a prior no-go, implement the adoption and let the resulting code, UX, bundle numbers, and tests speak. Do not conclude "should not be adopted" again from reasoning the user already overruled. Still surface any new security or license findings. The evaluation lesson that survives: verify edge-case behavior during integration, not as a rejection gate.
 
 ## Measure Impact Before/After Against a Clean Control
 
@@ -16,7 +16,11 @@ Done when: before/after numbers exist for the affected surfaces, measured agains
 
 ## Verify Dependency Semantics During Integration
 
-Library metadata fields routinely surprise: count fields that include context, parsers that treat trailing newlines as changes, barrel imports that defeat tree-shaking unless the package declares side-effect-free modules. Check the package's `sideEffects` field, import only the symbols needed (especially from background-worker entry points), and verify the built output — never the source layout — for framework leakage.
+Library metadata fields routinely surprise: in JS bundles, barrel imports
+defeat tree-shaking unless the package declares side-effect-free modules.
+Check the package's `sideEffects` field, import only the symbols needed
+(especially from background-worker entry points), and verify the built
+output, never the source layout, for framework leakage.
 
 Done when: the built output is inspected for unexpected weight and every surprising semantic is covered by a test.
 

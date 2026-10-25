@@ -16,14 +16,28 @@ visible and bounded, then read the run log to confirm what actually happened.
 
 ## Bound and order every job
 
-- Give every job a `timeout-minutes` sized to its work. A hung step otherwise
-  runs to the platform maximum. A job that calls a reusable workflow cannot set
-  it; the reusable workflow's own jobs must.
+- Give every job a `timeout-minutes` with headroom over its recent successful
+  runs (for example two to three times the longest), and report the numbers. A
+  hung step otherwise runs to the platform maximum. A job that calls a
+  reusable workflow cannot set it; the reusable workflow's own jobs must.
 - Restore a cache before the step that would fill it, and skip that step on a
   cache hit. A cache saved after an install never saves time.
 - Split independent checks into parallel jobs so one failure reports early.
 - Keep gates as gates: a check under `continue-on-error`, or piped into
   `|| true`, always passes and reports nothing.
+- A skipped required check counts as passing. To block merge on several jobs,
+  add one final job named exactly as the required check, with `needs` on those
+  jobs and `if: always()`, that fails unless `needs.<job>.result` is `success`
+  for each one, so skipped, cancelled, and failed jobs all fail it. Leave
+  advisory jobs out of its `needs`. When adding the pattern, prove it once by
+  breaking one needed job on a branch.
+- A `concurrency` group keyed on the PR alone with `cancel-in-progress`
+  lets a re-run of an older commit cancel the newest commit's run. Re-run at
+  the head, or give re-runs their own group.
+- A speed-up loses no signal (see `challenge-every-guard`): no test stops
+  running, and when sharding, each test lands in exactly one shard (a matrix
+  that deliberately runs tests across versions is fine). Measure the gain on
+  real runs against a stated baseline window.
 
 ## Move values across the shell boundary on purpose
 
@@ -40,21 +54,24 @@ visible and bounded, then read the run log to confirm what actually happened.
 
 Set restrictive top-level `permissions` and grant write scopes per job.
 Reusable workflows receive at most what the caller grants, so document the
-permissions callers must give. Scope automated commits to the files they
-own, and have bots open pull requests with their checks named rather than
-pushing to the default branch.
+permissions callers must give. For protected branches, prefer bots that open
+pull requests with their checks named; where a bot must push directly (a
+release bot), scope its commits to the files it owns. Events caused by
+`GITHUB_TOKEN` (except `workflow_dispatch` and `repository_dispatch`) do not
+start new workflow runs automatically, so a pull request a workflow opens
+with it gets no checks; use an app token where those checks must run.
 
 ## Write shared workflows for their callers
 
 A reusable workflow or action runs inside other repos' constraints:
 
-- Take toolchain versions as inputs with a safe default; installing the
-  newest runtime breaks callers whose `engines` or `devEngines` pin an exact
-  version.
+- Take toolchain versions as inputs with a safe default; for Node, installing
+  the newest runtime breaks callers whose `engines` or `devEngines` pin an
+  exact version.
 - Test new inputs and sub-features against representative callers before
   release, and document the caller YAML for each supported setup.
-- Pin third-party actions to a release tag or commit SHA, and version the
-  shared workflow so callers can pin it too.
+- Pin third-party actions to a full commit SHA, since tags can be moved, and
+  version the shared workflow so callers can pin it too.
 
 ## Verify on a real run
 

@@ -1,6 +1,6 @@
 ---
 name: codebase-dossier
-description: Write an evidence-cited dossier of a codebase or a family of related repos, covering purpose, architecture, operations, history, decisions, and sharp edges.
+description: Write an evidence-cited dossier of a codebase or several related repos, covering purpose, architecture, operations, history, decisions, and sharp edges.
 disable-model-invocation: true
 triggers: ["user"]
 ---
@@ -13,10 +13,10 @@ inferred, so readers can tell what was checked.
 
 ## Scope the subject
 
-Name the repos covered, the commit each was read at, and the audience. For a
-family of repos (copied templates, sibling apps), put shared material on one
-platform page and keep per-repo pages for what differs. Done when each page's
-scope is stated in its first lines.
+Name the repos covered, the commit each was read at, and the audience. For
+several related repos, put shared material on one platform page and keep
+per-repo pages for what differs. Done when each page's scope is stated in its
+first lines.
 
 ## Gather evidence
 
@@ -32,7 +32,7 @@ scope is stated in its first lines.
   claims against the code and raw git before using them. Summaries add tidy
   checklists and plausible items the source never had.
 
-## Verify across the family
+## Verify across the repos
 
 A claim on a shared page must hold in every repo it covers. Check each one
 per repo; where a repo diverges, say so on the shared page or narrow the
@@ -40,13 +40,14 @@ claim. Done when every shared claim names the repos it was checked in.
 
 ## Write
 
-Follow the [dossier outline](references/dossier-outline.md). Lead each page
-with a plain summary. Describe what the code does today; history explains it
-but does not replace it. Fetch every external link before placing it, and
-replace any that fail.
+Adapt the [example outline](references/dossier-outline.md) to the audience
+and the codebase; it is one shape that works, not a required format. Lead
+each page with a plain summary. Describe what the code does today; history
+explains it but does not replace it. Fetch every external link before placing
+it, and replace any that fail.
 
 ## Finish
 
-Done when every section of the outline is filled or marked not applicable,
-every claim is cited or tagged inferred, and the evidence-gaps section lists
-what could not be checked and why.
+Done when every section of the chosen outline is filled or marked not
+applicable, every claim is cited or tagged inferred, and an evidence-gaps
+section lists what could not be checked and why.

@@ -1,7 +1,8 @@
-# Dossier outline
+# Example dossier outline
 
-One page per section for a large codebase; one page with these headings for a
-small one.
+One example shape to adapt: drop sections that do not apply and add what the
+audience needs. One page per section for a large codebase; one page with
+these headings for a small one.
 
 ## Index
 
@@ -12,8 +13,8 @@ exemplify the structure.
 ## Purpose
 
 The problem solved, domain scope with evidence, users and roles, where it
-runs, why it is custom rather than bought, non-goals, and how success is
-judged.
+runs, why it exists rather than an existing tool (where relevant), non-goals,
+and how success is judged.
 
 ## Architecture
 
@@ -24,9 +25,9 @@ defaults.
 ## Capabilities
 
 - **Product:** what users can do, by role.
-- **Operations:** deploy, configuration and when it takes effect, access
-  administration, observability, security, health and recovery, and an
-  operator checklist.
+- **Operations (for deployed systems):** deploy, configuration and when it
+  takes effect, access administration, observability, security, health and
+  recovery, and an operator checklist.
 - **Developer experience:** the inner loop and the release loop, extension
   points, and known sharp edges.
 

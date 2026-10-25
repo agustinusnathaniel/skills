@@ -26,12 +26,14 @@ Infer the reader from the target file and the repository's conventions. When
 the target is unclear, or one release needs several surfaces, ask which
 readers to write for before drafting, then write each surface separately.
 Follow the repository's format, entry template, and registration steps; when
-its own example breaks its stated rules, follow the rules.
+its own example breaks its stated rules, follow the rules and flag the
+mismatch.
 
 ## Collect what shipped
 
-List the commits and merged PRs between the previous release tag and this
-one. Every entry maps to a shipped change in that range, and every change that
+List the commits and merged PRs between the previous release (tag, build,
+or date) and this one. Every entry maps to a shipped change in that range,
+and every change that
 matters to this reader has an entry or a deliberate omission. Internal work
 (refactors, dependency bumps, tooling) appears only in maintainer notes,
 unless it changes behavior a reader relies on.
@@ -50,12 +52,15 @@ group the rest (new, improved, fixed, or the repository's own categories).
 
 ## Keep history append-only
 
-Add new entries; leave published ones as they were. Correct a wrong entry
-with a note in the next one, and restore any history that was condensed or
-rewritten. Keep version, date, and tag consistent with the release.
+Add new entries; never silently change what a published entry claims. Correct
+a wrong claim in the next entry; fix typos and broken links in place. Restore
+any history that was condensed or rewritten. When the changelog is generated,
+follow the repo tooling. Keep version, date, and tag consistent with the
+release.
 
 ## Verify
 
 Done when each entry maps to a shipped change, a read from the reader's seat
-finds nothing pitched at another reader, required actions are stated, and the
-changelog page or file builds.
+finds nothing pitched at another reader, required actions are stated, a
+changeset is added where the repo uses them, and the changelog page or file
+builds.

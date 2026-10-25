@@ -53,7 +53,10 @@ reviewability, blast radius, staged rollout.
 
 The body follows the repository's template, states the PR's size with
 generated code counted separately so reviewers know what to read, and lists
-anything new the change introduces with its justification. When several
+anything new the change introduces with its justification. When the change
+alters a shared helper's behaviour, it names every affected caller so their
+owners know. After a reviewer has reviewed or approved, a "Since review"
+section lists the commits added after the head they saw. When several
 people or agent sessions work on the same branch, it names the one who pushes. After any push, re-read the title and body against the new
 head and remove what is no longer true.
 
@@ -72,6 +75,14 @@ Run every check before marking a PR ready or requesting review:
   scores, and some repeat items already decided.
 - Every human reviewer's last comment is resolved, and lessons from earlier
   reviewers are applied across the PR, not only at the commented line.
+  Correctness findings are fixed by default, and style suggestions stay the
+  author's call; leaving a correctness finding as is needs evidence, given in
+  its thread, that it cannot occur. Every part of a multi-part finding is
+  answered, and approval bodies are read too, since remarks hide in them.
+- Every review thread is answered, bot threads included, and resolved where
+  the host requires conversation resolution.
+- When a PR has many reviewer points, one summary comment maps each point to
+  the commit that addressed it, so reviewers can re-check in one pass.
 - Where the repository uses feature flags: whether one is needed, whether it
   exists, whether it defaults to off. Shared paths are safe to merge with the
   flag off.
@@ -79,10 +90,17 @@ Run every check before marking a PR ready or requesting review:
   clean checkout, cleanup of leftover scaffolding and restating comments,
   lint scoped to the diff.
 
-Then read the merge box itself. Branch protection can require approvals or
-checks that a summary or API response does not name. Once everything is green, mark
+Then read the merge box itself, and read it again after every push, not only
+before merge: a push or a merge from the base can drop an approval. Branch
+protection can require approvals or checks that a summary or API response
+does not name. Once everything is green, mark
 ready promptly; marking ready and requesting review stay the user's call
 unless they have delegated it.
+
+A PR held on purpose (waiting on a dependency, a proof, or another PR) stays
+draft, and every status lists it as held with what it waits for. To put a PR
+on hold, convert it to draft and remove its requested reviewers; draft status
+alone leaves it in their queue.
 
 ## Hand over the merge checklist up front
 
@@ -90,8 +108,20 @@ Before the user merges, give the complete checklist for each PR in one
 message:
 
 - **Pre-merge:** approvals still missing, and anything that must exist
-  before the code lands, such as flags with their defaults or database
-  indexes.
+  before the code lands, such as flags with their defaults, database
+  indexes, or new environment variables in each environment. Version
+  changes follow the repository's release tooling (changesets,
+  semantic-release, and the like). When the PR sets a published version by
+  hand, check it against the registry right before merge so it does not
+  collide, and give dependent work the final number only after the publish
+  succeeds. A change that needs a field from another package's published
+  client waits for that publish, confirms on the registry a version that has
+  the field, and depends on it in the repository's usual style.
+- **Production asks:** every ask to merge to production or turn on a
+  production flag states what could go wrong, the blast radius, what will be
+  watched, how to roll back, and what is unverified. For a promotion or deploy
+  PR approved earlier, list what landed after the approval and whether each
+  change ships dark or live.
 - **Deploy order:** when several services or PRs depend on each other, which
   deploys first (consumers before producers) and which must be live before
   the next merges.

@@ -19,10 +19,10 @@ For a large change, also read the tracker item and the design discussion, and
 judge the diff against the spec it implements rather than against your own
 design. Check whether other open PRs or comments already raise the point.
 
-## Keep only critical findings
+## Lead with must-fix findings
 
-Unless the user asks for a full review, comment only on what must change
-before merge:
+Follow the depth the user asks for (must-fix only, or a full review). By
+default, lead with what must change before merge:
 
 - Wrong behaviour, data loss, races, unhandled failure paths.
 - Security, authorization, secrets, personal data.
@@ -30,23 +30,30 @@ before merge:
 - Unrelated changes hidden in the commits.
 - Large additions the feature does not need.
 
-Verify each finding against the code before drafting it.
+Verify each finding against the code before drafting it. Do not judge data
+real or fake from its shape; check where it came from, and flag real personal
+data in fixtures.
+
+Mark minor points as non-blocking rather than hiding them, in a separate group
+after the must-fix items, phrased as questions.
 
 ## Draft the review
 
 Start with a one-line verdict: **LGTM**, **LGTM after a small fix**, or
-**needs changes**. When nothing is critical, say LGTM and stop.
+**needs changes**. When nothing is critical, say LGTM and stop, attaching any
+non-blocking notes to that verdict.
 
 For each finding give:
 
 - The exact file and line in the diff.
 - One sentence on the problem for the user.
 - A short, paste-ready comment phrased as a question or a concrete ask. For a
-  one- or two-line fix, include a suggestion block.
+  one- or two-line fix, include a suggested change (On GitHub: a suggestion
+  block).
 
 When the comments are questions rather than blockers, say so in the summary.
-Post as a single comment review at the head commit; approve or request
-changes only when the user asks for that.
+Post as one review at the head commit (On GitHub: a comment review); approve
+or request changes only when the user asks for that.
 
 ## Write in the user's voice
 
@@ -55,12 +62,11 @@ and way of addressing people. When the user says they are new to the area,
 write as a learner: questions rather than verdicts, one plain "what if" per
 point, and asking which doc to read rather than asserting a contradiction.
 
-Follow the user's and the project's policy on disclosing AI assistance. Keep
-the comments about the code, without narrating which tools ran or how many
-review rounds happened.
+Follow the project's AI-disclosure policy.
 
 Make every reference a full markdown link with a few plain words on what it
-is, rather than a bare `#123` or `file:850`. Use standard markdown links, `-`
+is, rather than a bare `#123` or `file:850`, preferring links that work
+outside the diff view. Use standard markdown links, `-`
 bullets with indented sub-bullets, and backticks for code, so the text pastes
 cleanly anywhere.
 
@@ -71,8 +77,8 @@ cleanly anywhere.
 2. Across revision rounds, keep a running list of every change the user asked
    for; when two asks conflict, name the conflict and ask.
 3. Post only the exact text the user approved. Proofread it first.
-4. Fetch the posted text back and compare it with the approved draft. Fix a
-   slip in place only after the user says yes.
+4. Re-read the posted comment for formatting slips. Fix a slip in place only
+   after the user says yes.
 
 Without a posting tool you are authorized to use, stop at step 1: the user
 posts it.
@@ -81,3 +87,6 @@ posts it.
 
 Agree with what is right first, then add the missing context. Credit whoever
 caught something, and flag corrections openly.
+
+Before drafting a thread reply, restate the reviewer's exact question and
+answer that, with evidence.

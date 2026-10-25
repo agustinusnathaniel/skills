@@ -14,7 +14,9 @@ For each primary dependency record:
 Look for:
 
 - Injection: are queries parameterized (bound parameters) or string-interpolated?
-- Unsafe code: any `unsafe` blocks or equivalent? Project-level unsafe-code forbids?
+- Unsafe code: any `unsafe` blocks or the language's equivalent (C# `unsafe`,
+  Java native methods, Python C extensions, Node native addons)? Is their use
+  forbidden or reviewed at the project level?
 - Input validation: size limits, type validation, sanitization
 - Auth model (if applicable): constant-time comparison, token storage, CORS config
 - Secret handling: API keys in config files, telemetry, phone-home calls

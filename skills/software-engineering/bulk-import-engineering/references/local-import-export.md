@@ -19,8 +19,9 @@ merge mode needs this as much as replace mode.
 
 ## Merge by identity, field by field
 
-Match incoming rows to existing ones by stable identity. Apply incoming
-non-empty fields over the existing row; a rule that skips a row whose key
+Decide the merge policy up front: skip, overwrite, or field-wise. Match
+incoming rows to existing ones by stable identity. Apply incoming non-empty
+fields over the existing row; a rule that skips a row whose key
 already exists silently discards corrections. Decide up front what happens to
 rows that cannot be attributed to an owner or group: reject the file, or skip
 them and say so.
@@ -52,7 +53,8 @@ store. Cap collections that grow without bound.
 ## Verify
 
 - Export, then import into an empty store: data is identical.
-- Import the same file twice: the second run changes nothing.
+- Import the same file twice under identity-keyed merge: the second run
+  changes nothing.
 - Import a previous-version export and a corrupt file: the first succeeds, the
   second leaves data untouched.
 - Export with a corrupt row present: the export completes.

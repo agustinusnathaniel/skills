@@ -20,22 +20,29 @@ When the tool implements a protocol, wire format, or industry standard, verify i
 
 "Last updated" is not always a risk signal. Classify the problem domain:
 
-- **Frozen algorithm** (checksums, encodings, math): staleness is irrelevant — the algorithm cannot change. Adoption at scale matters more than publish date.
+- **Frozen algorithm** (checksums, encodings, math): staleness is a weaker
+  signal, not no signal. The algorithm cannot change, so adoption at scale
+  matters more than publish date.
 - **Moving ecosystem** (frameworks, security libraries): staleness is a risk — missing patches mean vulnerabilities.
 - **API wrapper** (payment SDKs, cloud clients): moderate risk — upstream APIs change and wrappers break; check whether the wrapped API changed since last publish.
 
-Always report the classification alongside the date.
+Always report the classification alongside the date, and state the update
+cadence explicitly. For network-exposed components, expect timely security
+patches.
 
 ## Integration With the Existing Stack
 
-- Does it offer agent/IDE integration (e.g. MCP support)?
+- Does it integrate with the tools the team uses (editors, agents, MCP)?
 - Does it fit the current workflow?
 - Does it overlap existing capabilities, and what is the migration cost from alternatives?
-- Who benefits — the human operator, the agent workflow, both, or neither? State explicitly; a tool can be excellent in isolation but useless in this setup.
+- Who benefits (which users or workflows: the human operator, the agent
+  workflow, both, or neither)? State explicitly; a tool can be excellent in
+  isolation but useless in this setup.
 
-## Platforms Built On for Clients
+## Platforms Hosting Several Customers or Tenants
 
-When the tool is a platform (commerce engine, CRM, CMS) that client projects or a service business will be built on, the cost sits in operating it, not in its UI:
+When the platform will host several customers or tenants (commerce engine,
+CRM, CMS), the cost sits in operating it, not in its UI:
 
 - Data isolation per client: separate instances, workspaces, or row-level policy, and how API keys and agent access are scoped.
 - Operational ownership: upgrades, backups, incidents, and compliance you take on compared with the SaaS alternative.

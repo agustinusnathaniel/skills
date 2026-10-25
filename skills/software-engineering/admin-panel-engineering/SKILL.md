@@ -5,8 +5,8 @@ description: >
   adding a page, sidebar or menu entry, route, or action that only some
   permissions or roles may see; touching login, logout, session expiry, or
   role edits; scoping data to a tenant, partner, or organization; building
-  filtered list pages, exports, audit trails, or approval flows; or fixing a
-  bug in an app that has a copied sibling repo.
+  filtered list pages, exports, audit trails, destructive confirmations,
+  operator status messages, or approval flows.
 ---
 
 # Admin Panel Engineering
@@ -23,8 +23,9 @@ Find what the backend actually returns, not what HTTP conventions suggest:
   backends answer every denial with 401, so a client "403 → show error" branch
   is unreachable and a denial logs the user out. When the statuses are
   overloaded, fetch the permission tree first and gate the UI on it.
-- How permissions are matched. Match the route template exactly; a prefix or
-  substring match lets `/orders` grant `/orders/:id/refund`.
+- How permissions are matched. Match permission identifiers (route
+  templates, permission keys, or policy names) exactly; a prefix or substring
+  match lets `/orders` grant `/orders/:id/refund`.
 - Where tenant identity comes from. Read the tenant, partner, or owner id from
   the authenticated context on the server; ignore ids the client sends.
 - How permission changes propagate: cache keys, TTL units, and which key a role
@@ -52,8 +53,9 @@ Render a loading state while the permission map is unresolved; treating
 - After login, honor a saved `redirectTo` only when it belongs to the same user
   or role.
 - When a user edits their own role, refetch their permission map.
-- Hold role assignment to a ceiling: a user grants only roles at or below
-  their own level, enforced on the server.
+- Constrain role grants on the server: a user grants only permissions they
+  hold themselves, or whatever grant rule the app defines, without assuming
+  roles form a single ladder.
 
 ## Keep list contracts honest
 
@@ -65,23 +67,23 @@ Render a loading state while the permission map is unresolved; treating
 - Label export scope: visible page, full filtered result, or entity-only. A
   client export of the loaded rows is not the filtered dataset; use a server
   export for that.
-- File downloads fail as `Blob` bodies. Parse the error body as text before
-  reading JSON, and read the filename from `Content-Disposition` with and
-  without quotes.
+- When a download is requested with a blob response type, its errors arrive as
+  `Blob` bodies too. Parse the error body as text before reading JSON, and
+  read the filename from `Content-Disposition` with and without quotes.
 
 For filters and pagination in the URL, use the `url-state` skill. For
 upload-validate-execute flows, use `bulk-import-engineering`.
 
-## Fix every copy
+## Fix every instance
 
-When the app was copied from a sibling, list the siblings and diff the shared
-files before fixing. Apply the fix to each copy, or extract the shared module,
-and say which copies were checked.
+When the code has other instances (forks, copied sibling apps, vendored
+duplicates), list them and diff the shared files before fixing. Apply the fix
+to each, or extract the shared module, and say which instances were checked.
 
 ## References
 
-- Audit trails, destructive actions, approvals, and role design:
-  [admin domain](references/admin-domain.md).
+- Audit trails, destructive actions and confirmations, approvals, operator
+  status copy, and role design: [admin domain](references/admin-domain.md).
 - Client data caches with SWR or similar (keys, gating, logout, revalidation):
   [SWR](references/swr.md).
 - React with Ant Design forms and tables: [antd](references/antd.md).
