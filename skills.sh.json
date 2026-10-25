@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, admin panels, mobile app shells, calculations, client trust, configuration, CI workflows, webhooks, hydration, URL state, release notes, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, admin panels, Expo app foundations, calculations, client trust, configuration, CI workflows, hydration, URL state, release notes, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
       "skills": [
         "admin-panel-engineering",
         "architecture-decision-framework",
@@ -16,26 +16,20 @@
         "config-drift",
         "github-actions-authoring",
         "hydration-safe-state",
-        "mobile-app-shell",
+        "expo-app-foundations",
         "prune-codebase",
         "pull-request-readiness",
         "pull-request-review",
         "release-notes",
         "test-strategy",
         "tool-evaluation-and-adoption",
-        "url-state",
-        "webhook-integration"
+        "url-state"
       ]
     },
     {
       "title": "Automation",
       "description": "Recurring improvement loops and delegated coding agent sessions that run without per-step direction.",
       "skills": ["autonomous-improvement-loop", "delegating-to-coding-agents"]
-    },
-    {
-      "title": "Research",
-      "description": "Deep domain research via canonical authorities and frameworks.",
-      "skills": ["domain-research"]
     },
     {
       "title": "Communication",

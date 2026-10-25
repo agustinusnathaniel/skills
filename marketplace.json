@@ -1,6 +1,6 @@
 {
   "name": "agustinusnathaniel-skills",
-  "description": "Reusable skills for software engineering, automation, research, and communication.",
+  "description": "Reusable skills for software engineering, automation, and communication.",
   "owner": {
     "name": "Agustinus Nathaniel"
   },
@@ -9,7 +9,7 @@
       "name": "agustinusnathaniel-skills",
       "source": "./",
       "version": "2.1.0",
-      "description": "Skills for software engineering, automation, research, and communication."
+      "description": "Skills for software engineering, automation, and communication."
     }
   ]
 }

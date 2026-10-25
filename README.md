@@ -18,7 +18,7 @@ A collection of agent skills for AI coding agents.
 | [config-drift](skills/software-engineering/config-drift/SKILL.md) | Verify that a configuration change is what the running system actually uses. |
 | [github-actions-authoring](skills/software-engineering/github-actions-authoring/SKILL.md) | Write GitHub Actions workflows whose timeouts, caches, gates, permissions, and shared inputs behave as written. |
 | [hydration-safe-state](skills/software-engineering/hydration-safe-state/SKILL.md) | Keep hydration consistent when prerendered or server-rendered HTML meets browser-only state. |
-| [mobile-app-shell](skills/software-engineering/mobile-app-shell/SKILL.md) | Build React Native and Expo app shells that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |
+| [expo-app-foundations](skills/software-engineering/expo-app-foundations/SKILL.md) | Build Expo and React Native app foundations that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [pull-request-readiness](skills/software-engineering/pull-request-readiness/SKILL.md) | Shape PRs and stacks, check readiness against evidence, and hand over the merge checklist before anyone merges. |
 | [pull-request-review](skills/software-engineering/pull-request-review/SKILL.md) | Review others' PRs, leading with must-fix findings and marking minor points non-blocking, and draft comments the user approves before they are posted. |
@@ -26,7 +26,6 @@ A collection of agent skills for AI coding agents.
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
 | [url-state](skills/software-engineering/url-state/SKILL.md) | Carry filters, pagination, and share links in the URL with a tested string round trip. |
-| [webhook-integration](skills/software-engineering/webhook-integration/SKILL.md) | Handle provider webhooks, payment settlement and reconciliation, partner APIs, queues, and sync jobs so replays and failures are recoverable. |
 
 ### automation
 
@@ -34,12 +33,6 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [autonomous-improvement-loop](skills/automation/autonomous-improvement-loop/SKILL.md) | Compound small improvements on a recurring schedule without per-cycle direction. |
 | [delegating-to-coding-agents](skills/automation/delegating-to-coding-agents/SKILL.md) | Brief, own, watch, and verify coding agent sessions that push to pull requests. |
-
-### research
-
-| Skill | Description |
-|---|---|
-| [domain-research](skills/research/domain-research/SKILL.md) | Research a domain via its canonical authorities and frameworks. |
 
 ### communication
 
@@ -114,11 +107,15 @@ devin plugins install agustinusnathaniel/skills
 
 The Devin manifest (`.devin-plugin/plugin.json`) takes precedence over `.claude-plugin/plugin.json` in Devin and loads only the `software-engineering` skills.
 
-### Skill rename
+### Skill renames and removals
 
-`reduce-production-code` is now `prune-codebase`. Reinstall from this repository
-and select `prune-codebase`, then update saved invocations and links that use the
-old name. Existing installed copies retain their old name until migrated.
+`reduce-production-code` is now `prune-codebase`, and `mobile-app-shell` is now
+`expo-app-foundations`. Reinstall from this repository and select the new name,
+then update saved invocations and links that use the old name. Existing
+installed copies retain their old name until migrated.
+
+`webhook-integration` and `domain-research` are retired. Uninstall them, or keep
+an installed copy if you still rely on it.
 
 ## Adding New Skills
 

@@ -19,8 +19,8 @@ Done when: one target is selected and the mode that selected it is recorded in s
 
 Recognize loop output by the identity convention fixed at setup — e.g. branch prefix plus label — never by author, since the author is whoever owns the token used to create it. Example convention:
 
-- Branch prefix: `autopr/improve/` (e.g. `autopr/improve/dedupe-worker-handlers`)
-- Label: a dedicated loop label (e.g. `autopr`), applied separately after creation — some creation endpoints silently drop labels
+- Branch prefix: `loop/improve/` (e.g. `loop/improve/dedupe-worker-handlers`)
+- Label: a dedicated loop label (e.g. `improvement-loop`), applied separately after creation, since some creation endpoints silently drop labels
 
 List candidates with `gh pr list --state open`, then filter by the convention.
 
@@ -44,7 +44,7 @@ Declare "no iteration needed" only when all of these hold:
 2. The full gate suite exits 0.
 3. CI check-runs on the head SHA all conclude success.
 4. Both comment threads are read: review comments and issue comments (bot and human feedback live in different threads).
-5. The branch is not behind the base (`git rev-list --count HEAD..<base-ref>` is 0; the base ref is usually `origin/main`, resolved per [iteration-patterns.md](iteration-patterns.md)).
+5. The branch is not behind the base (`git rev-list --count HEAD..<base-ref>` is 0, with `<base-ref>` resolved per [iteration-patterns.md](iteration-patterns.md)).
 6. Repo-required checks (changelog entries, coverage gates, bot checks) are evaluated against merged-PR precedent before acting — warnings on no-behavior-change work are informational.
 
 Done when: all six checks pass (record "skipped — complete"), or the found work is implemented, gated green, pushed, and the description reconciled.
@@ -56,7 +56,7 @@ Done when: all six checks pass (record "skipped — complete"), or the found wor
 3. Identify exactly one improvement. Fix an improvement policy once and reuse it; an example order: architecture, simplification, bug fix, performance, security, test coverage, readability. For data-driven targets, cross-referencing modeled-but-unused fields against actual usage is a high-yield technique.
 4. Implement with a coding-agent CLI (Claude Code, Codex, or equivalent) for multi-file changes.
 5. Check diff size before delivering: more than a handful of files or a couple hundred lines for a single-concept change signals a stale base or scope creep — rebase or trim first.
-6. Open a draft PR with a conventional-commit title, then apply the loop identity (label) separately.
+6. Open a draft PR with a title that follows the repository's convention, then apply the loop identity (label) separately.
 
 Done when: the draft exists, carries the loop identity, branches from the current base, and its diff contains only the intended change.
 

@@ -10,7 +10,7 @@ Done when: the carried work either passes all gates and is committed, or its fai
 
 ## Check the working tree before discarding a stale branch
 
-Branch metadata only sees committed diff. Before writing off a branch as merged or empty, run `git status --short`: an interrupted cycle can leave a complete feature uncommitted on a branch that reports zero commits ahead. Back up the tree first, gate it as carried work above, and commit onto a fresh branch from `origin/main` when it passes.
+Branch metadata only sees committed diff. Before writing off a branch as merged or empty, run `git status --short`: an interrupted cycle can leave a complete feature uncommitted on a branch that reports zero commits ahead. Back up the tree first, gate it as carried work above, and commit onto a fresh branch from `<base-ref>` when it passes.
 
 Done when: `git status --short` is clean by commit or deliberate discard — never by assumption.
 
@@ -38,15 +38,15 @@ Done when: landed work is skipped, remaining work has an identified diff, or an
 unresolved classification is recorded in the target's state entry (branch, base
 ref checked, evidence seen, and next step).
 
-## Refresh a branch behind main with merge, not rewrite
+## Refresh a branch behind the base by the repository's policy
 
-When the PR diff shows files nobody touched, the branch predates `main`. Bring it current by merging `origin/main` into the branch and pushing a fast-forward — this preserves the PR number, review thread, and label. Reserve history rewrites for branches that exist only locally.
+When the PR diff shows files nobody touched, the branch predates `<base-ref>`. Bring it current the way the repository updates branches (merge or rebase), keeping the PR number, review thread, and label. Do not rewrite history others have already reviewed; rebase only where the repository expects it and no review would be invalidated.
 
-Done when: `git diff origin/main HEAD --stat` shows only intended files and the push is a fast-forward.
+Done when: `git diff <base-ref> HEAD --stat` shows only intended files.
 
 ## Hold the scope on every commit
 
-Before each commit compare the working-tree diff and the PR-vs-main diff. Restore files touched by accident (changelogs, generated docs, unrelated edits) from `origin/main` before committing, and keep each PR to one concept.
+Before each commit compare the working-tree diff and the PR-vs-base diff. Restore files touched by accident (changelogs, generated docs, unrelated edits) from `<base-ref>` before committing, and keep each PR to one concept.
 
 Done when: both diffs contain only intended changes.
 
