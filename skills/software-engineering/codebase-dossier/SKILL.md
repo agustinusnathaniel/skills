@@ -1,6 +1,6 @@
 ---
 name: codebase-dossier
-description: Write an evidence-cited dossier of a codebase or a family of related repos, covering purpose, architecture, operations, history, decisions, and sharp edges.
+description: Write an evidence-cited dossier of a codebase or several related repos, covering purpose, architecture, operations, history, decisions, and sharp edges.
 disable-model-invocation: true
 triggers: ["user"]
 ---
@@ -13,10 +13,10 @@ inferred, so readers can tell what was checked.
 
 ## Scope the subject
 
-Name the repos covered, the commit each was read at, and the audience. For a
-family of repos (copied templates, sibling apps), put shared material on one
-platform page and keep per-repo pages for what differs. Done when each page's
-scope is stated in its first lines.
+Name the repos covered, the commit each was read at, and the audience. For
+several related repos, put shared material on one platform page and keep
+per-repo pages for what differs. Done when each page's scope is stated in its
+first lines.
 
 ## Gather evidence
 
@@ -32,7 +32,7 @@ scope is stated in its first lines.
   claims against the code and raw git before using them. Summaries add tidy
   checklists and plausible items the source never had.
 
-## Verify across the family
+## Verify across the repos
 
 A claim on a shared page must hold in every repo it covers. Check each one
 per repo; where a repo diverges, say so on the shared page or narrow the

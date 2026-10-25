@@ -81,6 +81,8 @@ Run every check before marking a PR ready or requesting review:
   answered, and approval bodies are read too, since remarks hide in them.
 - Every review thread is answered, bot threads included, and resolved where
   the host requires conversation resolution.
+- When a PR has many reviewer points, one summary comment maps each point to
+  the commit that addressed it, so reviewers can re-check in one pass.
 - Where the repository uses feature flags: whether one is needed, whether it
   exists, whether it defaults to off. Shared paths are safe to merge with the
   flag off.

@@ -37,8 +37,7 @@ data.
 - `virtual` needs numeric `scroll.x` and `scroll.y`, and with `rowSelection` a
   numeric `rowSelection.columnWidth`. A wrapped `Table` used with `virtual`
   must forward its ref before React 19.
-- Virtualize per table, after measuring. Large editable or bulk-action tables
-  have crashed under virtualization; keep a sticky header there instead.
+- Virtualize per table, after measuring.
 
 ## Date pickers on mobile
 

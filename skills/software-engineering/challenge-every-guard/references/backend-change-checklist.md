@@ -6,10 +6,9 @@ mandate: for every section the diff touches, tier each item by evidence like
 any other guard, then record where the change handles a **real** one or why
 an item does not apply.
 
-Related skills own neighbouring checks: `webhook-integration` for external
-providers and scheduled jobs, `client-trust-boundary` for caller-supplied ids
-and authorization, and `config-drift` for whether a deploy or config change
-took effect.
+Related skills own neighbouring checks: `client-trust-boundary` for
+caller-supplied ids and authorization, and `config-drift` for whether a deploy
+or config change took effect.
 
 ## Writes to shared records
 
@@ -20,13 +19,16 @@ took effect.
   the state change between the two.
 - Write only the fields that changed, or fence the write with a version.
   Writing back a whole record read earlier overwrites concurrent edits.
-- Change one element of an array field with one positional update matched on
-  the old value, not a read, compare, and write-back of the whole array. A
-  replay or a concurrent change then matches nothing.
+- Change one element of an array field with a single-document atomic
+  conditional per-element update matched on the old value, where the store
+  supports it (With MongoDB: a positional update or `arrayFilters`), not a
+  read, compare, and write-back of the whole array. A replay or a concurrent
+  change then matches nothing.
 - Before matching records across systems, confirm which identifier each one
   stores; two systems can key the same entity differently.
-- Make a new API's inputs required at the boundary. It has no legacy callers,
-  and optional inputs grow defaults nobody chose.
+- Make a new API's inputs required at the boundary unless a default is
+  deliberate and documented. It has no legacy callers, and optional inputs
+  grow defaults nobody chose.
 
 ## Calls to other systems
 
@@ -78,8 +80,8 @@ took effect.
   the same audit entry; a path that skips it leaves changes nobody can trace.
 - Name who acts on an alert before adding it. Alerts nobody owns teach people
   to ignore alerts.
-- Give every state a record can get stuck in a way to detect it and a
-  documented way out.
+- Give every state real users or data can get stuck in a way to detect it
+  and a documented way out.
 - Keep personal data, user content, and secrets out of logs.
 - Fail closed when a safety input is missing, failed, or empty, rather than
   defaulting it to safe.

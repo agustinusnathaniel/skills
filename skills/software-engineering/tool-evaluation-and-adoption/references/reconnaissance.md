@@ -8,7 +8,7 @@ Fetch from the forge API (or equivalent):
 
 - Stars, forks, license, primary language, description
 - Last commit date, commit count, release count
-- Open issue count (maintenance-quality signal)
+- Issue response and triage rate (maintenance-quality signal)
 - Topics/tags
 
 ## README Understanding
@@ -24,8 +24,10 @@ Read the full README and record:
 
 Beyond the README:
 
-- Probe the docs site for a machine-readable export (`<docs-site>/llms.txt`) — cleaner than HTML scraping for feature lists and architecture pages.
-- For packages, check the registry API (e.g. crates.io, npm) for latest version, download counts, and release cadence. A pre-1.0 version is a risk signal to state in the verdict.
+- Probe the docs site for a machine-readable docs form (for example
+  `<docs-site>/llms.txt`), cleaner than HTML scraping for feature lists and
+  architecture pages.
+- For packages, check the registry API (e.g. crates.io, npm) for latest version, download counts, and release cadence. A pre-1.0 version is a risk signal to state in the verdict; note whether the docs call the API unstable.
 - Cross-check the forge `homepage` field against the README's URLs. A mismatch (or an org/repo name that differs from expectations) can reveal a name collision or a fork.
 
 ## Current Usage

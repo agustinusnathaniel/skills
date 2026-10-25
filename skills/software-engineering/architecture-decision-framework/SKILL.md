@@ -75,9 +75,10 @@ affected comparison; retain supported conclusions when challenged without new
 evidence. Revise priorities when the user changes them. Keep weights tied to those
 priorities rather than tuning them to a preferred answer.
 
-Treat a named example in feedback as a symptom: audit the whole artifact against
-the user's stated reference model and constraints, not only the named item. Keep
-a running list of user-stated constraints and recheck each revision against all
+Treat a named example in feedback as a symptom: audit the whole artifact
+against the user's stated reference model and constraints, not only the named
+item, and say what the audit found. Keep changes within the request. Keep a
+running list of user-stated constraints and recheck each revision against all
 of them. When a recommendation changes, state what changed from the prior one and
 why.
 

@@ -17,32 +17,35 @@ then make every path preserve it.
 ## State the invariant and its owner
 
 Write what the quantity must equal and which side computes the authoritative
-value. Money, sequence numbers, and anything persisted are computed on the
-server; a client total is a display. Done when each derived value has a stated
-formula and one owner.
+value. In client/server apps the server owns it; in local-first ones the
+client does. Any other side's total is a display. Done when each derived
+value has a stated formula and one owner.
 
 ## Represent values exactly
 
 - Store money in integer minor units or a decimal type. Round at defined
   points with the business rounding step, not at every intermediate product.
-- Check what the driver returns. Many database drivers return `NUMERIC` and
-  `DECIMAL` as strings, so `a + b` concatenates. Coerce once at the model
-  layer.
-- Guard integer bounds (`Number.MAX_SAFE_INTEGER`) for counters and summed
-  minor units.
+- Check what the driver returns. With node-postgres (JavaScript), `NUMERIC`
+  and `DECIMAL` come back as strings, so `a + b` concatenates. Coerce once at the
+  model layer; other stacks have an equivalent coercion point, so name it.
+- In JavaScript, guard integer bounds (`Number.MAX_SAFE_INTEGER`) for
+  counters and summed minor units; other platforms have their own limits, so
+  name the bound wherever the code runs.
 
 ## Derive instead of accumulating
 
-Recompute derived amounts from the invariant on each run, for example a penalty
-as rate × days overdue × current outstanding, plus what was already paid, rather
-than adding a daily increment. Recomputation stays correct after retries,
-partial payments, and missed runs; increments drift. Include every state the
-formula covers, such as partially paid items alongside unpaid ones.
+Recompute derived amounts from authoritative inputs on each run, for example
+a penalty from the payment history and the rate schedule, rather than adding
+a daily increment. When increments are the mechanism, make each one
+idempotent. Recomputation stays correct after retries, partial payments, and
+missed runs; increments drift. Include every state the formula covers, such
+as partially paid items alongside unpaid ones.
 
 ## Pin time to a defined clock
 
-- Parse date-only strings with UTC getters. Local getters shift the date across
-  a month boundary for viewers with negative offsets.
+- In JavaScript, parse date-only strings with UTC getters. Local getters
+  shift the date across a month boundary for viewers with negative offsets;
+  other languages have equivalent UTC accessors, so use them.
 - Name the timezone that defines a business day: the viewer's, or the
   operating region's. Compute day boundaries in it, explicitly.
 - Normalize both operands to the start of the day before counting days.
@@ -57,8 +60,8 @@ proportional error.
 
 ## Aggregate after classifying
 
-Classify gaps, exclusions, and outliers before dividing. Group by entity before
-computing ratios across a fleet or portfolio, so one entity's sequence cannot
+Classify gaps, exclusions, and outliers before dividing. Group by entity
+before computing ratios across the set, so one entity's sequence cannot
 poison another's. Strip excluded points in the chart adapter rather than
 plotting nulls or interpolating.
 
@@ -67,10 +70,11 @@ plotting nulls or interpolating.
 - Reconcile edited lists by stable row identity. Matching by array position
   moves one row's state onto its neighbour after a delete or reorder.
 - Make completion actions update in place, so a double submit records once.
-- Allocate counters inside the write transaction with a row lock, and protect
-  first use with a unique index; a lock on a missing row locks nothing.
-- For payment callbacks and other provider replays, use the
-  `webhook-integration` skill.
+- Allocate counters atomically (a sequence or atomic increment; a row lock
+  only for gapless numbering), and protect first use with a unique
+  constraint; a lock on a missing row locks nothing.
+- Key provider replays and record each one once, like any other completion
+  action.
 
 ## Verify at the boundaries
 

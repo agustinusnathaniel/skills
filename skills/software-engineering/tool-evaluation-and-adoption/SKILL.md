@@ -16,7 +16,9 @@ Match the user's language to the scope before doing anything else:
 | "see if it fits", "check it out", "review this", "vet this", "is it good?", "can we use this?", "should we switch to / upgrade to X?" | Evaluate only — full analysis, deliver, wait for a decision |
 | "install this", "set it up", "go ahead", or equivalent | Install authorized — evaluation may be abbreviated, proceed to Step 7 after review |
 
-Evaluate-only scope is read-only: inspect source, docs, and registry metadata without installing or downloading the tool, even "just to check".
+Evaluate-only scope is read-only: do not install or run the tool, even "just
+to check". Cloning or fetching its source into an isolated directory for
+static inspection is fine.
 
 Done when: the scope (evaluate-only or install-authorized) is established from the current request and prior authorization.
 
@@ -42,11 +44,14 @@ Done when: pros/cons are listed, every stale-looking dependency carries a domain
 
 Follow [references/candidate-assessment.md](references/candidate-assessment.md): verify the product category before comparing, measure against current-implementation invariants.
 
-Done when: the candidate's category (computes, renders, hosts, or workflow) is stated, or this step is skipped with a one-line reason (not a replacement proposal).
+Done when: the candidate's product category and the capabilities it replaces
+(computation/algorithm, rendering/presentation, transport/hosting,
+workflow/UX) are stated, or this step is skipped with a
+one-line reason (not a replacement proposal).
 
-## Step 5: Geo-Accessibility Check (only for regulated or geo-licensed tools)
+## Step 5: Jurisdiction and Licensing Check (only for regulated or geo-licensed tools)
 
-Follow [references/emerging-market-access.md](references/emerging-market-access.md) when the tool involves financial transactions, trading, regulated activity, or geographic licensing.
+Follow [references/jurisdiction-and-licensing.md](references/jurisdiction-and-licensing.md) when the tool involves financial transactions, trading, regulated activity, or geographic licensing.
 
 Done when: accessibility is confirmed or flagged with a restriction classification, or this step is skipped with a one-line reason (unregulated, globally available tool).
 
@@ -55,7 +60,8 @@ Done when: accessibility is confirmed or flagged with a restriction classificati
 Write the assessment report:
 
 - What it is (one-liner)
-- Who benefits (the human operator, the agent workflow, both, or neither — state explicitly)
+- Who benefits (which users or workflows: the human operator, the agent
+  workflow, both, or neither; state explicitly)
 - Security findings table (pass / concerns)
 - Fit assessment (pros/cons for this environment)
 - Verdict: **Go** or **No-go** with rationale
@@ -73,7 +79,8 @@ user decision, such as accepting a material capability loss or expanding scope.
 A No-go verdict or unresolved security or license concern is always a blocker
 requiring an explicit user decision, even when installation was previously authorized.
 Once the user explicitly chooses adoption over a No-go, implement it and let
-measured evidence carry any remaining argument.
+measured evidence carry any remaining argument, while still surfacing any new
+security or license findings.
 
 Done when: the verdict and its evidence are clear, and either adoption proceeds
 under existing authorization or the unresolved decision is presented concretely
@@ -86,7 +93,10 @@ Follow [references/install-compatibility.md](references/install-compatibility.md
 1. Prefer checksum-verified release assets or a package manager; read install scripts before running them.
 2. Configure auth, ports, directories, and integrations from environment-provided values.
 3. For bundle-sensitive adoptions, follow [references/adoption-verification.md](references/adoption-verification.md) to measure impact before/after against a clean-tree control build.
-4. When an install or upgrade breaks on mismatched versions within a package family, move every related package to the latest consistent stable release, regenerate the lockfile, and adapt the code to the new API, rather than pinning transitive dependencies back.
+4. When an install or upgrade breaks on mismatched versions within a package
+   family, prefer aligning the family on one consistent release: regenerate
+   the lockfile and adapt the code to the new API. Pin back only with a
+   recorded reason.
 5. When the adoption replaces a tool, list what the old one did implicitly (defaults such as retries, timeouts, and serialization) and match it or record the intended change. Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
 
 Done when: the tool is installed from a verified source, configured, a smoke test confirms it works end to end, and no trace of a replaced tool remains.

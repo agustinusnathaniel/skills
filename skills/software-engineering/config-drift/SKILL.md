@@ -63,8 +63,9 @@ output they cannot parse.
 ## Clients that outlive a deploy
 
 Running clients keep old code after a deploy: service workers that activate
-without reloading, lazy chunks the deploy removed, over-the-air updates bound
-to a runtime version, cached config. Decide how an old client learns about the
+without reloading, lazy chunks the deploy removed, over-the-air updates
+(Expo/EAS) bound to a runtime version, cached config. Decide how an old
+client learns about the
 new version and moves to it, then exercise an update with a tab or app already
 open. Read [client version skew](references/client-version-skew.md) when the
 change touches service workers, code splitting, or mobile updates.

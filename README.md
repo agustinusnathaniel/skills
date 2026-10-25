@@ -21,7 +21,7 @@ A collection of agent skills for AI coding agents.
 | [mobile-app-shell](skills/software-engineering/mobile-app-shell/SKILL.md) | Build React Native and Expo app shells that survive cold starts, stale tokens, flaky networks, and long-lived binaries. |
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [pull-request-readiness](skills/software-engineering/pull-request-readiness/SKILL.md) | Shape PRs and stacks, check readiness against evidence, and hand over the merge checklist before anyone merges. |
-| [pull-request-review](skills/software-engineering/pull-request-review/SKILL.md) | Review others' PRs for critical findings only, and draft comments the user approves before they are posted. |
+| [pull-request-review](skills/software-engineering/pull-request-review/SKILL.md) | Review others' PRs, leading with must-fix findings and marking minor points non-blocking, and draft comments the user approves before they are posted. |
 | [release-notes](skills/software-engineering/release-notes/SKILL.md) | Write changelogs and release notes for end users, developers, or maintainers, verified against what shipped. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |

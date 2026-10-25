@@ -41,10 +41,10 @@ feature that does not exist yet, and extend the original code rather than
 copying it elsewhere.
 
 For invariants another service owns, prefer letting that service reject
-invalid input, treating its invalid-argument error as that item failing,
-over copying its validator. Early validation in your own UI or dry run still
-applies. A
-validator you must port needs proof it behaves like the original.
+invalid input, treating its validation-rejection response as that item
+failing, over copying its validator. Early validation in your own UI or dry
+run still applies. A validator you must port needs proof it behaves like the
+original.
 
 ## Triage each guarded case
 
@@ -55,17 +55,21 @@ that reaches it.
 | Tier | Evidence | Code |
 | --- | --- | --- |
 | **impossible** | No production path produces the state | None. Remove the branch and its test |
-| **rare** | Reachable but seldom, with a human able to respond | One early guard at the entry point with a named error, or a runbook entry or alert. Keep it off the main path |
+| **rare** | Reachable but seldom, with a human able to respond | One early guard at the entry point with a named error, or a step in the written procedure, or an alert. Keep it off the main path |
 | **real** | Observed, or certain under normal load | Main path, in the sibling's shape |
 | **unknown** | Not yet established | Say so and ask. Build nothing until it is settled |
+
+Security and trust-boundary checks stay whatever their tier. Remove a branch
+as **impossible** only when neither untrusted input nor a future caller can
+reach it.
 
 A case that needs an unlikely chain of events in normal use (a service far
 slower than usual at the exact moment two runs overlap, an admin undoing their
 own setup mid-run) is handled like an **impossible** one: no code. If a
-reviewer raised it, add at most one known-limits line.
-This applies only when the outcome is tolerable: a case that would leave
-real users with wrong data, locked out, or visibly broken is **real** and
-gates launch, however rare.
+reviewer raised it, add at most one known-limits line. This applies only
+when the outcome is tolerable: a case that would leave real users with wrong
+data, locked out, or visibly broken is **real** and gates launch, however
+rare.
 
 Before claiming a guard or fix covers a flow, list every caller performing the
 same side effect (open PRs included), every reader and writer of a changed key
@@ -74,9 +78,10 @@ existing and newly created records end up right, and name in the PR the paths
 it does not cover.
 
 Risks a person decides (confirmation, routing, timing, undo) belong in the
-runbook. Code keeps guards for failures with no human in the loop:
-unreachable dependencies, concurrency, data loss. Whether rollback is a coded
-path or a runbook procedure is the owner's decision.
+written steps someone follows to run the operation (docs, a checklist, or the
+PR's merge steps), not in code. Code keeps guards for failures with no human
+in the loop: unreachable dependencies, concurrency, data loss. Whether
+rollback is coded or a written procedure is the owner's decision.
 
 Validate early, in a dry run or the UI, so invalid data never reaches
 execution; that removes the need to handle it downstream.
@@ -87,13 +92,13 @@ execution; that removes the need to handle it downstream.
   the current source of truth, an idempotent write converges under
   last-write-wins; it needs no lock and no "already done" check.
 - **One computation, one write.** Decide in memory with pure functions, then
-  write once. A loop of awaited writes with re-check passes is the shape to
-  replace.
+  write once or in idempotent batches. A loop of awaited writes with re-check
+  passes is the shape to replace.
 - **Guard at the boundary, trust inside.** Validate where data enters; inner
   functions take it as given.
-- **Owner invariants are given.** Record a data bug in a system another
-  team owns as theirs. An owner's review ask is a decision to revisit with them, never a
-  silent removal.
+- **Owner invariants are given.** When another team or service owns the
+  system, record a data bug in it as theirs, and treat the owner's review ask
+  as a decision to revisit with them, never a silent removal.
 - **Reshape when a review round adds mechanism.** Two fixes failing on the
   same assumption mean the assumption is wrong; find it before adding a third.
 - **Optimizations lose no signal.** In a speed or cost change, every dropped

@@ -12,16 +12,18 @@ they notice the new version, and what breaks while they don't.
   `virtual:pwa-register` (`registerSW`, or the framework hook).
 - An automatic reload can discard form input. Form-heavy apps should use
   `registerType: 'prompt'` and let the user reload.
-- `updateServiceWorker(true)` resolves before the new worker controls the page.
-  Reload on the worker's `controlling` / `controllerchange` event, not on that
+- With vite-plugin-pwa, `updateServiceWorker(true)` only asks the waiting
+  worker to activate: current versions ignore its reload argument, and it
+  resolves before the
+  new worker controls the page. The plugin's register code reloads on
+  workbox-window's `controlling` (prompt mode) or `activated` (auto mode)
+  event, or calls `onNeedReload` when given. Reload there, not on the
   promise, or the old worker serves the reload.
-- `navigateFallback` to a URL outside the precache fails. Exclude server routes
-  (`/api/`, server-function paths) with a denylist.
-- Precached workers and WebAssembly files are versioned assets. Prefer
-  network-first for them, or exclude them from the precache.
-- Some framework build pipelines skip the plugin's bundle-close step, so no
-  worker is written at all. Confirm the deployed `sw.js` exists and changed;
-  generating it in a post-build script is a working fallback.
+- Precached workers and WebAssembly files with unhashed filenames are
+  versioned assets a deploy cannot bust. Prefer network-first for them, or
+  exclude them from the precache.
+- Confirm the deployed `sw.js` exists and changed. When the build writes
+  none, generating it in a post-build script is a working fallback.
 
 ## Lazy chunks after a deploy
 
@@ -38,7 +40,7 @@ script. Handle it in one place:
 - Prefer telling the user an update is available over reloading silently on
   screens with unsaved input.
 
-## Mobile over-the-air updates
+## Mobile over-the-air updates (Expo/EAS)
 
 - An update reaches only builds with a matching runtime version. Bump the
   runtime version whenever native code or native config changes.

@@ -27,13 +27,13 @@ that accepts a key shipped in the client hides the URL but not the access.
 
 ## Authorize every call on the server
 
-- Hidden menus and disabled buttons are presentation. Each endpoint or
-  backend function checks the caller's identity, permission, and tenant on
-  every call.
+- Hidden menus and disabled buttons are presentation. Each non-public
+  endpoint or backend function checks the caller's identity, permission, and
+  tenant (where multi-tenant) on every call.
 - With a backend-as-a-service, find out what is public by default. Some
   expose every client-callable function to anyone holding the deployment URL;
   put an auth check in each public function and keep server-only logic in
-  internal functions or behind security rules.
+  functions the client cannot call.
 - Platform gates such as API key referrer restrictions, app attestation, and
   bot challenges cut low-effort abuse. They are signals, not authorization.
   Add per-user and per-function rate limits where abuse is cheap.
@@ -55,6 +55,6 @@ tokens, decoded claims, and personal data before sending them.
 
 Done when each changed endpoint or function was called directly, with a
 script rather than the UI: without a token, with another user's token, and
-with a token from another tenant, each denied with no data returned; when a
-search of the built output finds no secrets; and when an edited stored
-session fails to raise privileges.
+with a token from another tenant (where multi-tenant), each denied with no
+data returned; when a search of the built output finds no secrets; and when
+an edited stored session fails to raise privileges.
