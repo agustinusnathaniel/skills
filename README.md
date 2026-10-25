@@ -116,6 +116,8 @@ old name. Existing installed copies retain their old name until migrated.
 
 ## Adding New Skills
 
+A new skill must meet the placement rule in [AGENTS.md](AGENTS.md).
+
 Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.zcode-plugin/plugin.json`, `kimi.plugin.json`, the appropriate `skills.sh.json` grouping, and the table above. Add a changeset (`pnpm changeset`) following the bump policy under Versioning.
 
 Keep frontmatter to the portable [Agent Skills](https://agentskills.io/specification) fields (`name` matching the directory, `description` up to 1024 characters). A skill that should run only when a user invokes it needs three settings, because hosts read different keys: `disable-model-invocation: true` (Claude Code, Cursor, Kimi, omp), `triggers: ["user"]` (Devin), and `agents/openai.yaml` with `policy.allow_implicit_invocation: false` (Codex). ZCode has no manual-only setting, so the description must still read as a trigger.

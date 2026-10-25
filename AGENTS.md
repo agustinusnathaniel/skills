@@ -6,6 +6,12 @@ with the `writing-for-agents` skill, and calibrate against current model guidanc
 and [Claude prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices).
 Registration and versioning steps live in the README.
 
+- This repo is independent of maestria. A skill belongs here when a specific
+  kind of task triggers it, and it stays only if it is recurring, adds what a
+  model gets wrong without it, is verifiable from public docs or repeated
+  experience, and sits in a stack the maintainer uses. Agent behaviour for
+  every task belongs in maestria; personal workflow and one-company lessons
+  stay out. Label stack-specific advice.
 - Fold a learning into the skill that owns the behavior, or a conditional
   reference behind a pointer. A new skill needs a trigger no existing description
   covers.
