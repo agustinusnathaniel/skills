@@ -1,5 +1,29 @@
 # agustinusnathaniel-skills
 
+## 2.2.0
+
+### Minor Changes
+
+- [#35](https://github.com/agustinusnathaniel/skills/pull/35) [`833df7b`](https://github.com/agustinusnathaniel/skills/commit/833df7b91bef56560f38c74e4de209e88e95e60f) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Retire and rename skills so each covers a recurring task in a stack the repo maintains:
+  
+  - **webhook-integration**, **domain-research**, **release-notes**, and **delegating-to-coding-agents** are retired. Uninstall them, or keep an installed copy if you still rely on it.
+  - **mobile-app-shell** is renamed **expo-app-foundations** and scoped to Expo and React Native app foundations: a remotely controllable minimum supported version before the first release, other remote values only over a secured channel, over-the-air updates matched to binaries by runtime version and environment, proactive refresh where clocks are trustworthy plus one shared refresh on 401, and screen-capture blocking per screen. Reinstall and select the new name.
+  - **autonomous-improvement-loop** names GitHub and `gh` as its target, follows the repository's branch-update policy, and uses neutral branch, label, and base-ref names.
+
+- [#33](https://github.com/agustinusnathaniel/skills/pull/33) [`d345c2a`](https://github.com/agustinusnathaniel/skills/commit/d345c2aae2a852258c5dff270f351c5538d06156) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Fold recurring review lessons into the skills that own them, and generalize skills for public use: stack-specific advice is labelled (React, JavaScript, node-postgres, MongoDB, GitHub, Expo/EAS, Astro, TanStack Query) and personal preferences are scaled to stakes.
+  
+  - **challenge-every-guard**: security and trust-boundary checks stay whatever their tier, and practically-never cases are handled like impossible ones unless they would leave real users with wrong data, locked out, or visibly broken. Enumerate every caller, reader, and writer before claiming coverage; find why a guard or test exists before cutting it; optimizations lose no signal; no placeholders for later phases; let the owning service validate its own invariants; risks a person decides go in the written steps someone follows. The backend checklist adds acknowledging only final outcomes, reading retry and dead-letter policy, bounding work per delivery, failing closed on missing safety inputs, logging and counting every silent path, and an atomic per-element update.
+  - **test-strategy**: keep a bug's reproduction as a regression test unless an existing test pins it; label a defensive fix for an unreproduced bug as unverified; prefer E2E that ends in a reproducible artifact; assert at the serialized boundary, extend existing tests, test claims in both directions, pin output before swapping an implementation; judge model-driven behavior with an eval.
+  - **pull-request-readiness**: re-read the merge box after every push, answer every review thread (bots included), fix correctness findings by default, map many reviewer points to commits, hold a PR by drafting it and removing reviewers, follow the repository's release tooling for versions, and give the production safety answer.
+  - **pull-request-review**: follow the user's preferred depth, lead with must-fix findings and mark minor points non-blocking, check fixture provenance, follow the project's AI-disclosure policy, and answer the reviewer's actual question.
+  - **github-actions-authoring**: an aggregator job for required checks, timeout headroom from recent runs, full-SHA action pins, the concurrency re-run trap, bot PRs for protected branches, the `GITHUB_TOKEN` trigger limit, and speed-ups that lose no signal.
+  - **admin-panel-engineering**: Cancel focus on destructive confirmations, destructive styling per the design system, closable dialogs while jobs run, operator status copy with a reason code and next step, exact permission identifiers, grant rules without a single role ladder, self-approval only where policy allows, irreversible capabilities in approvals and notifications, and fixing every instance of copied code.
+  - **tool-evaluation-and-adoption**: version claims checked against the registry; prefer aligning a package family on one release and pin back only with a recorded reason; static source inspection allowed in evaluate-only; a jurisdiction and licensing check; dependency and supply-chain alert triage.
+  - **prune-codebase**: list remaining reductions at the first PR and continue within the user's scope or budget; split into independently reviewable PRs.
+  - **codebase-dossier**: the outline is an example to adapt, not a required format.
+  - **config-drift**: the client version skew reference covers detecting and refreshing stale clients in general, with service workers (vite-plugin-pwa and Workbox, including its reload behavior) labelled as one stack.
+  - **client-trust-boundary**, **hydration-safe-state**, **url-state**, **bulk-import-engineering**, **calculation-correctness**, and **architecture-decision-framework**: generalized wording and stack labels.
+
 ## 2.1.0
 
 ### Minor Changes
