@@ -41,12 +41,6 @@ A collection of agent skills for AI coding agents.
 |---|---|
 | [domain-research](skills/research/domain-research/SKILL.md) | Research a domain via its canonical authorities and frameworks. |
 
-### communication
-
-| Skill | Description |
-|---|---|
-| [drafting-messages](skills/communication/drafting-messages/SKILL.md) | Draft messages, review requests, and status updates that someone else posts under their own name. |
-
 ## Installing Skills
 
 ### Interactive picker

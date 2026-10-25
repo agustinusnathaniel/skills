@@ -36,11 +36,6 @@
       "title": "Research",
       "description": "Deep domain research via canonical authorities and frameworks.",
       "skills": ["domain-research"]
-    },
-    {
-      "title": "Communication",
-      "description": "Messages and status updates written for someone to post under their own name.",
-      "skills": ["drafting-messages"]
     }
   ]
 }

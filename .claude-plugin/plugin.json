@@ -1,7 +1,7 @@
 {
   "name": "agustinusnathaniel-skills",
   "version": "2.1.0",
-  "description": "Reusable skills for software engineering, automation, research, and communication.",
+  "description": "Reusable skills for software engineering, automation, and research.",
   "author": {
     "name": "Agustinus Nathaniel"
   },
@@ -27,7 +27,6 @@
     "./skills/software-engineering/webhook-integration",
     "./skills/automation/autonomous-improvement-loop",
     "./skills/automation/delegating-to-coding-agents",
-    "./skills/research/domain-research",
-    "./skills/communication/drafting-messages"
+    "./skills/research/domain-research"
   ]
 }
