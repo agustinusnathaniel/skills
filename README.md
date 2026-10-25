@@ -32,13 +32,7 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [autonomous-improvement-loop](skills/automation/autonomous-improvement-loop/SKILL.md) | Compound small improvements on a recurring schedule without per-cycle direction. |
-| [delegating-to-coding-agents](skills/automation/delegating-to-coding-agents/SKILL.md) | Brief, own, watch, and verify coding agent sessions that push to pull requests. |
-
-### communication
-
-| Skill | Description |
-|---|---|
-| [drafting-messages](skills/communication/drafting-messages/SKILL.md) | Draft messages, review requests, and status updates that someone else posts under their own name. |
+| [delegating-to-coding-agents](skills/automation/delegating-to-coding-agents/SKILL.md) | Brief, own, and verify several coding agent sessions that push to pull requests. |
 
 ## Installing Skills
 

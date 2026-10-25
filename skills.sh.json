@@ -30,11 +30,6 @@
       "title": "Automation",
       "description": "Recurring improvement loops and delegated coding agent sessions that run without per-step direction.",
       "skills": ["autonomous-improvement-loop", "delegating-to-coding-agents"]
-    },
-    {
-      "title": "Communication",
-      "description": "Messages and status updates written for someone to post under their own name.",
-      "skills": ["drafting-messages"]
     }
   ]
 }
