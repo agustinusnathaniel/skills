@@ -67,4 +67,5 @@ without reloading, lazy chunks the deploy removed, cached config. Decide how
 an old client learns about the new version and moves to it, then exercise an
 update with a client already open. Read
 [client version skew](references/client-version-skew.md) when the change
-touches service workers, code splitting, or client caching.
+touches service workers, code splitting, or client caching. For Expo/EAS
+over-the-air updates, use the `expo-app-foundations` skill.
