@@ -1,5 +1,11 @@
 # agustinusnathaniel-skills
 
+## 2.3.0
+
+### Minor Changes
+
+- [#38](https://github.com/agustinusnathaniel/skills/pull/38) [`8a11c17`](https://github.com/agustinusnathaniel/skills/commit/8a11c17f20559effb050fa9d811c8079caa1e0f2) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Add `typescript-code-conventions` (signatures, control flow, errors, types, modules, and React components, with a self-check for repositories without a linter) and `react-app-structure` (where pages, routes, page logic, and API calls go in a React web app). Both follow the repository's own rules and sibling files first.
+
 ## 2.2.0
 
 ### Minor Changes

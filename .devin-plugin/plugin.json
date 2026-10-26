@@ -1,6 +1,6 @@
 {
   "name": "agustinusnathaniel-skills",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Software engineering skills: architecture decisions, admin panels, Expo app foundations, bulk imports, calculations, client trust, configuration drift, CI workflows, hydration, URL state, TypeScript conventions, React app structure, codebase dossiers, pruning, guard triage, pull request readiness and review, test strategy, and tool evaluation.",
   "author": {
     "name": "Agustinus Nathaniel"
