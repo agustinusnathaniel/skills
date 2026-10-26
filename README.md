@@ -22,8 +22,10 @@ A collection of agent skills for AI coding agents.
 | [prune-codebase](skills/software-engineering/prune-codebase/SKILL.md) | Prune code, tests, documentation, configuration, and tooling while preserving intended behavior and useful rationale. |
 | [pull-request-readiness](skills/software-engineering/pull-request-readiness/SKILL.md) | Shape PRs and stacks, check readiness against evidence, and hand over the merge checklist before anyone merges. |
 | [pull-request-review](skills/software-engineering/pull-request-review/SKILL.md) | Review others' PRs, leading with must-fix findings and marking minor points non-blocking, and draft comments the user approves before they are posted. |
+| [react-app-structure](skills/software-engineering/react-app-structure/SKILL.md) | Place pages, routes, page logic, and API calls in a React web app, following the repository's layout first. |
 | [test-strategy](skills/software-engineering/test-strategy/SKILL.md) | Choose tests that pin meaningful behavior at the smallest useful boundary. |
 | [tool-evaluation-and-adoption](skills/software-engineering/tool-evaluation-and-adoption/SKILL.md) | Vet an open-source tool before adopting it: reconnaissance, security review, fit analysis, go/no-go verdict, verified install. |
+| [typescript-code-conventions](skills/software-engineering/typescript-code-conventions/SKILL.md) | Write TypeScript that fits the repository first: small signatures, early returns, Error objects with `cause`, named exports, and a self-check for repos without a linter. |
 | [url-state](skills/software-engineering/url-state/SKILL.md) | Carry filters, pagination, and share links in the URL with a tested string round trip. |
 
 ### automation

@@ -4,7 +4,7 @@
   "groupings": [
     {
       "title": "Software Engineering",
-      "description": "Skills for architecture decisions, admin panels, Expo app foundations, calculations, client trust, configuration, CI workflows, hydration, URL state, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
+      "description": "Skills for architecture decisions, admin panels, Expo app foundations, calculations, client trust, configuration, CI workflows, hydration, URL state, TypeScript conventions, React app structure, codebase dossiers, pruning, guard triage, pull request readiness and review, testing, and tool adoption.",
       "skills": [
         "admin-panel-engineering",
         "architecture-decision-framework",
@@ -20,8 +20,10 @@
         "prune-codebase",
         "pull-request-readiness",
         "pull-request-review",
+        "react-app-structure",
         "test-strategy",
         "tool-evaluation-and-adoption",
+        "typescript-code-conventions",
         "url-state"
       ]
     },
