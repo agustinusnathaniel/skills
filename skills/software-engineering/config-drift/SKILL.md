@@ -55,7 +55,8 @@ reported together with the check that was attempted.
 ## Make failure paths speak
 
 Find the places where a broken value degrades quietly: a `catch` that swallows,
-an ignore list, a CI gate that cannot fail (`github-actions-authoring`), a
+an ignore list, a CI gate that cannot fail ("Keep gates as gates" in
+`github-actions-authoring`), a
 fallback provider or default, or success parsed from unstructured output. For observability and alerting changes, send
 a test event and confirm it arrives. Make updaters and probes fail closed on
 output they cannot parse.

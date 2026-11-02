@@ -6,8 +6,8 @@ a **real** one or why an item does not apply.
 
 Related skills own neighbouring checks: `client-trust-boundary` for
 caller-supplied ids and authorization, `config-drift` for whether a deploy
-or config change took effect, and `pull-request-readiness` for deploy order
-and feature flags.
+or config change took effect, and `pull-request-readiness` ("Check readiness" and its merge checklist)
+for deploy order and feature flags.
 
 ## Writes to shared records
 

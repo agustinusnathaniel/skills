@@ -49,7 +49,8 @@ reviewability, blast radius, staged rollout.
 
 The body follows the repository's template, states the PR's size with
 generated code counted separately so reviewers know what to read, and
-justifies anything new as `challenge-every-guard` asks. When the change
+justifies anything new as "Copy the sibling first" in `challenge-every-guard`
+asks. When the change
 alters a shared command, route, or helper, it names every caller, workflow,
 and runbook that uses it and shows each still works. After a reviewer has
 reviewed or approved, a "Since review" section lists the commits added after
@@ -78,7 +79,8 @@ Run every check before marking a PR ready or requesting review:
   author's call; leaving a correctness finding as is needs evidence, given in
   its thread, that it cannot occur. Approval bodies are read too, since
   remarks hide in them.
-- Every review thread is answered (draft replies with `pull-request-review`),
+- Every review thread is answered, every part of each finding (draft replies
+  with "On pushback" in `pull-request-review`),
   bot threads included, and resolved where the host requires conversation
   resolution.
 - When a PR has many reviewer points, one summary comment maps each point to

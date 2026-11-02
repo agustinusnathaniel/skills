@@ -29,8 +29,8 @@ that accepts a key shipped in the client hides the URL but not the access.
 
 - Hidden menus and disabled buttons are presentation. Each non-public
   endpoint or backend function checks the caller's identity, permission, and
-  tenant (where multi-tenant) on every call, taking the tenant from the
-  authenticated context and ignoring ids the client sends.
+  tenant (where multi-tenant) on every call, taking the tenant, partner, or
+  owner id from the authenticated context and ignoring ids the client sends.
 - With a backend-as-a-service, find out what is public by default. Some
   expose every client-callable function to anyone holding the deployment URL;
   put an auth check in each public function and keep server-only logic in

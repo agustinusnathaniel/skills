@@ -4,7 +4,7 @@ description: >
   Choose what to test or verify for a change, and at which boundary. Use when
   reproducing a bug before fixing it, choosing unit, integration, or
   end-to-end coverage, judging whether existing tests earn their keep, or
-  changing prompts or model settings.
+  changing prompts, schemas, or model settings.
 ---
 
 # Test Strategy

@@ -9,7 +9,7 @@ exclusive buckets: production, tests/support, docs/directives, generated/vendor,
 and other. Classify maintained registries, configuration, and templates with the
 behavior they implement; preserve retained component inventories unless pruning
 is requested. Decide what is generated from ownership and provenance, not from
-generated headers mentioned in maintained source. Include new and untracked
+generated headers mentioned in maintained source or tests. Include new and untracked
 work, reconcile with the complete diff, and explain classification
 corrections. Keep current-round and cumulative deltas distinct, using any
 comparison range the user specifies.

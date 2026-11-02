@@ -146,7 +146,9 @@ Correctness and budget limits take precedence. Report partial progress and the
 concrete limitation when completion criteria remain unmet.
 
 For generated projections, edit canonical sources and verify regeneration.
-Split, check, and hand over PRs with `pull-request-readiness`. Any change that
+Split, check, and hand over PRs with `pull-request-readiness` ("Shape the PR
+list first", "Check readiness"), distinguishing local checks from remote CI.
+Any change that
 reaches a published package, including private packages bundled into
 published ones, needs the changeset or release note the repository requires;
 write release notes around user-visible changes and keep implementation

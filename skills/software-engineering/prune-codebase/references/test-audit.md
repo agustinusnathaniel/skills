@@ -41,7 +41,7 @@ behavior is protected at the replacement boundary. Remove obsolete test-only
 exports while preserving public APIs.
 
 Add a bug regression test only for a genuine behavior gap, failing first as
-`test-strategy` describes; when the pre-fix baseline cannot be reconstructed,
+"Fail first" in `test-strategy` describes; when the pre-fix baseline cannot be reconstructed,
 identify other direct evidence of the gap. Avoid repeating the same scenario
 at every layer.
 

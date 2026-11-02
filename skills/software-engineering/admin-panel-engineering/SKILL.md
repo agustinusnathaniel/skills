@@ -25,8 +25,8 @@ Find what the backend actually returns, not what HTTP conventions suggest:
 - How permissions are matched. Match permission identifiers (route
   templates, permission keys, or policy names) exactly; a prefix or substring
   match lets `/orders` grant `/orders/:id/refund`.
-- Where tenant, partner, or owner identity comes from; `client-trust-boundary`
-  says where it must.
+- Where tenant, partner, or owner identity comes from; "Authorize every call
+  on the server" in `client-trust-boundary` says where it must.
 - How permission changes propagate: cache keys, TTL units, and which key a role
   edit invalidates. A mismatch defers every edit to the next login.
 
