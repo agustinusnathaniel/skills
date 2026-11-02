@@ -93,8 +93,9 @@ rollback is coded or a written procedure is the owner's decision.
 - **Guard at the boundary, trust inside.** Validate where data enters, in a dry
   run or the UI where one exists; inner functions take it as given.
 - **Owner invariants are given.** When another team or service owns the
-  system, record a data bug in it as theirs, and treat the owner's review ask
-  as a decision to revisit with them, never a silent removal.
+  system, a data bug in it is theirs to fix at the source, never yours to work
+  around. Drop a guard the owner asked for in review only with their
+  agreement.
 - **Reshape when a review round adds mechanism.** Two fixes failing on the
   same assumption mean the assumption is wrong; find it before adding a third.
 - **Optimizations lose no signal.** In a speed or cost change, every dropped

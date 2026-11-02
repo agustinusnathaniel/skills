@@ -57,7 +57,7 @@ the head they saw. When several
 people or agent sessions work on the same branch, it names the one who
 pushes. After any push, re-read the title and body against the new head and
 remove what is no longer true. Check that the body renders on the host (On
-GitHub: `gh api -X POST /markdown -f mode=gfm`); literal angle-bracket text
+GitHub: `gh api /markdown -f mode=gfm -F text=@body.md`); literal angle-bracket text
 goes in backticks.
 
 ## Check readiness
@@ -65,8 +65,8 @@ goes in backticks.
 Run every check before marking a PR ready or requesting review:
 
 - Synced with the base branch.
-- Full affected suites pass at the current head, new tests fail without the
-  fix, and CI shows the new specs ran; a broken stack base can skip them.
+- Full affected suites pass at the current head, new or extended tests fail
+  without the fix, and CI shows the new specs ran; a broken stack base can skip them.
 - Every CI check read, not only the summary. Some required checks do not
   re-run when the base changes; re-trigger them the way the repository allows.
 - Every bot comment since the PR opened is read and triaged with evidence
