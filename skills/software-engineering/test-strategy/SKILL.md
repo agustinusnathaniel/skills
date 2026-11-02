@@ -1,11 +1,10 @@
 ---
 name: test-strategy
 description: >
-  Use when deciding what to test or verify for a change and at which boundary
-  (unit, integration, E2E), reproducing a bug before patching it, planning
-  failure-first coverage, choosing artifact-producing E2E for complex
-  features, judging whether existing tests earn their keep, or changing
-  model-driven behavior.
+  Choose what to test or verify for a change, and at which boundary. Use when
+  reproducing a bug before fixing it, choosing unit, integration, or
+  end-to-end coverage, judging whether existing tests earn their keep, or
+  changing prompts or model settings.
 ---
 
 # Test Strategy
@@ -21,17 +20,14 @@ Before choosing checks or changing behavior, state the externally observable
 result and invariant at risk. Identify plausible failure modes, then select
 only the cases that expose a real gap at the chosen boundary.
 
-## Reproduce before patching a bug
+## Fail first
 
 Before patching a bug, reproduce it with the cheapest failing check at the
 smallest boundary that shows it, run at the current head. When it does not
-reproduce, report the evidence you gathered rather than patching on a guess.
-If the user still wants a defensive fix, make it and label it unverified.
-
-After the fix, keep the reproduction as a regression test unless an existing
-test already pins the behavior.
-
-## Check, implement, verify
+reproduce, report the evidence you gathered rather than patching on a guess;
+if the user still wants a defensive fix, make it and label it unverified.
+Keep the reproduction as a regression test unless an existing test already
+pins the behavior.
 
 For new behavior, when practical, run the smallest meaningful check before
 the change to confirm it can expose the failure, then implement and rerun it
@@ -81,8 +77,7 @@ Before adding a test, find what already covers the behavior at every boundary
 and extend that test with an assertion or case. Test every claim the change
 makes: a guard described as the real protection gets a case for each bad
 shape it rejects, and a new blocking condition is tested in both directions
-(blocked, then a retry that succeeds). When a coverage gate flags a branch for
-a state production cannot reach, simplify the guard rather than adding a test.
+(blocked, then a retry that succeeds).
 
 Assert only what the design requires, and assert it exactly: exact call
 arguments over partial matchers. A guard's test fails when the guard is
@@ -97,8 +92,8 @@ caught.
 
 Before replacing an implementation, a library, a build tool, or a test runner,
 pin today's output with a characterization test that passes before and after
-the swap. List the checks the old tool ran implicitly (type checking during a
-build, environment validation) and show each still runs somewhere.
+the swap; for the checks the old tool ran implicitly, see "Swaps and
+optimizations lose no signal" in `challenge-every-guard`.
 
 Model-driven behavior (prompts, schemas, model or effort settings) is judged
 by an eval rather than unit tests: compare the current setting with each
@@ -111,8 +106,9 @@ Every test you add names the production failure it catches and uses only
 inputs production can produce; say so in the PR description. Delete tests
 that are tautological (asserting a mock's output, a fake's behavior, or a
 logger's call shape), that cover states production cannot reach (remove the
-unreachable branch too), or that duplicate another test. Snapshots without a
-defensible behavior contract fail the same bar. Keep a test that guards data
+branch too, including when a coverage gate flags it), or that duplicate
+another test. Snapshots and change detectors without a defensible behavior
+contract fail the same bar. Keep a test that guards data
 loss, account takeover, rollback, a stuck job, or a fixed production bug
 whenever no other test catches that failure. Remove any other existing test
 only when a named check at another boundary catches the same failure or its

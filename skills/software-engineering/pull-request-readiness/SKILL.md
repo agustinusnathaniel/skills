@@ -2,9 +2,9 @@
 name: pull-request-readiness
 description: >
   Get a pull request, or a stack of them, to mergeable. Use when splitting
-  work into PRs, building or fixing stacked PRs, deciding whether a PR is
-  ready for review, marking it ready or requesting review, triaging bot and CI
-  findings, or preparing the merge and deploy steps for the user.
+  work into PRs or stacks, checking a PR is ready before marking it ready or
+  requesting review, triaging bot and CI findings, or preparing the merge and
+  deploy steps for the user.
 ---
 
 # Pull Request Readiness
@@ -48,8 +48,8 @@ reviewability, blast radius, staged rollout.
 ## Make the body a contract
 
 The body follows the repository's template, states the PR's size with
-generated code counted separately so reviewers know what to read, and lists
-anything new the change introduces with its justification. When the change
+generated code counted separately so reviewers know what to read, and
+justifies anything new as `challenge-every-guard` asks. When the change
 alters a shared command, route, or helper, it names every caller, workflow,
 and runbook that uses it and shows each still works. After a reviewer has
 reviewed or approved, a "Since review" section lists the commits added after
@@ -76,17 +76,18 @@ Run every check before marking a PR ready or requesting review:
   reviewers are applied across the PR, not only at the commented line.
   Correctness findings are fixed by default, and style suggestions stay the
   author's call; leaving a correctness finding as is needs evidence, given in
-  its thread, that it cannot occur. Every part of a multi-part finding is
-  answered, and approval bodies are read too, since remarks hide in them.
-- Every review thread is answered, bot threads included, and resolved where
-  the host requires conversation resolution.
+  its thread, that it cannot occur. Approval bodies are read too, since
+  remarks hide in them.
+- Every review thread is answered (draft replies with `pull-request-review`),
+  bot threads included, and resolved where the host requires conversation
+  resolution.
 - When a PR has many reviewer points, one summary comment maps each point to
   the commit that addressed it, so reviewers can re-check in one pass.
 - Where the repository uses feature flags: whether one is needed, whether it
-  exists, whether it defaults to off. Shared paths are safe to merge with the
-  flag off.
+  exists, whether it defaults to off. A change to an existing shared path is
+  live as soon as it deploys, so it must be safe with the flag off.
 - Quality gates the repository uses: an independent review of the diff from a
-  clean checkout, cleanup of leftover scaffolding and restating comments,
+  clean checkout, the `challenge-every-guard` "Clean before review" pass,
   lint scoped to the diff against the PR base (without a base ref, some
   linters check only uncommitted changes and report clean).
 
@@ -123,8 +124,9 @@ message:
   PR approved earlier, list what landed after the approval and whether each
   change ships dark or live.
 - **Deploy order:** when several services or PRs depend on each other, which
-  deploys first (consumers before producers) and which must be live before
-  the next merges.
+  deploys first (consumers that accept a new shape before producers that send
+  it) and which must be live before the next merges; a flag stays off until
+  everything it depends on is live.
 - **Post-merge:** flags to turn on and in which environment, backfills or
   scripts to run (dry run first), what to watch and for how long, and
   follow-up PRs or tickets.

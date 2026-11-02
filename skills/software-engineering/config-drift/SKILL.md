@@ -4,8 +4,8 @@ description: >
   Verify that a configuration change is what the running system actually uses.
   Use when changing environment variables, build-time config, security headers
   or CSP, service worker or update settings, hosting or platform config files,
-  shared CI workflows, or agent and tool config, and when a setting has no
-  effect or a feature silently stops working.
+  or agent and tool config, and when a setting has no effect or a feature
+  silently stops working.
 ---
 
 # Config Drift
@@ -44,8 +44,8 @@ and remove validator references to files that no longer exist.
 
 Observe each changed value at its consumer: the built bundle, the headers the
 deployed URL actually serves, the version of the deployed worker, the rendered
-page, the process's resolved config, or the tool version a CI job actually ran.
-Grep built output for values that should appear, and confirm absence for
+page, or the process's resolved config. For CI workflows, the read-back is
+`github-actions-authoring`'s "Verify on a real run". Grep built output for values that should appear, and confirm absence for
 values that must not. Anything shipped to a client is public; use the
 `client-trust-boundary` skill for what may ship.
 
@@ -55,8 +55,8 @@ reported together with the check that was attempted.
 ## Make failure paths speak
 
 Find the places where a broken value degrades quietly: a `catch` that swallows,
-an ignore list, `continue-on-error`, a fallback provider or default, or success
-parsed from unstructured output. For observability and alerting changes, send
+an ignore list, a CI gate that cannot fail (`github-actions-authoring`), a
+fallback provider or default, or success parsed from unstructured output. For observability and alerting changes, send
 a test event and confirm it arrives. Make updaters and probes fail closed on
 output they cannot parse.
 

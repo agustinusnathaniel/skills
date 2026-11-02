@@ -3,9 +3,8 @@ name: typescript-code-conventions
 description: >
   Write TypeScript that fits the repository first and these conventions
   second, with or without a linter. Use when writing or changing TypeScript
-  or TSX in any app, service, library, or CLI: function signatures, control
-  flow, errors and async code, types, imports and exports, file names, and
-  React components; or when a lint rule on any of these fails.
+  or TSX, or when a lint rule on function shape, errors, types, imports, or
+  React components fails.
 ---
 
 # TypeScript Code Conventions

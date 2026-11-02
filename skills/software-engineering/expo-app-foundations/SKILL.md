@@ -3,7 +3,7 @@ name: expo-app-foundations
 description: >
   Build or change the foundations of an Expo or React Native app. Use when
   setting up environments, release channels, or over-the-air updates; adding
-  remote config, forced updates, or feature flags; handling token refresh, push
+  remote config or forced updates; handling token refresh, push
   notifications, or deep links; embedding web views; or adding native
   modules, config plugins, or permissions.
 ---

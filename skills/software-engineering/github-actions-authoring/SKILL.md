@@ -5,7 +5,7 @@ description: >
   or timeouts; building a reusable workflow or composite action that other
   repos call; automating commits, releases, or dependency-update PRs; or
   debugging a workflow that passes without checking anything or behaves
-  differently than its YAML suggests.
+  unlike its YAML.
 ---
 
 # GitHub Actions Authoring

@@ -28,10 +28,5 @@ src/lib/services/api/
 
 ## The client
 
-Configure once: base URL, auth header from the session, and hooks that run
-on every response.
-
-- On 401, refresh once when the app uses refresh tokens; when there is no
-  refresh or it fails, clear the session and every cached response.
-- On other errors, show the error to the user from the client, once.
-- Request functions return typed data and let errors flow to the caller.
+`client.ts` follows the "One HTTP client" principle in the skill. It shows
+non-401 errors to the user once, and request functions return typed data.

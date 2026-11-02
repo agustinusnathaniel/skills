@@ -1,11 +1,10 @@
 ---
 name: prune-codebase
 description: >
-  Use for substantial codebase pruning, reduction, or removal of overengineering
-  across production code and supporting tests, documentation, agent instructions,
+  Use for substantial codebase pruning or removal of overengineering across
+  production code and its tests, documentation, agent instructions,
   configuration, and tooling, including follow-up passes after a reduction PR.
-  Preserve intended behavior and useful rationale; exclude ordinary feature work
-  and minor cleanup.
+  Not for ordinary feature work or minor cleanup.
 ---
 
 # Prune Codebase
@@ -77,8 +76,8 @@ clear ownership. Preserve public contracts, security properties, and required
 performance. Before applying a repeated rewrite, validate the transformation on
 representative semantic variants, especially exception scope, cleanup,
 evaluation order, and side effects. Review the affected variants, not just one
-successful example. Before removing a defense, identify the boundary or equivalent
-protection that enforces its invariant and verify relevant invalid inputs.
+successful example. Before removing a defense, run the removal check in
+`challenge-every-guard` ("Preserve prior behaviour when refactoring").
 Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment. Hold comments your own changes add to the same bar.
 
 For behavior-sensitive reductions, establish representative real inputs before
@@ -97,9 +96,8 @@ remediation, new test harnesses, or permission and policy changes, becomes a
 separate, named delivery the user decides on.
 
 Amend affected docs, instructions, or ADRs that would recreate the complexity.
-Preserve decision history and record durable rationale; keep transient line counts
-and verification logs in the delivery report. Add an ADR only when policy requires
-it or an architectural decision changes.
+Record decisions as `architecture-decision-framework` describes, adding an ADR
+only when policy requires it or an architectural decision changes.
 
 ## Verify proportionately
 
@@ -113,10 +111,10 @@ names, schemas, CLI behavior, and serialized shapes. Use exact comparison when
 representation is contractual; otherwise compare semantics and normalize only
 known nondeterminism.
 
-When CLI or integration flows change, exercise the affected user journey through
-the built or published entry point the user actually runs, in an isolated
-environment. Check choices, cancellation, scope, and resulting state where
-relevant; help output and helper tests alone do not establish that the flow works. Report unexercised paths as verification gaps.
+When CLI or integration flows change, exercise the affected journey through the
+built or published entry point in an isolated environment, as `test-strategy`'s
+"Prove behavior at the real boundary" describes, checking choices,
+cancellation, scope, and resulting state. Report unexercised paths as gaps.
 
 Add repeatable coverage at the smallest boundary that catches an uncovered
 regression risk. When replacing an implementation, reducing tests, or removing
@@ -147,14 +145,11 @@ Completion requires all of the following:
 Correctness and budget limits take precedence. Report partial progress and the
 concrete limitation when completion criteria remain unmet.
 
-For generated projections, edit canonical sources and verify regeneration. For
-PRs/releases, apply release policy through affected shipped consumers,
-including private/shared packages bundled into published ones: any change that
-reaches a published package needs the changeset or release note the repository
-requires. Split large reductions into independently reviewable PRs, stacked
-only when one depends on another, and give any merge order in the handoff.
-Verify required delivery checks at the final revision; distinguish local
-checks from remote CI. Write release notes around user-visible changes,
-keeping implementation accounting in the PR report.
+For generated projections, edit canonical sources and verify regeneration.
+Split, check, and hand over PRs with `pull-request-readiness`. Any change that
+reaches a published package, including private packages bundled into
+published ones, needs the changeset or release note the repository requires;
+write release notes around user-visible changes and keep implementation
+accounting in the PR report.
 
 Re-count deltas at the current head of every delivered branch when reporting, never at an earlier revision or before a rebase. Report target and actual deltas over the full delivery range: production, tests/support, combined maintained code, and reconciled overall totals led together so production-only savings never stand alone as the result. Label round subtotals. Keep generated/vendor and lockfile churn on their own line; they never count as production savings. Explain eliminated mechanisms, dependency tradeoffs, corrected defects, verification gaps, and remaining candidates.

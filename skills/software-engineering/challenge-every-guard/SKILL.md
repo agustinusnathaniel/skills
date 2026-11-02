@@ -2,11 +2,10 @@
 name: challenge-every-guard
 description: >
   Size defensive code to evidence and fit a change to the codebase it lands in.
-  Use when writing or reviewing a change that adds guards, retries, locks,
-  fallbacks, "already done" checks, validation, or new abstractions; when a
-  review round keeps adding mechanism; when a PR has grown far past its
-  feature; or when reviewing a backend change to services, jobs, events,
-  queries, or deploys.
+  Use when a change adds guards, retries, locks, fallbacks, validation, or new
+  abstractions; when review rounds keep adding mechanism or a PR outgrows its
+  feature; or when reviewing a backend change to services, jobs, events, or
+  queries.
 ---
 
 # Challenge Every Guard
@@ -37,12 +36,6 @@ with one implementation, test infrastructure, a new service. When it cannot
 be justified, leave it out. Add no configuration, flag, or placeholder for a
 feature that does not exist yet, and extend the original code rather than
 copying it elsewhere.
-
-For invariants another service owns, prefer letting that service reject
-invalid input, treating its validation-rejection response as that item
-failing, over copying its validator. Early validation in your own UI or dry
-run still applies. A validator you must port needs proof it behaves like the
-original.
 
 ## Triage each guarded case
 
@@ -94,16 +87,23 @@ rollback is coded or a written procedure is the owner's decision.
   run or the UI where one exists; inner functions take it as given.
 - **Owner invariants are given.** When another team or service owns the
   system, a data bug in it is theirs to fix at the source, never yours to work
-  around. Drop a guard the owner asked for in review only with their
-  agreement.
+  around. Let that service reject invalid input and treat its rejection as
+  that item failing, rather than copying its validator; a validator you must
+  port needs proof it behaves like the original. Drop a guard the owner asked
+  for in review only with their agreement.
 - **Reshape when a review round adds mechanism.** Two fixes failing on the
   same assumption mean the assumption is wrong; find it before adding a third.
-- **Optimizations lose no signal.** In a speed or cost change, every dropped
-  check is shown redundant or replaced, and side costs are named up front.
+- **Swaps and optimizations lose no signal.** In a speed or cost change, or
+  when replacing a tool, library, or build step, every dropped check is shown
+  redundant or replaced, including what the old one did implicitly (type
+  checking during a build, environment validation, retries, timeouts,
+  serialization defaults). Name side costs up front.
 
 Preserve prior behaviour when refactoring. Before removing a guard or test,
-find why it was added (the commit and the regression it guards) and whether
-removing it starts a retry or redelivery loop. Input any authorized publisher
+find why it was added (the commit and the regression it guards), which
+boundary or equivalent protection still enforces its invariant (check it
+against the relevant invalid inputs), and whether removing it starts a retry
+or redelivery loop. Input any authorized publisher
 or caller can send counts as production input, even when only a forged or
 malformed message produces it. List destructive deletions for approval first.
 

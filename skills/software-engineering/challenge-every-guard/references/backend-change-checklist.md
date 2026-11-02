@@ -5,8 +5,9 @@ mandate: for every section the diff touches, record where the change handles
 a **real** one or why an item does not apply.
 
 Related skills own neighbouring checks: `client-trust-boundary` for
-caller-supplied ids and authorization, and `config-drift` for whether a deploy
-or config change took effect.
+caller-supplied ids and authorization, `config-drift` for whether a deploy
+or config change took effect, and `pull-request-readiness` for deploy order
+and feature flags.
 
 ## Writes to shared records
 
@@ -91,11 +92,3 @@ or config change took effect.
 Rollback restores exactly what the forward change replaced, and states what
 happens to records created after it ran. A rollback that restores too much
 loses newer data.
-
-## Deploy order and flags
-
-- When services depend on each other, write the deploy order: consumers that
-  accept a new shape deploy before producers that send it.
-- A change to an existing shared path is live as soon as it deploys, so it
-  must be safe with any new flag off.
-- Keep a flag off until everything it depends on is live.

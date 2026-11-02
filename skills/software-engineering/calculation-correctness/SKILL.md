@@ -2,10 +2,9 @@
 name: calculation-correctness
 description: >
   Implement or review code that computes money, dates, units, counters, or
-  derived metrics. Use for totals, fees, interest and penalties, rounding,
-  invoice or sequence numbers, timezone and day boundaries, unit conversion,
-  aggregated statistics and charts, and edits that reconcile lists of rows
-  that carry state.
+  derived metrics. Use for totals, fees, rounding, sequence numbers, timezone
+  and day boundaries, unit conversion, aggregated charts, and edits that
+  reconcile lists of rows that carry state.
 ---
 
 # Calculation Correctness
