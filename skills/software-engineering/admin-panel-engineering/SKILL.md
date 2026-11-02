@@ -63,9 +63,9 @@ Render a loading state while the permission map is unresolved; treating
   backend.
 - An Apply button must apply. If filters already apply on change, make the
   button say so or remove it.
-- Label export scope: visible page, full filtered result, or entity-only. A
-  client export of the loaded rows is not the filtered dataset; use a server
-  export for that.
+- State the scope on every export: visible page, full filtered result,
+  entity-only, or a fixed report. A client export of the loaded rows is not
+  the filtered dataset; use a server export for that.
 - When a download is requested with a blob response type, its errors arrive as
   `Blob` bodies too. Parse the error body as text before reading JSON, and
   read the filename from `Content-Disposition` with and without quotes.
