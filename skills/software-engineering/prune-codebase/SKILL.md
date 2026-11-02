@@ -103,8 +103,9 @@ remediation, new test harnesses, or permission and policy changes, becomes a
 separate, named delivery the user decides on.
 
 Amend affected docs, instructions, or ADRs that would recreate the complexity.
-Record decisions as `architecture-decision-framework` describes, adding an ADR
-only when policy requires it or an architectural decision changes.
+Preserve decision history and record durable rationale; keep transient line
+counts and verification logs in the delivery report. Add an ADR only when
+policy requires it or an architectural decision changes.
 
 ## Verify proportionately
 
