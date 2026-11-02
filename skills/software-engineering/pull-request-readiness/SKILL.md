@@ -10,13 +10,10 @@ description: >
 # Pull Request Readiness
 
 A PR is ready when a reviewer can approve it in one sitting and the user can
-merge it without discovering a new step afterward. Shape the PRs before the
-code, check readiness against evidence, and hand over the merge checklist
-before anyone merges.
+merge it without discovering a new step afterward.
 
-For writing or refreshing the title and body, use the repository's PR
-template or a PR-writing skill when one is available; this skill covers what
-the body must promise and keep true.
+For the wording of the title and body, use the repository's PR template or a
+PR-writing skill; this skill covers what the body must keep true.
 
 ## Shape the PR list first
 
@@ -46,34 +43,36 @@ reviewability, blast radius, staged rollout.
   repositories, keep the copies identical and compare hashes.
 - Generated code goes in its own commit.
 - The body of each stacked PR names the PR it is stacked on.
-- Merge bottom-up. Some hosts' native stacks require the bottom PR to be up
-  to date before the next can merge.
+- Merge bottom-up.
 
 ## Make the body a contract
 
 The body follows the repository's template, states the PR's size with
 generated code counted separately so reviewers know what to read, and lists
 anything new the change introduces with its justification. When the change
-alters a shared helper's behaviour, it names every affected caller so their
-owners know. After a reviewer has reviewed or approved, a "Since review"
-section lists the commits added after the head they saw. When several
-people or agent sessions work on the same branch, it names the one who pushes. After any push, re-read the title and body against the new
-head and remove what is no longer true.
+alters a shared command, route, or helper, it names every caller, workflow,
+and runbook that uses it and shows each still works. After a reviewer has
+reviewed or approved, a "Since review" section lists the commits added after
+the head they saw. When several
+people or agent sessions work on the same branch, it names the one who
+pushes. After any push, re-read the title and body against the new head and
+remove what is no longer true. Check that the body renders on the host (On
+GitHub: `gh api -X POST /markdown -f mode=gfm`); literal angle-bracket text
+goes in backticks.
 
 ## Check readiness
 
 Run every check before marking a PR ready or requesting review:
 
 - Synced with the base branch.
-- Full affected test suites pass, and the new tests fail without the fix.
-- New specs actually ran in CI at the current head; a broken stack base can
-  skip them silently.
+- Full affected suites pass at the current head, new tests fail without the
+  fix, and CI shows the new specs ran; a broken stack base can skip them.
 - Every CI check read, not only the summary. Some required checks do not
-  re-run when the base changes; reopen the PR or push an empty commit.
+  re-run when the base changes; re-trigger them the way the repository allows.
 - Every bot comment since the PR opened is read and triaged with evidence
-  against the code and the plan. Some bots report real defects, some only
-  scores, and some repeat items already decided.
-- Every human reviewer's last comment is resolved, and lessons from earlier
+  against the code and the plan.
+- Every request from every reviewer round still holds at the current head; a
+  later cleanup or simplification pass never undoes one. Lessons from earlier
   reviewers are applied across the PR, not only at the commented line.
   Correctness findings are fixed by default, and style suggestions stay the
   author's call; leaving a correctness finding as is needs evidence, given in
@@ -88,7 +87,8 @@ Run every check before marking a PR ready or requesting review:
   flag off.
 - Quality gates the repository uses: an independent review of the diff from a
   clean checkout, cleanup of leftover scaffolding and restating comments,
-  lint scoped to the diff.
+  lint scoped to the diff against the PR base (without a base ref, some
+  linters check only uncommitted changes and report clean).
 
 Then read the merge box itself, and read it again after every push, not only
 before merge: a push or a merge from the base can drop an approval. Branch
@@ -107,16 +107,16 @@ alone leaves it in their queue.
 Before the user merges, give the complete checklist for each PR in one
 message:
 
-- **Pre-merge:** approvals still missing, and anything that must exist
+- **Pre-merge:** approvals still missing, unanswered questions from whoever
+  implemented the PR (a person or an agent session), reviewer changes not yet
+  pushed, and anything that must exist
   before the code lands, such as flags with their defaults, database
   indexes, or new environment variables in each environment. Version
-  changes follow the repository's release tooling (changesets,
-  semantic-release, and the like). When the PR sets a published version by
-  hand, check it against the registry right before merge so it does not
-  collide, and give dependent work the final number only after the publish
-  succeeds. A change that needs a field from another package's published
-  client waits for that publish, confirms on the registry a version that has
-  the field, and depends on it in the repository's usual style.
+  changes follow the repository's release tooling. A version set by hand is
+  checked against the registry right before merge, and dependent work gets
+  the final number only after the publish succeeds. A change that needs a
+  field from another package's published client waits until the registry
+  shows a version that has it.
 - **Production asks:** every ask to merge to production or turn on a
   production flag states what could go wrong, the blast radius, what will be
   watched, how to roll back, and what is unverified. For a promotion or deploy

@@ -9,8 +9,8 @@ reconstruct.
 Record who did what to which record, when, and from where, with the old and
 new values of each changed field. Write the entry on the server, in the same
 transaction as the change, so a failed change leaves no entry and a
-successful one always has one. Log logins, permission changes, and exports
-as well as edits. Never let the client supply the actor.
+successful one always has one. Log logins and permission changes as well as
+edits. Never let the client supply the actor.
 
 ## Destructive actions
 
@@ -41,7 +41,9 @@ Close traps the operator until it times out.
 
 Every skipped, blocked, or failed state an operator sees carries a fixed
 reason code with no personal data embedded (an id is fine) and the next step,
-such as the command or button that recovers it. Keep distinct causes distinct
+such as the command or button that recovers it. The next step never points at
+an account that may belong to someone else; when a lookup can match either of
+two records, say how to tell them apart. Keep distinct causes distinct
 rather than collapsing them into one label. Status copy is true in every
 state: "not counted yet" is not failure, and a total that says "everyone"
 counts the skipped people too. Reuse the app's existing label maps, and give
@@ -55,12 +57,10 @@ this on the server. Record each transition of the request
 with its actor. Re-check the approver's permission at approval time, since
 roles change while requests wait.
 
-When a change adds an irreversible capability (an action that cannot be
-undone, or that removes others' access), route it through the approval and
-notification paths: it requires an approver other than the requester even
-where policy allows self-approval for low-risk actions, and when someone else
-can stop an action that only the requester can restart, the requester is
-notified. Copy never promises an action the viewer cannot take.
+An irreversible capability (an action that cannot be undone, or that removes
+others' access) always needs an approver other than the requester. When
+someone else can stop an action that only the requester can restart, notify
+the requester. Copy never promises an action the viewer cannot take.
 
 ## Roles and permissions
 
@@ -71,6 +71,5 @@ offer cloning for a variant. Show what a role grants before it is assigned.
 
 ## Exports and reports
 
-State the scope on every export (visible page, full filtered result, or a
-fixed report), record the export in the audit trail, and run large exports
-as server jobs with a download link.
+Record each export in the audit trail, and run large exports as server jobs
+with a download link.

@@ -13,8 +13,6 @@ description: >
 
 Every guard is a claim that a failure happens. Keep the guards evidence
 supports, place them where the sibling code places them, and delete the rest.
-A change shaped this way is smaller, matches its neighbours, and reviews in
-one sitting.
 
 ## Copy the sibling first
 
@@ -73,18 +71,16 @@ rare.
 
 Before claiming a guard or fix covers a flow, list every caller performing the
 same side effect (open PRs included), every reader and writer of a changed key
-across services, and sibling endpoints that need the same check. Say how both
-existing and newly created records end up right, and name in the PR the paths
-it does not cover.
+across services, sibling endpoints that need the same check, and every variant
+of the data it touches: kinds of the same record, aliases and primaries, mixed
+case, empty values. Say how existing and new records end up right, and name in
+the PR the paths it does not cover.
 
 Risks a person decides (confirmation, routing, timing, undo) belong in the
 written steps someone follows to run the operation (docs, a checklist, or the
 PR's merge steps), not in code. Code keeps guards for failures with no human
 in the loop: unreachable dependencies, concurrency, data loss. Whether
 rollback is coded or a written procedure is the owner's decision.
-
-Validate early, in a dry run or the UI, so invalid data never reaches
-execution; that removes the need to handle it downstream.
 
 ## Shape what survives
 
@@ -94,8 +90,8 @@ execution; that removes the need to handle it downstream.
 - **One computation, one write.** Decide in memory with pure functions, then
   write once or in idempotent batches. A loop of awaited writes with re-check
   passes is the shape to replace.
-- **Guard at the boundary, trust inside.** Validate where data enters; inner
-  functions take it as given.
+- **Guard at the boundary, trust inside.** Validate where data enters, in a dry
+  run or the UI where one exists; inner functions take it as given.
 - **Owner invariants are given.** When another team or service owns the
   system, record a data bug in it as theirs, and treat the owner's review ask
   as a decision to revisit with them, never a silent removal.
@@ -110,14 +106,15 @@ removing it starts a retry or redelivery loop. Input any authorized publisher
 or caller can send counts as production input, even when only a forged or
 malformed message produces it. List destructive deletions for approval first.
 
-Tests follow the same tiers: a test for an impossible state goes with the
-branch it covered. Use the `test-strategy` skill for which tests to keep.
+Use the `test-strategy` skill for which tests to keep.
 
 ## Clean before review
 
-Remove comments that restate the code, try/catch around code that cannot
-throw or whose error the caller already handles, casts that silence the type
-checker, nesting deeper than the sibling's, and exports with no caller.
+Remove hunks the PR's purpose does not need, comments that restate the code,
+try/catch around code that cannot throw or whose error the caller already
+handles, casts that silence the type checker, nesting deeper than the
+sibling's, exports and options no caller uses, and single-use helpers that
+add only indirection. Cite the caller count or sibling for each.
 
 ## Backend changes
 

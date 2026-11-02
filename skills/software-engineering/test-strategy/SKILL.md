@@ -11,11 +11,9 @@ description: >
 # Test Strategy
 
 Choose the smallest test boundary that proves the observable behavior at risk.
-For complex features, prefer repeatable end-to-end coverage that ends in a
-reproducible artifact over many unit tests, especially when a failure crosses
-system boundaries or only the assembled product can expose it. A smaller
-boundary is cheaper and clearer for a local, stable failure mode; account for
-end-to-end runtime and flakiness costs.
+When a failure crosses system boundaries or only the assembled product can
+expose it, prefer repeatable end-to-end coverage that ends in a reproducible
+artifact over many unit tests, weighing its runtime and flakiness.
 
 ## Establish the failure contract
 
@@ -35,85 +33,96 @@ test already pins the behavior.
 
 ## Check, implement, verify
 
-For new behavior, when practical, express the most important gap as the
-smallest meaningful check and run it before the change to confirm it can
-expose the failure. Then implement the change and rerun that check plus
-relevant existing verification. This is a useful red-before-green tactic, not
-a requirement to use test-driven development on every change. If a check
-cannot run or fail before new behavior exists, keep the failure contract
-explicit and verify the observable result after implementation.
+For new behavior, when practical, run the smallest meaningful check before
+the change to confirm it can expose the failure, then implement and rerun it
+with the relevant existing verification. If a check cannot fail before the
+behavior exists, verify the observable result afterwards.
 
-When a runtime error got past type checks, tests, and the build, ask why, and
-add integration or end-to-end coverage for that class of failure. A
-concurrency fix needs real concurrency in its test; a change to a remote call
-gets one real or sandbox call where one exists. Confirm in CI at the current
-head that new tests actually ran.
+## Prove behavior at the real boundary
 
-Verify where the user observes the result: the built or published artifact, the
-real host or service, the rendered UI. A local wrapper or internal helper passing
-shows only that the wrapper works. Before reporting a path as unverifiable,
-attempt its cheapest real run, such as an isolated temporary project or a local
-or sandbox host, and report the gap with that attempt's failure.
+Verify where the user observes the result: the built or published artifact,
+the real host or service, the rendered UI. A wrapper, helper, or mocked next
+hop passing proves only that piece. Prove each behavior the change relies on
+where it happens:
+
+- A parameter reaches the server; a client library can drop it.
+- A wrapper throws; some return a failure result instead.
+- A library applies new config to existing resources, not only new ones.
+- An event or broadcast fix reaches the client through every gate on the send
+  path (flags, membership, expiry, counters) and survives every job that
+  clears that state.
+- Error copy keyed by an error code is true at every place the server throws
+  that code.
+
+A concurrency fix needs real concurrency in its test, and a remote-call change
+one real or sandbox call where one exists. When a runtime error got past type
+checks, tests, and the build, add coverage for that class of failure at the
+boundary that would have caught it. Before calling a path unverifiable,
+attempt its cheapest real run (an isolated temporary project, a local or
+sandbox host) and report that attempt's failure.
 
 Substitute only what crosses the process boundary. Run storage for real, in
 memory or in a container, since mocks miss key-path, constraint, and
 partial-update semantics; a faithful in-memory implementation (in JavaScript,
 `fake-indexeddb`) is the next best when the real store cannot run. Stub the
-network at the request layer and fail on unhandled requests. Take expected
-values from the real consumer (the config or routing table the system
-actually reads), not from the constant the code under test also reads; a
-self-consistent test cannot see drift. A test that needs a build fails with a
-build instruction when the artifact is missing, rather than silently skipping
-where a skip would hide a gap. Assert at the boundary that
-survives serialization (the response body, the serialized message payload,
-the arguments reaching a client), not the object one layer above it; a value
-that cannot cross that boundary has no behavior to test.
+network at the request layer and fail on unhandled requests. Fakes behave like
+the dependency they replace, with its semantics, error codes, and API shapes.
+Take expected values from the real consumer (the config or routing table the
+system actually reads), not from the constant the code under test also reads;
+a self-consistent test cannot see drift. A test that needs a build fails with
+a build instruction when the artifact is missing, rather than silently
+skipping. Assert at the boundary that survives serialization (the response
+body, the serialized message payload, the arguments reaching a client), not
+the object one layer above it.
+
+## Write and change tests
 
 Before adding a test, find what already covers the behavior at every boundary
-and extend that test with an assertion or case. "Fails without the fix" can be
-shown with an existing or extended test. Test every claim the change makes: a
-guard described as the real protection gets a case for each bad shape it
-rejects, and a new blocking condition is tested in both directions (blocked,
-then a retry that succeeds). When a coverage gate flags a branch for a state
-production cannot reach, simplify the guard rather than adding a test. Fix a
-flaky timing assertion by anchoring it to the values the code actually used,
-not by widening the tolerance.
+and extend that test with an assertion or case. Test every claim the change
+makes: a guard described as the real protection gets a case for each bad
+shape it rejects, and a new blocking condition is tested in both directions
+(blocked, then a retry that succeeds). When a coverage gate flags a branch for
+a state production cannot reach, simplify the guard rather than adding a test.
 
-Before replacing an implementation with simpler code or a different library,
-pin today's output with a characterization test across its edge cases that
-passes before and after the swap.
+Assert only what the design requires, and assert it exactly: exact call
+arguments over partial matchers. A guard's test fails when the guard is
+deleted. Fix a flaky timing assertion by anchoring it to the values the code
+actually used, not by widening the tolerance. Scope a test-only switch to the
+narrowest test that needs it.
+
+Change an existing test only when the behavior it encodes changed on purpose,
+and state why. When a change turns a test red, fix the code; loosening
+assertions, lowering thresholds, or deleting the test hides the regression it
+caught.
+
+Before replacing an implementation, a library, a build tool, or a test runner,
+pin today's output with a characterization test that passes before and after
+the swap. List the checks the old tool ran implicitly (type checking during a
+build, environment validation) and show each still runs somewhere.
 
 Model-driven behavior (prompts, schemas, model or effort settings) is judged
 by an eval rather than unit tests: compare the current setting with each
 candidate on realistic, non-production inputs, repeated per arm, and decide
 in advance what result would stop the change.
 
-When a change turns an existing test red, fix the code, or change the test with
-a stated reason its contract no longer holds. Loosening assertions, lowering
-thresholds, or deleting the test to get green hides the regression it caught.
+## Keep only tests that earn their place
 
-Each test, fixture, or script earns its place by protecting an in-scope
-behavior or failure mode. Every test you add names the production failure it
-catches and uses only inputs production can produce; say so in the PR
-description. Delete tests that are tautological (asserting a mock's output, a
-fake's behavior, or a logger's call shape), that cover states production cannot
-reach (remove the unreachable branch too), or that duplicate another test.
-Snapshots without a defensible behavior contract and regression tests without a
-genuine gap fail the same bar. Keep a test that guards data loss, account
-takeover, rollback, a stuck job, or a fixed production bug
+Every test you add names the production failure it catches and uses only
+inputs production can produce; say so in the PR description. Delete tests
+that are tautological (asserting a mock's output, a fake's behavior, or a
+logger's call shape), that cover states production cannot reach (remove the
+unreachable branch too), or that duplicate another test. Snapshots without a
+defensible behavior contract fail the same bar. Keep a test that guards data
+loss, account takeover, rollback, a stuck job, or a fixed production bug
 whenever no other test catches that failure. Remove any other existing test
 only when a named check at another boundary catches the same failure or its
 contract is obsolete; use the `prune-codebase` test audit when available.
 
-Fakes behave like the dependency they replace, with its semantics, error
-codes, and API shapes. A guard's test fails when the guard is deleted. Assert
-only what the design requires, and scope any test-only switch to the narrowest
-test that needs it, never the whole suite.
-
 For complex behavior where end-to-end coverage is the chosen boundary, make
 the run repeatable and record its setup, action, expected observable result,
-and artifact location. Keep artifacts limited to relevant, redacted evidence.
-For retried external effects, durable workflows, or compatibility risks, use
+and artifact location. For retried external effects, durable workflows, or
+compatibility risks, use
 [workflow failure guidance](references/workflow-failures.md). For UI state
-changes involving navigation, async state, permissions, sessions or accounts,
-or keyboard and focus, use [UI state guidance](references/ui-state-verification.md).
+changes involving navigation, multi-step flows, async state, permissions,
+sessions or accounts, or keyboard and focus, use
+[UI state guidance](references/ui-state-verification.md).
