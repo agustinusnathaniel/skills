@@ -15,7 +15,7 @@ Use when a tool is proposed as a replacement for an existing capability in the r
 5. Measure integration cost and package weight. Check whether the candidate duplicates an existing dependency while adding unrelated machinery.
 6. Give a go/no-go adoption decision with authoritative URLs and measured facts.
 7. If the candidate is a poor fit but reveals a real product gap, evaluate a bounded alternative using existing primitives. Report the two decisions separately.
-8. Never install or adopt a dependency during evaluation without explicit authorization. A no-go result is valid; do not manufacture a PR.
+8. A no-go result is valid; do not manufacture a PR.
 
 ## Worked Pattern
 

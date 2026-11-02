@@ -52,7 +52,8 @@ that reaches it.
 
 Security and trust-boundary checks stay whatever their tier. Remove a branch
 as **impossible** only when neither untrusted input nor a future caller can
-reach it.
+reach it; input any authorized publisher or caller can send counts as
+production input, even when only a forged or malformed message produces it.
 
 A case that needs an unlikely chain of events in normal use (a service far
 slower than usual at the exact moment two runs overlap, an admin undoing their
@@ -81,8 +82,8 @@ rollback is coded or a written procedure is the owner's decision.
   the current source of truth, an idempotent write converges under
   last-write-wins; it needs no lock and no "already done" check.
 - **One computation, one write.** Decide in memory with pure functions, then
-  write once or in idempotent batches. A loop of awaited writes with re-check
-  passes is the shape to replace.
+  write once or in idempotent batches, replacing loops of awaited writes with
+  re-check passes.
 - **Guard at the boundary, trust inside.** Validate where data enters, in a dry
   run or the UI where one exists; inner functions take it as given.
 - **Owner invariants are given.** When another team or service owns the
@@ -103,9 +104,7 @@ Preserve prior behaviour when refactoring. Before removing a guard or test,
 find why it was added (the commit and the regression it guards), which
 boundary or equivalent protection still enforces its invariant (check it
 against the relevant invalid inputs), and whether removing it starts a retry
-or redelivery loop. Input any authorized publisher
-or caller can send counts as production input, even when only a forged or
-malformed message produces it. List destructive deletions for approval first.
+or redelivery loop. List destructive deletions for approval first.
 
 Use the `test-strategy` skill for which tests to keep.
 
@@ -119,10 +118,9 @@ add only indirection. Cite the caller count or sibling for each.
 
 ## Backend changes
 
-When the change touches services, background jobs, events, queries, scripts,
-or deploy order, apply the
-[backend change checklist](references/backend-change-checklist.md). It lists
-failure classes that recur in backend review; tier each one by evidence like
+When the change touches services, background jobs, events, queries, or
+scripts, apply the [backend change checklist](references/backend-change-checklist.md):
+failure classes that recur in backend review, each tiered by evidence like
 any other guard.
 
 ## Report

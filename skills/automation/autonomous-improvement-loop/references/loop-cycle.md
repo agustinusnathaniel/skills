@@ -33,7 +33,7 @@ Done when: every open PR on the target is classified as loop or non-loop using t
 3. Establish a verification baseline: run the project's gate suite (typecheck, tests, lint) before changing anything, so pre-existing reds are not mistaken for regressions. On large suites, target the affected packages.
 4. Assess: verification failures → fix from the logs; unaddressed review comments → address; obvious gaps or unfinished work → complete; otherwise run the completion checklist below.
 5. Implement the iteration, keeping the diff scoped to the unit's topic.
-6. Reconcile the delivery description with the actual diff: every changed file is mentioned, removed work is unmentioned, verification numbers are current.
+6. Reconcile the delivery description with the actual diff ([Keep the PR body truthful](iteration-patterns.md#keep-the-pr-body-truthful)).
 7. Commit, push, verify the remote ref moved.
 
 ### Completion checklist

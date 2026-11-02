@@ -13,12 +13,11 @@ Deliver substantially less live application code that humans and agents can
 understand and maintain. Preserve intended capabilities and correct confirmed
 defects. Judge savings by eliminated maintenance, with line counts as evidence.
 
-When the user explicitly applies this skill to documentation, follow
-[documentation reduction](references/documentation.md). For docs-only work, use
-that workflow instead of the production targets below; for mixed work, report docs
-separately. When the scope includes text agents follow as instructions (`AGENTS.md`,
-`CLAUDE.md`, directives, prompts, skills), follow
-[agent instruction reduction](references/agent-instructions.md) for that text.
+When the user applies this skill to documentation, follow
+[documentation reduction](references/documentation.md) instead of the
+production targets below; for mixed work, report docs separately. For text
+agents follow as instructions (`AGENTS.md`, `CLAUDE.md`, directives, prompts,
+skills), follow [agent instruction reduction](references/agent-instructions.md).
 
 ## Establish scope and evidence
 
@@ -29,11 +28,11 @@ Record a fixed baseline without disturbing user changes. Count with one method i
 exclusive buckets: production, tests/support, docs/directives, generated/vendor,
 and other. Classify maintained registries, configuration, and templates with the
 behavior they implement; preserve retained component inventories unless pruning
-is requested. Determine generated status from actual ownership and provenance,
-not mentions of generated headers in maintained source or tests. Include
-new/untracked work, reconcile with the complete diff, and explain classification
-corrections. Keep current-round and cumulative deltas
-distinct, using any comparison range the user specifies.
+is requested. Decide what is generated from ownership and provenance, not from
+generated headers mentioned in maintained source. Include new and untracked
+work, reconcile with the complete diff, and explain classification
+corrections. Keep current-round and cumulative deltas distinct, using any
+comparison range the user specifies.
 
 ## Choose substantial reductions
 
@@ -42,47 +41,59 @@ obsolete compatibility, speculative extensibility, and layers with little
 responsibility. For the strongest candidates, establish consumers, behavior to
 preserve, the smallest credible replacement, and net savings including supporting
 costs. Trace scripts, hooks, entry points, bundled consumers, and downstream
-or plugin contracts before declaring code unused. Absence of internal callers
-does not establish that a public name is removable. Resolve specific uncertainties before dismissing major candidates.
+or plugin contracts before declaring code unused; a public name without
+internal callers may still have consumers. Resolve specific uncertainties
+before dismissing major candidates.
 
-On the first pass, sweep every reduction class without waiting for the user to name one: ecosystem delegation, implementation simplification, comment triage, test deduplication, and inherited scaffold. Account for each class with concrete candidates or an evidence-based retention reason.
+On the first pass, sweep every reduction class unprompted: ecosystem
+delegation, implementation simplification, comment triage, test
+deduplication, and inherited scaffold. Account for each with concrete
+candidates or an evidence-based retention reason.
 
-Inherited scaffold is what a starter template or fork brought in that the product never used: sample features, integrations, configuration, and content, plus the tests and docs describing them as real. In forks, also find the upstream's own keys, identifiers, and defaults. Delete unused capability rather than hardening it, and rewrite docs that present it as the product.
+Inherited scaffold is what a starter template or fork brought in that the
+product never used: sample features, integrations, configuration, content,
+and the tests and docs presenting them as real, plus a fork's upstream keys,
+identifiers, and defaults. Delete unused capability rather than hardening it,
+and rewrite docs that present it as the product.
 
 Derive a substantial production target in lines and percentage from those
-candidates, then proceed with authorized implementation. Formatting compression,
-file moves, and redistributed complexity do not count as simplification. Favor
-reductions that make behavior easier to locate and follow; splitting large files
-or unifying helpers is not an improvement when it adds indirection or obscures
-ownership, and inlining a cohesive module into its consumer is not a saving when
-it blurs module boundaries. Bound each restructure to the smallest unit with checks green before and after; a net-small diff that adds indirection, tables, or cross-module coupling is redistribution and gets reverted. Approved feature retirement is separate and does not count toward
-the preservation target.
+candidates, then proceed with authorized implementation. Formatting
+compression, file moves, and redistributed complexity do not count. Favor
+reductions that make behavior easier to locate and follow: splitting files or
+unifying helpers that adds indirection or obscures ownership, and inlining a
+cohesive module that blurs a boundary, are not savings. Bound each
+restructure to the smallest unit with checks green before and after; a
+net-small diff that adds indirection, tables, or cross-module coupling is
+redistribution and gets reverted. Approved feature retirement is separate and
+does not count toward the target.
 
 Evaluate built-ins, existing dependencies, and established packages before
-rewriting utilities. Compare simpler library usage with removal, accounting for
-replacement glue, error handling, concurrency, and ongoing costs. Ground each
-ecosystem candidate, and each claim that none exists, in a current registry,
-source, or official-docs lookup rather than memory, and record what was checked.
-Choose the option with lower ownership cost and verify its application contract,
-including invalid inputs, side effects, and failure semantics.
+rewriting utilities, counting replacement glue, error handling, concurrency,
+and ongoing costs. Ground each ecosystem candidate, and each claim that none
+exists, in a current registry, source, or official-docs lookup rather than
+memory, and record what was checked. Choose the lower ownership cost and
+verify its contract, including invalid inputs, side effects, and failure
+semantics.
 
 ## Implement and correct defects
 
 Preserve public contracts, security properties, and required
-performance. Before applying a repeated rewrite, validate the transformation on
-representative semantic variants, especially exception scope, cleanup,
-evaluation order, and side effects. Review the affected variants, not just one
-successful example. Before removing a defense, run the removal check in
+performance. Before applying a repeated rewrite, validate it on every affected
+semantic variant (exception scope, cleanup, evaluation order, side effects),
+not one successful example. Before removing a defense, run the removal check in
 `challenge-every-guard` ("Preserve prior behaviour when refactoring").
-Triage comments with the code: delete what-comments; keep why-comments only for external quirks, invariants, and surprising behavior the code cannot express. When a named test already pins the invariant, prefer the test and drop the duplicate comment. Hold comments your own changes add to the same bar.
+Triage comments with the code: delete what-comments; keep why-comments only
+for external quirks, invariants, and surprising behavior the code cannot
+express, and drop one a named test already pins. Comments your changes add
+meet the same bar.
 
-For behavior-sensitive reductions, establish representative real inputs before
-editing, including cases served by the mechanism being removed. Compare baseline
-and replacement on relevant user outcomes, such as search recall and ranking or
-detection accuracy. Passing documented examples or mock-only tests does not
-establish parity. A measurable capability loss needs an explicit user decision
-about that loss; permission to remove an implementation alone does not settle it.
-Keep the mechanism or find a smaller replacement when preservation is unproven.
+For behavior-sensitive reductions, gather representative real inputs before
+editing, including cases served by the mechanism being removed, and compare
+baseline and replacement on user outcomes such as search recall and ranking or
+detection accuracy; documented examples and mock-only tests do not establish
+parity. A measurable capability loss needs the user's explicit decision about
+that loss, not only permission to remove the implementation. Keep the
+mechanism or find a smaller replacement when preservation is unproven.
 
 Correct encountered defects within scope when intended behavior is established
 and the fix can be verified, preferably by eliminating their causes. Distinguish
@@ -97,11 +108,11 @@ only when policy requires it or an architectural decision changes.
 
 ## Verify proportionately
 
-Reuse existing coverage and still-valid evidence. Run focused checks during edits,
-then review meaningful changes independently and run repository-required checks on
-the integrated batch. After a repair, revisit affected evidence and findings;
-repeat broader checks only when the change or repository policy warrants them.
-Report unavailable review or verification as a gap. Where stable contracts can
+Reuse existing coverage and still-valid evidence. Run focused checks during
+edits, then an independent review of meaningful changes and the
+repository-required checks on the integrated batch. After a repair, revisit
+affected evidence and findings. Report unavailable review or verification as a
+gap. Where stable contracts can
 be captured, compare baseline and replacement directly, including exported
 names, schemas, CLI behavior, and serialized shapes. Use exact comparison when
 representation is contractual; otherwise compare semantics and normalize only
@@ -148,4 +159,11 @@ published ones, needs the changeset or release note the repository requires;
 write release notes around user-visible changes and keep implementation
 accounting in the PR report.
 
-Re-count deltas at the current head of every delivered branch when reporting, never at an earlier revision or before a rebase. Report target and actual deltas over the full delivery range: production, tests/support, combined maintained code, and reconciled overall totals led together so production-only savings never stand alone as the result. Label round subtotals. Keep generated/vendor and lockfile churn on their own line; they never count as production savings. Explain eliminated mechanisms, dependency tradeoffs, corrected defects, verification gaps, and remaining candidates.
+Re-count deltas at the current head of every delivered branch, never at an
+earlier revision or before a rebase. Report target and actual deltas over the
+full delivery range, leading with production, tests/support, combined
+maintained code, and reconciled overall totals together so production-only
+savings never stand alone. Label round subtotals. Keep generated/vendor and
+lockfile churn on their own line; it never counts as savings. Explain
+eliminated mechanisms, dependency tradeoffs, corrected defects, verification
+gaps, and remaining candidates.

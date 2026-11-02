@@ -1,10 +1,6 @@
 # Adoption Verification: Measure, Don't Assume
 
-Post-decision workflow: once adoption is approved, the deliverable is measured evidence — not a re-litigation of the verdict.
-
-## Principle: Explicit Approval Overrides Prior Rejection
-
-When the user explicitly says "adopt X" after a prior no-go, implement the adoption and let the resulting code, UX, bundle numbers, and tests speak. Do not conclude "should not be adopted" again from reasoning the user already overruled. Still surface any new security or license findings. The evaluation lesson that survives: verify edge-case behavior during integration, not as a rejection gate.
+Post-decision workflow: once adoption is approved, including over a No-go (SKILL.md Step 6), the deliverable is measured evidence, not a re-litigation of the verdict. Verify edge-case behavior during integration, not as a rejection gate.
 
 ## Measure Impact Before/After Against a Clean Control
 

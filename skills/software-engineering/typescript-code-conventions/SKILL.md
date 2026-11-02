@@ -53,24 +53,12 @@ itself:
 
 ## Conventions
 
-Each reference holds the reasons, the fixes, and the lint rule names.
-
-- **Functions and control flow**: at most two positional parameters, past
-  that a single options object; functions up to 60 lines and files up to
-  500, tests included; braces on every block; early returns over `else`; no
-  nested ternaries; `for...of` over `.forEach`. See
-  [functions and control flow](references/functions-and-control-flow.md).
-- **Errors and async**: throw `Error` objects with a message, passing
-  `cause` when rethrowing; every `async` function awaits; `console.error`
-  and `console.info` only. See
-  [errors and async](references/errors-and-async.md).
-- **Types and modules**: `unknown` and narrowing over `any`, `!`, and
-  `@ts-ignore`; `Array<T>`; `import type`; named exports; no barrel files;
-  `@/` alias imports across folders; kebab-case file names. See
-  [types and modules](references/types-and-modules.md).
-- **React and Expo components**: components defined at module level, hooks
-  at the top with complete dependencies, stable keys, semantic elements. See
-  [React](references/react.md).
+The self-check below lists the conventions. Each reference holds the reasons,
+the fixes, and the lint rule names:
+[functions and control flow](references/functions-and-control-flow.md),
+[errors and async](references/errors-and-async.md),
+[types and modules](references/types-and-modules.md), and
+[React and Expo components](references/react.md).
 
 ## When a linter flags one of these rules
 
@@ -100,13 +88,15 @@ for this; fix it this way.
 - An `async` function with no `await`: drop `async`.
 - `any`, `!`, `@ts-ignore`, or `console.log`: narrow from `unknown`, check
   and throw, fix the type, or log with `console.error` or `console.info`.
+- `T[]` for an array type: write `Array<T>`.
 - A type-only import without `import type`, a built-in without `node:`, or
-  a `../` import across folders: fix the import.
+  a `../` import across folders: use `import type`, `node:`, or the `@/`
+  alias.
 - A default export outside a framework-loaded file, a barrel file, or a
   file name not in kebab-case: export by name, import from the defining
   module, rename the file.
 - In React: a component defined inside another, a hook in a condition, an
-  incomplete dependency list, or an index key: apply
-  [React](references/react.md).
+  incomplete dependency list, an index key, or a `div` with a role where a
+  semantic element exists: apply [React](references/react.md).
 - A suppression you added that names no framework contract: remove it and
   fix the code.

@@ -35,9 +35,8 @@ patches.
 - Does it integrate with the tools the team uses (editors, agents, MCP)?
 - Does it fit the current workflow?
 - Does it overlap existing capabilities, and what is the migration cost from alternatives?
-- Who benefits (which users or workflows: the human operator, the agent
-  workflow, both, or neither)? State explicitly; a tool can be excellent in
-  isolation but useless in this setup.
+- Who benefits, as the SKILL.md Step 6 report states: a tool can be excellent
+  in isolation but useless in this setup.
 
 ## Platforms Hosting Several Customers or Tenants
 
