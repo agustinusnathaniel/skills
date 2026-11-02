@@ -25,8 +25,9 @@ and pick arbitrarily between contradicting ones. A description is loaded on
 every turn and a `SKILL.md` body on every trigger, so both stay lean.
 
 - One home per rule. The skill that owns the behaviour holds it, and other
-  skills point there in one line. Fold a learning into that home or into a
-  conditional reference behind a pointer.
+  skills point there in one line that names the skill and section, so a
+  reader without that skill installed still knows what to look for. Fold a
+  learning into that home or into a conditional reference behind a pointer.
 - Edit an existing line before adding one. Generalize to the mechanism behind
   an incident, and merge lessons that share a root into one principle plus its
   test.

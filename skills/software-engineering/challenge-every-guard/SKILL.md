@@ -30,12 +30,11 @@ cite the line.
 Prefer the platform's native option or a library the repository already uses
 over hand-rolled code. A service gets the security mechanisms its siblings
 have; adding or removing one is the owner's decision, not a side effect of
-the change. Justify anything new in the PR body: a dependency, a second
-configuration mechanism beside an existing one, an abstraction, an interface
-with one implementation, test infrastructure, a new service. When it cannot
-be justified, leave it out. Add no configuration, flag, or placeholder for a
-feature that does not exist yet, and extend the original code rather than
-copying it elsewhere.
+the change. Justify anything new in the PR body (a dependency, a second
+configuration mechanism, an abstraction, an interface with one
+implementation, test infrastructure, a new service) or leave it out. Add no
+configuration, flag, or placeholder for a feature that does not exist yet,
+and extend the original code rather than copying it.
 
 ## Triage each guarded case
 
@@ -57,11 +56,10 @@ production input, even when only a forged or malformed message produces it.
 
 A case that needs an unlikely chain of events in normal use (a service far
 slower than usual at the exact moment two runs overlap, an admin undoing their
-own setup mid-run) is handled like an **impossible** one: no code. If a
-reviewer raised it, add at most one known-limits line. This applies only
-when the outcome is tolerable: a case that would leave real users with wrong
-data, locked out, or visibly broken is **real** and gates launch, however
-rare.
+own setup mid-run) gets no code, like an **impossible** one, and at most one
+known-limits line if a reviewer raised it. That holds only when the outcome
+is tolerable: a case that would leave real users with wrong data, locked
+out, or visibly broken is **real** and gates launch, however rare.
 
 Before claiming a guard or fix covers a flow, list every caller performing the
 same side effect (open PRs included), every reader and writer of a changed key
@@ -71,10 +69,10 @@ case, empty values. Say how existing and new records end up right, and name in
 the PR the paths it does not cover.
 
 Risks a person decides (confirmation, routing, timing, undo) belong in the
-written steps someone follows to run the operation (docs, a checklist, or the
-PR's merge steps), not in code. Code keeps guards for failures with no human
-in the loop: unreachable dependencies, concurrency, data loss. Whether
-rollback is coded or a written procedure is the owner's decision.
+written steps for running the operation (docs, a checklist, or the PR's
+merge steps), not in code. Code keeps guards for failures with no human in
+the loop: unreachable dependencies, concurrency, data loss. Whether rollback
+is coded or written down is the owner's decision.
 
 ## Shape what survives
 
@@ -104,9 +102,8 @@ Preserve prior behaviour when refactoring. Before removing a guard or test,
 find why it was added (the commit and the regression it guards), which
 boundary or equivalent protection still enforces its invariant (check it
 against the relevant invalid inputs), and whether removing it starts a retry
-or redelivery loop. List destructive deletions for approval first.
-
-Use the `test-strategy` skill for which tests to keep.
+or redelivery loop. List destructive deletions for approval first. Which
+tests to keep is `test-strategy`'s call.
 
 ## Clean before review
 

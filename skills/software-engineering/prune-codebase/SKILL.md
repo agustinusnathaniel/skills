@@ -24,15 +24,8 @@ skills), follow [agent instruction reduction](references/agent-instructions.md).
 Use the user's scope, budget, and existing evidence. Challenge inherited
 conventions and ADRs when a simpler design can meet the requirements.
 
-Record a fixed baseline without disturbing user changes. Count with one method in
-exclusive buckets: production, tests/support, docs/directives, generated/vendor,
-and other. Classify maintained registries, configuration, and templates with the
-behavior they implement; preserve retained component inventories unless pruning
-is requested. Decide what is generated from ownership and provenance, not from
-generated headers mentioned in maintained source. Include new and untracked
-work, reconcile with the complete diff, and explain classification
-corrections. Keep current-round and cumulative deltas distinct, using any
-comparison range the user specifies.
+Record a fixed baseline, counted as [delta accounting](references/delta-accounting.md)
+describes.
 
 ## Choose substantial reductions
 
@@ -113,9 +106,8 @@ Reuse existing coverage and still-valid evidence. Run focused checks during
 edits, then an independent review of meaningful changes and the
 repository-required checks on the integrated batch. After a repair, revisit
 affected evidence and findings. Report unavailable review or verification as a
-gap. Where stable contracts can
-be captured, compare baseline and replacement directly, including exported
-names, schemas, CLI behavior, and serialized shapes. Use exact comparison when
+gap. Where stable contracts can be captured (exported names, schemas, CLI
+behavior, serialized shapes), compare baseline and replacement directly. Use exact comparison when
 representation is contractual; otherwise compare semantics and normalize only
 known nondeterminism.
 
@@ -160,11 +152,6 @@ published ones, needs the changeset or release note the repository requires;
 write release notes around user-visible changes and keep implementation
 accounting in the PR report.
 
-Re-count deltas at the current head of every delivered branch, never at an
-earlier revision or before a rebase. Report target and actual deltas over the
-full delivery range, leading with production, tests/support, combined
-maintained code, and reconciled overall totals together so production-only
-savings never stand alone. Label round subtotals. Keep generated/vendor and
-lockfile churn on their own line; it never counts as savings. Explain
-eliminated mechanisms, dependency tradeoffs, corrected defects, verification
-gaps, and remaining candidates.
+Report deltas as [delta accounting](references/delta-accounting.md)
+describes, and explain eliminated mechanisms, dependency tradeoffs, corrected
+defects, verification gaps, and remaining candidates.
