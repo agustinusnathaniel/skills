@@ -14,8 +14,7 @@ user has not approved word for word.
 
 ## Gather context
 
-Read the PR body, the linked issue or spec, and the full diff before judging.
-For a large change, also read the tracker item and the design discussion, and
+For a large change, read the tracker item and the design discussion, and
 judge the diff against the spec it implements rather than against your own
 design. Check whether other open PRs or comments already raise the point.
 

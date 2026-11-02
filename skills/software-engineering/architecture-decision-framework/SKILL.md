@@ -7,16 +7,12 @@ description: >
 
 # Architecture Decision Framework
 
-Make architecture decisions through business context, decision matrices, and
-iterative refinement. Prioritize the user's outcome over technical purity. Explain
-the trade-offs and record why the chosen approach fits. Scale the analysis to the
-impact and cost of changing the decision later.
+Scale the analysis to the impact and cost of changing the decision later.
 
 ## Frame the decision
 
 Identify the outcome, exact system or artifact in scope, and current behavior to
-preserve. Use the supplied time horizon, budget, team capability, and constraints.
-Distinguish hard requirements from preferences and revisitable conventions.
+preserve. Distinguish hard requirements from preferences and revisitable conventions.
 Labels such as “MVP” or “production” alone do not establish acceptable reliability
 or scope.
 
@@ -28,8 +24,7 @@ preserve their rationale while checking whether their assumptions still hold.
 
 Ask only for missing information that could change the recommendation or establish
 required authority; inspect discoverable facts before asking the user. Keep
-clarification to a short round with a provisional recommendation. Reuse supplied
-answers. State low-impact assumptions and proceed; when a consequential unknown
+clarification to a short round with a provisional recommendation. State low-impact assumptions and proceed; when a consequential unknown
 remains, explain what depends on it and continue independent analysis. In a
 delegated task, return unresolved owner decisions to the caller.
 
@@ -72,8 +67,8 @@ experiment with a decision criterion.
 
 Treat feedback as evidence to examine. Correct a false premise and reconsider the
 affected comparison; retain supported conclusions when challenged without new
-evidence. Revise priorities when the user changes them. Keep weights tied to those
-priorities rather than tuning them to a preferred answer.
+evidence. Keep weights tied to the user's priorities rather than tuning them to
+a preferred answer.
 
 Treat a named example in feedback as a symptom: audit the whole artifact
 against the user's stated reference model and constraints, not only the named
@@ -85,10 +80,9 @@ why.
 A recommendation is ready when the relevant constraints are accounted for,
 decisive claims have evidence or explicit uncertainty, and the choice, consequence,
 and next action are clear. Further analysis needs a specific unresolved question.
-Match the deliverable to the request: a decision brief, ADR, or detailed design
-specification. Carry the chosen approach, constraints, and unresolved validation
-into any requested implementation handoff. Honor existing authorization; present
-the concrete recommendation when an owner decision is still required.
+Carry the chosen approach, constraints, and unresolved validation into any
+requested implementation handoff, and present the concrete recommendation when
+an owner decision is still required.
 
 ## Record what must survive
 

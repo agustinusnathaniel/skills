@@ -22,11 +22,8 @@ separately. When the scope includes text agents follow as instructions (`AGENTS.
 
 ## Establish scope and evidence
 
-Use the user's scope, budget, and existing evidence. Survey main subsystems for
-whole-project work; trace relevant paths for focused work. Inspect missing evidence
-needed to establish intended behavior and constraints. Challenge inherited
-conventions and ADRs when a simpler design can meet the requirements. Honor
-existing authorization, dependency constraints, and applicable approval requirements.
+Use the user's scope, budget, and existing evidence. Challenge inherited
+conventions and ADRs when a simpler design can meet the requirements.
 
 Record a fixed baseline without disturbing user changes. Count with one method in
 exclusive buckets: production, tests/support, docs/directives, generated/vendor,
@@ -71,8 +68,7 @@ including invalid inputs, side effects, and failure semantics.
 
 ## Implement and correct defects
 
-Batch compatible reductions into coherent changes with straightforward code and
-clear ownership. Preserve public contracts, security properties, and required
+Preserve public contracts, security properties, and required
 performance. Before applying a repeated rewrite, validate the transformation on
 representative semantic variants, especially exception scope, cleanup,
 evaluation order, and side effects. Review the affected variants, not just one
