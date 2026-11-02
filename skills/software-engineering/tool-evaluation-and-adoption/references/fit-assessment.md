@@ -47,5 +47,3 @@ CRM, CMS), the cost sits in operating it, not in its UI:
 - Operational ownership: upgrades, backups, incidents, and compliance you take on compared with the SaaS alternative.
 - Extension model: whether custom work lives in isolated modules or plugins, or requires modifying the core, which blocks upgrades.
 - Domain complexity the platform leaves to you, such as taxes, inventory concurrency, order and payment reconciliation, and webhooks.
-
-Done when: pros/cons are listed, every stale-looking dependency carries a domain classification, and stack overlap plus beneficiary are stated.
