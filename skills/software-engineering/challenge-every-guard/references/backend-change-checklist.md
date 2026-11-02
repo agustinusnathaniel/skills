@@ -1,10 +1,8 @@
 # Backend Change Checklist
 
-Failure classes that recur when a backend change touches shared records,
-background work, events, queries, or deploys. Each item is a candidate, not a
-mandate: for every section the diff touches, tier each item by evidence like
-any other guard, then record where the change handles a **real** one or why
-an item does not apply.
+Failure classes that recur in backend review. Each item is a candidate, not a
+mandate: for every section the diff touches, record where the change handles
+a **real** one or why an item does not apply.
 
 Related skills own neighbouring checks: `client-trust-boundary` for
 caller-supplied ids and authorization, and `config-drift` for whether a deploy
@@ -14,16 +12,17 @@ or config change took effect.
 
 - Re-read the record from its source of truth before acting on it; a copy held
   elsewhere may be stale.
+- Treat a missing, failed, or empty input to a filter or safety check as
+  unknown and fail closed. An empty field in a bulk update or delete filter
+  matches every row: bail out before the write.
 - Put each checked precondition in the write's own condition, such as a
   conditional update or a `WHERE` clause. A separate read, then write, lets
   the state change between the two.
-- Write only the fields that changed, or fence the write with a version.
-  Writing back a whole record read earlier overwrites concurrent edits.
-- Change one element of an array field with a single-document atomic
-  conditional per-element update matched on the old value, where the store
-  supports it (With MongoDB: a positional update or `arrayFilters`), not a
-  read, compare, and write-back of the whole array. A replay or a concurrent
-  change then matches nothing.
+- Write only the fields that changed, or fence the write with a version;
+  writing back a whole record or array read earlier overwrites concurrent
+  edits. Change one array element with an atomic update matched on its old
+  value (With MongoDB: a positional update or `arrayFilters`), so a replay or
+  a concurrent change matches nothing.
 - Before matching records across systems, confirm which identifier each one
   stores; two systems can key the same entity differently.
 - Make a new API's inputs required at the boundary unless a default is
@@ -36,8 +35,6 @@ or config change took effect.
   dependency cannot stall the worker.
 - A preflight check uses the same lookup and key as the operation it predicts;
   otherwise it approves cases the real path rejects.
-- When another system sends a wrong value, fix it at its source before
-  building on it. A local workaround drifts from the authority.
 
 ## Events and messages
 
@@ -45,8 +42,11 @@ or config change took effect.
   table written in the same transaction. Publishing separately can lose the
   event, or report failure after the change has committed.
 - Give each event type one owner and one typed payload definition, so
-  producers cannot drift apart.
-- Make consumers idempotent; deliveries repeat and arrive out of order.
+  producers cannot drift apart. Confirm from the producer which event carries
+  a case before coding a branch for it.
+- Make consumers idempotent and act on the latest state read from the owner,
+  not the event's payload: deliveries repeat and arrive out of order, and a
+  late event processed after its own rollback must not undo it.
 - Acknowledge only final outcomes; make transient, lock, and stale-read
   failures retryable, since an ack drops the message.
 - Before relying on redelivery, read the subscription's retry and dead-letter
@@ -83,8 +83,6 @@ or config change took effect.
 - Give every state real users or data can get stuck in a way to detect it
   and a documented way out.
 - Keep personal data, user content, and secrets out of logs.
-- Fail closed when a safety input is missing, failed, or empty, rather than
-  defaulting it to safe.
 - Give every deliberately silent path (swallowed error, skip, give-up) a log
   line and a durable counter that a status or alert reads.
 

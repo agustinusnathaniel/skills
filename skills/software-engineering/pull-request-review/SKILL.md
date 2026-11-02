@@ -51,7 +51,6 @@ For each finding give:
   one- or two-line fix, include a suggested change (On GitHub: a suggestion
   block).
 
-When the comments are questions rather than blockers, say so in the summary.
 Post as one review at the head commit (On GitHub: a comment review); approve
 or request changes only when the user asks for that.
 
@@ -66,9 +65,8 @@ Follow the project's AI-disclosure policy.
 
 Make every reference a full markdown link with a few plain words on what it
 is, rather than a bare `#123` or `file:850`, preferring links that work
-outside the diff view. Use standard markdown links, `-`
-bullets with indented sub-bullets, and backticks for code, so the text pastes
-cleanly anywhere.
+outside the diff view. Use `-` bullets and backticks for code, so the text
+pastes cleanly anywhere.
 
 ## Post only after approval
 
@@ -76,7 +74,7 @@ cleanly anywhere.
    user sees, then ask: post, edit, or skip. One version, no variants.
 2. Across revision rounds, keep a running list of every change the user asked
    for; when two asks conflict, name the conflict and ask.
-3. Post only the exact text the user approved. Proofread it first.
+3. Post only the exact text the user approved.
 4. Re-read the posted comment for formatting slips. Fix a slip in place only
    after the user says yes.
 
@@ -89,4 +87,5 @@ Agree with what is right first, then add the missing context. Credit whoever
 caught something, and flag corrections openly.
 
 Before drafting a thread reply, restate the reviewer's exact question and
-answer that, with evidence.
+answer that, with evidence. When you already replied in the thread, edit that
+reply instead of posting another.
