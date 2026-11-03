@@ -1,5 +1,0 @@
----
-"agustinusnathaniel-skills": minor
----
-
-Consolidate verification and review lessons into existing skills without growing them. `test-strategy` gains a "prove behavior at the real boundary" section (parameters reaching the server, wrappers that return failure results, config applied to existing resources, event delivery through every gate, error copy at every throw site, checks an old build tool ran implicitly) and regroups its test rules; its UI reference covers walking multi-step flows backwards and behavior-only UI assertions. `challenge-every-guard` covers data variants and unneeded hunks; its backend checklist adds empty-filter bail-outs and latest-state event consumers. `pull-request-readiness` covers shared-workflow callers, body rendering, reviewer requests holding at each head, base-scoped lint, and merge blockers. `pull-request-review` edits an earlier thread reply instead of posting again, and the admin domain reference keeps operator hints from pointing at someone else's account.

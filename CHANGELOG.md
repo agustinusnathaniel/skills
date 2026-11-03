@@ -1,5 +1,19 @@
 # agustinusnathaniel-skills
 
+## 2.4.0
+
+### Minor Changes
+
+- [#42](https://github.com/agustinusnathaniel/skills/pull/42) [`d622f1b`](https://github.com/agustinusnathaniel/skills/commit/d622f1bbd6af5054f4d9981db38954a553f927c3) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Consolidate the skills so each rule has one home. Rules repeated across skills now live in the skill that owns them, with one-line pointers elsewhere: deploy order and flag safety in `pull-request-readiness` (its merge checklist moves to a reference), implicit checks of a replaced tool in `challenge-every-guard`, thread replies in `pull-request-review`, tenant identity in `client-trust-boundary`, CI read-back in `github-actions-authoring`, and test bars in `test-strategy`. `architecture-decision-framework` is retired: most of it restated decision practice a current model follows unprompted. A few rules a current model already follows are dropped from `prune-codebase`, `pull-request-review`, and the autonomous loop's PR template. Descriptions lose synonyms. `admin-panel-engineering` again states the scope of every export, including fixed reports. AGENTS.md gains a "Keeping skills small" section.
+
+- [#40](https://github.com/agustinusnathaniel/skills/pull/40) [`8993889`](https://github.com/agustinusnathaniel/skills/commit/8993889bffe2a632fc34ec429d8481cec7ed1b35) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Consolidate verification and review lessons into existing skills without growing them. `test-strategy` gains a "prove behavior at the real boundary" section (parameters reaching the server, wrappers that return failure results, config applied to existing resources, event delivery through every gate, error copy at every throw site, checks an old build tool ran implicitly) and regroups its test rules; its UI reference covers walking multi-step flows backwards and behavior-only UI assertions. `challenge-every-guard` covers data variants and unneeded hunks; its backend checklist adds empty-filter bail-outs and latest-state event consumers. `pull-request-readiness` covers shared-workflow callers, body rendering, reviewer requests holding at each head, base-scoped lint, and merge blockers. `pull-request-review` edits an earlier thread reply instead of posting again, and the admin domain reference keeps operator hints from pointing at someone else's account.
+
+- [#43](https://github.com/agustinusnathaniel/skills/pull/43) [`3eb97d8`](https://github.com/agustinusnathaniel/skills/commit/3eb97d8f040be8e6a3a910153dc9655e86de7f28) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Add three lessons to existing skills. The backend change checklist in `challenge-every-guard` notes that LLM SDK errors can carry raw model output through their message and cause chain into error trackers, so scrub at the reporter. `client-trust-boundary` says security and infrastructure docs never describe a working bypass. `pull-request-review` re-checks the head commit and the user's own reviews right before posting an approved review.
+
+### Patch Changes
+
+- [#44](https://github.com/agustinusnathaniel/skills/pull/44) [`48937ae`](https://github.com/agustinusnathaniel/skills/commit/48937ae2947128573bee275e7d335e10706162b1) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - Mark the repository's authoring guide (`AGENTS.md`) as a manual rule, so Devin no longer loads it as an always-on rule in every session that uses these skills.
+
 ## 2.3.0
 
 ### Minor Changes
