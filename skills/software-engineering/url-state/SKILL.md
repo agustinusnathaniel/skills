@@ -1,11 +1,10 @@
 ---
 name: url-state
 description: >
-  Put view state in the URL or read it back. React-specific notes are
-  labelled. Use when adding search params,
-  filters, pagination, or sort to a URL; building shareable, bookmarkable, or
-  deep links into lists; syncing a search box with the address bar; or when a
-  shared link crashes, opens the wrong view, or leaks the sender's state.
+  Put view state in the URL or read it back. Use when adding search params,
+  filters, pagination, or sort to a URL; building shareable or deep links
+  into lists; syncing a search box with the address bar; or when a shared
+  link crashes, opens the wrong view, or leaks the sender's state.
 ---
 
 # URL State

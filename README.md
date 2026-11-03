@@ -9,7 +9,6 @@ A collection of agent skills for AI coding agents.
 | Skill | Description |
 |---|---|
 | [admin-panel-engineering](skills/software-engineering/admin-panel-engineering/SKILL.md) | Build admin panels and backoffice apps whose permissions, sessions, tenancy, audit trails, and list contracts match the server. |
-| [architecture-decision-framework](skills/software-engineering/architecture-decision-framework/SKILL.md) | Make architecture decisions using decision matrices, weighted scoring, and iterative refinement. |
 | [bulk-import-engineering](skills/software-engineering/bulk-import-engineering/SKILL.md) | Plan, build, or audit bulk file import features with validation previews, execution identity, and safe recovery, including local-first import and export. |
 | [calculation-correctness](skills/software-engineering/calculation-correctness/SKILL.md) | Keep money, dates, units, counters, and derived metrics correct across retries, timezones, and edits. |
 | [challenge-every-guard](skills/software-engineering/challenge-every-guard/SKILL.md) | Size defensive code to evidence, match sibling code, and check backend changes against recurring review findings. |
@@ -108,8 +107,9 @@ The Devin manifest (`.devin-plugin/plugin.json`) takes precedence over `.claude-
 then update saved invocations and links that use the old name. Existing
 installed copies retain their old name until migrated.
 
-`webhook-integration`, `domain-research`, `release-notes`, and
-`delegating-to-coding-agents` are retired. Uninstall them, or keep
+`webhook-integration`, `domain-research`, `release-notes`,
+`delegating-to-coding-agents`, and `architecture-decision-framework` are
+retired. Uninstall them, or keep
 an installed copy if you still rely on it.
 
 ## Adding New Skills

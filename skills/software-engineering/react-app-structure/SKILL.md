@@ -2,9 +2,8 @@
 name: react-app-structure
 description: >
   Decide where code goes in a React web app (Vite with TanStack Router, or
-  Next.js), following the repository's existing layout first. Use when adding
-  a page, route, feature, API call, or shared component, or when moving logic
-  out of a component.
+  Next.js). Use when adding a page, route, feature, API call, or shared
+  component, or when moving logic out of a component.
 ---
 
 # React App Structure

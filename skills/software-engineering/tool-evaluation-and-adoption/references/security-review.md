@@ -33,5 +33,3 @@ Check for:
 ## License Check
 
 State compatibility with the user's needs explicitly (e.g. MIT, Apache 2.0, copyleft implications for the intended use).
-
-Done when: every area above has a recorded finding (pass, concern, or gap) and license compatibility is stated in one sentence.

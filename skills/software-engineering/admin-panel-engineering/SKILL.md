@@ -2,11 +2,10 @@
 name: admin-panel-engineering
 description: >
   Build or change admin panels, backoffice apps, and internal tools. Use when
-  adding a page, sidebar or menu entry, route, or action that only some
-  permissions or roles may see; touching login, logout, session expiry, or
-  role edits; scoping data to a tenant, partner, or organization; building
-  filtered list pages, exports, audit trails, destructive confirmations,
-  operator status messages, or approval flows.
+  adding a permission-gated page, menu entry, route, or action; touching
+  login, logout, session expiry, or role edits; scoping data to a tenant;
+  or building filtered lists, exports, audit trails, destructive
+  confirmations, operator status messages, or approvals.
 ---
 
 # Admin Panel Engineering
@@ -26,8 +25,8 @@ Find what the backend actually returns, not what HTTP conventions suggest:
 - How permissions are matched. Match permission identifiers (route
   templates, permission keys, or policy names) exactly; a prefix or substring
   match lets `/orders` grant `/orders/:id/refund`.
-- Where tenant identity comes from. Read the tenant, partner, or owner id from
-  the authenticated context on the server; ignore ids the client sends.
+- Where tenant, partner, or owner identity comes from; "Authorize every call
+  on the server" in `client-trust-boundary` says where it must.
 - How permission changes propagate: cache keys, TTL units, and which key a role
   edit invalidates. A mismatch defers every edit to the next login.
 
@@ -64,9 +63,9 @@ Render a loading state while the permission map is unresolved; treating
   backend.
 - An Apply button must apply. If filters already apply on change, make the
   button say so or remove it.
-- Label export scope: visible page, full filtered result, or entity-only. A
-  client export of the loaded rows is not the filtered dataset; use a server
-  export for that.
+- State the scope on every export: visible page, full filtered result,
+  entity-only, or a fixed report. A client export of the loaded rows is not
+  the filtered dataset; use a server export for that.
 - When a download is requested with a blob response type, its errors arrive as
   `Blob` bodies too. Parse the error body as text before reading JSON, and
   read the filename from `Content-Disposition` with and without quotes.

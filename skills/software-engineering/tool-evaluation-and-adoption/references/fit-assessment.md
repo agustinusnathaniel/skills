@@ -35,9 +35,8 @@ patches.
 - Does it integrate with the tools the team uses (editors, agents, MCP)?
 - Does it fit the current workflow?
 - Does it overlap existing capabilities, and what is the migration cost from alternatives?
-- Who benefits (which users or workflows: the human operator, the agent
-  workflow, both, or neither)? State explicitly; a tool can be excellent in
-  isolation but useless in this setup.
+- Who benefits, as the SKILL.md Step 6 report states: a tool can be excellent
+  in isolation but useless in this setup.
 
 ## Platforms Hosting Several Customers or Tenants
 
@@ -48,5 +47,3 @@ CRM, CMS), the cost sits in operating it, not in its UI:
 - Operational ownership: upgrades, backups, incidents, and compliance you take on compared with the SaaS alternative.
 - Extension model: whether custom work lives in isolated modules or plugins, or requires modifying the core, which blocks upgrades.
 - Domain complexity the platform leaves to you, such as taxes, inventory concurrency, order and payment reconciliation, and webhooks.
-
-Done when: pros/cons are listed, every stale-looking dependency carries a domain classification, and stack overlap plus beneficiary are stated.

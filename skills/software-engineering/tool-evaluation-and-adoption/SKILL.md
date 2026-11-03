@@ -73,14 +73,12 @@ docs, including claims from delegated research or memory, and every "latest" or
 only after reproducing the problem.
 
 For evaluate-only scope, deliver the assessment and ask whether to adopt. When
-installation is already authorized, carry relevant findings into Step 7 and report
-the result after verification. Ask only if a newly discovered blocker requires a
-user decision, such as accepting a material capability loss or expanding scope.
-A No-go verdict or unresolved security or license concern is always a blocker
-requiring an explicit user decision, even when installation was previously authorized.
-Once the user explicitly chooses adoption over a No-go, implement it and let
-measured evidence carry any remaining argument, while still surfacing any new
-security or license findings.
+installation is already authorized, carry relevant findings into Step 7 and ask
+only about a new blocker, such as a material capability loss or wider scope. A
+No-go verdict or unresolved security or license concern always needs the user's
+explicit decision, even under prior authorization. Once the user chooses
+adoption over a No-go, implement it and let measured evidence carry any
+remaining argument, still surfacing new security or license findings.
 
 Done when: the verdict and its evidence are clear, and either adoption proceeds
 under existing authorization or the unresolved decision is presented concretely
@@ -97,7 +95,7 @@ Follow [references/install-compatibility.md](references/install-compatibility.md
    family, prefer aligning the family on one consistent release: regenerate
    the lockfile and adapt the code to the new API. Pin back only with a
    recorded reason.
-5. When the adoption replaces a tool, list what the old one did implicitly (defaults such as retries, timeouts, and serialization) and match it or record the intended change. Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
+5. When the adoption replaces a tool, match what the old one did implicitly or record the intended change ("Swaps and optimizations lose no signal" in `challenge-every-guard`). Remove the old tool everywhere in the same change: dependencies, scripts, hooks, CI, editor settings, and docs.
 
 Done when: the tool is installed from a verified source, configured, a smoke test confirms it works end to end, and no trace of a replaced tool remains.
 

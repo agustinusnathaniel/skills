@@ -1,9 +1,9 @@
 ---
 name: pull-request-review
 description: >
-  Review someone else's pull request and draft the comments the user will
-  post under their name. Use when asked to review a PR, draft review or line
-  comments, or reply in a review thread.
+  Review someone else's pull request and draft the comments the user posts
+  under their name. Use when asked to review a PR, draft review comments, or
+  reply in a review thread.
 ---
 
 # Pull Request Review
@@ -14,8 +14,7 @@ user has not approved word for word.
 
 ## Gather context
 
-Read the PR body, the linked issue or spec, and the full diff before judging.
-For a large change, also read the tracker item and the design discussion, and
+For a large change, read the tracker item and the design discussion, and
 judge the diff against the spec it implements rather than against your own
 design. Check whether other open PRs or comments already raise the point.
 
@@ -87,5 +86,5 @@ Agree with what is right first, then add the missing context. Credit whoever
 caught something, and flag corrections openly.
 
 Before drafting a thread reply, restate the reviewer's exact question and
-answer that, with evidence. When you already replied in the thread, edit that
+answer that, every part of it, with evidence. When you already replied in the thread, edit that
 reply instead of posting another.

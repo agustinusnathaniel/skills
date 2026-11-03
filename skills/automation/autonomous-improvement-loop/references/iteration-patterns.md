@@ -56,24 +56,6 @@ After each iteration, update the body to match the landed diff: added work gets 
 
 Done when: every file in the diff maps to a body bullet, every body claim traces to the diff, and numbers are current.
 
-## PR body template
-
-```markdown
-## Summary
-
-<what changed and why>
-
-### Changes
-
-- one bullet per file or concept
-
-### Verification
-
-- Type check passes
-- Tests pass (N tests / N files)
-- Lint passes
-```
-
 ## Respect the delivery boundary
 
 Draft delivery is complete when the verified PR is available for review. Mark it

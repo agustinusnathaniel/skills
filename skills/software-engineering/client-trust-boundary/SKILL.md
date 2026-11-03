@@ -2,10 +2,10 @@
 name: client-trust-boundary
 description: >
   Decide what a web or mobile client may hold and what the server must
-  enforce. Use when adding client-exposed environment variables or API keys,
-  calling a backend-as-a-service (Firebase, Supabase, Convex) directly from
-  the client, gating features by role in the UI, storing sessions or roles in
-  browser or device storage, or reviewing a frontend for exposed secrets.
+  enforce. Use when exposing environment variables or API keys to a client,
+  calling a backend-as-a-service (Firebase, Supabase, Convex) from the
+  client, gating features by role in the UI, storing sessions or roles on
+  the device, or reviewing a frontend for exposed secrets.
 ---
 
 # Client Trust Boundary
@@ -29,7 +29,8 @@ that accepts a key shipped in the client hides the URL but not the access.
 
 - Hidden menus and disabled buttons are presentation. Each non-public
   endpoint or backend function checks the caller's identity, permission, and
-  tenant (where multi-tenant) on every call.
+  tenant (where multi-tenant) on every call, taking the tenant, partner, or
+  owner id from the authenticated context and ignoring ids the client sends.
 - With a backend-as-a-service, find out what is public by default. Some
   expose every client-callable function to anyone holding the deployment URL;
   put an auth check in each public function and keep server-only logic in
@@ -40,9 +41,9 @@ that accepts a key shipped in the client hides the URL but not the access.
 
 ## Treat client state as user input
 
-Stored sessions, roles, feature flags, and cached profiles can be edited.
-Validate stored session data for shape, version, and origin, fail closed on
-anything unexpected, and take privileges from the server's response. Tokens
+Stored sessions, roles, feature flags, and cached profiles can be edited:
+take privileges from the server's response, and fail closed on stored data
+whose shape, version, or origin is unexpected. Tokens
 in URLs leak through logs, history, and referrers; prefer headers or
 short-lived, single-use tokens.
 

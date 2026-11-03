@@ -6,11 +6,9 @@ confidence together; deletion count alone is not evidence of improvement.
 
 ## Find and assess candidates
 
-Prefer retiring tautological tests that restate the implementation and
-change-detector tests that lock in output without a behavior contract. Also
-inspect tests that compute expected values with the code under test, duplicate
-a stronger test, or assert only a mock's behavior. Check whether each test
-reaches the path its name promises. Check that negative controls observe the
+Start from the `test-strategy` bar ("Keep only tests that earn their place"
+and expected values taken from the real consumer). Also check whether each
+test reaches the path its name promises. Check that negative controls observe the
 intended rejection rather than an unrelated guard, and that fixtures or mocks
 do not supply behavior the production path should produce. Identify exports,
 wrappers, flags, and hooks with no production caller.
@@ -42,10 +40,10 @@ compatibility pins. Retain cases exercising removed mechanisms until their
 behavior is protected at the replacement boundary. Remove obsolete test-only
 exports while preserving public APIs.
 
-Add a bug regression test only for a genuine behavior gap it would have caught.
-Show that it fails on pre-fix code for the intended reason; when that baseline
-cannot be reconstructed, identify other direct evidence of the gap. Avoid tests
-that only prove the mock or repeat the same scenario at every layer.
+Add a bug regression test only for a genuine behavior gap, failing first as
+"Fail first" in `test-strategy` describes; when the pre-fix baseline cannot be reconstructed,
+identify other direct evidence of the gap. Avoid repeating the same scenario
+at every layer.
 
 Make one coherent edit around the behavior owner. Run focused tests and required
 repository checks, then inspect the diff for accidental loss of coverage or

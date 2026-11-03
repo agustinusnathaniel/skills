@@ -64,9 +64,8 @@ the requester. Copy never promises an action the viewer cannot take.
 
 ## Roles and permissions
 
-Model permissions at three levels: which menus and pages show, which actions
-are offered, and which API calls succeed. The first two are presentation; the
-third is the boundary. Before editing a shared role, show who it affects, and
+Menus, pages, and offered actions are presentation; the API call is the
+boundary ("Authorize every call on the server" in `client-trust-boundary`). Before editing a shared role, show who it affects, and
 offer cloning for a variant. Show what a role grants before it is assigned.
 
 ## Exports and reports

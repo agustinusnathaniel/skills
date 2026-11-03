@@ -19,12 +19,6 @@ Fix three decisions before the first cycle; record them where the schedule can s
 
 Done when: scope, vehicle, and convention are written down and visible to every scheduled run.
 
-## When to Use
-
-- Scheduled maintenance over one repo or a portfolio
-- Continuous small improvements: refactors, test additions, simplification
-- Any "keep improving until told to stop" pattern with authorized autonomous output
-
 ## When Not to Use
 
 - Targets where every change needs pre-approval and no standing authorization exists

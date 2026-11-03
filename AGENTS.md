@@ -12,15 +12,36 @@ Registration and versioning steps live in the README.
   experience, and sits in a stack the maintainer uses. Agent behaviour for
   every task belongs in maestria; personal workflow and one-company lessons
   stay out. Label stack-specific advice.
-- Fold a learning into the skill that owns the behavior, or a conditional
-  reference behind a pointer. A new skill needs a trigger no existing description
-  covers.
-- Generalize to the mechanism behind an incident. A rule earns its line when the
-  failure recurs across sessions or repos, or one miss is costly. Private project
-  names and one-off details stay out of skill text and PR descriptions alike;
-  this repo is public.
+- A new skill needs a trigger no existing description covers.
+- Private project names and one-off details stay out of skill text and PR
+  descriptions alike; this repo is public.
 - Skills install into several agent hosts (see the README). Use plain Markdown and
   portable frontmatter, and name tools generically.
+
+## Keeping skills small
+
+Instruction sets rot by accumulation: agents skip rules, misapply narrow ones,
+and pick arbitrarily between contradicting ones. A description is loaded on
+every turn and a `SKILL.md` body on every trigger, so both stay lean.
+
+- One home per rule. The skill that owns the behaviour holds it, and other
+  skills point there in one line that names the skill and section, so a
+  reader without that skill installed still knows what to look for. Fold a
+  learning into that home or into a conditional reference behind a pointer.
+- Edit an existing line before adding one. Generalize to the mechanism behind
+  an incident, and merge lessons that share a root into one principle plus its
+  test.
+- Keep a line only if it passes the deletion test: a current frontier model
+  would not do it unprompted, a failure that recurs across sessions or repos
+  (or one costly miss) or an authoritative source stands behind it, no other
+  skill holds it, and it contradicts no other rule.
+- Keep a `SKILL.md` body under about 1,000 words; past that, move what only
+  some branches need into references.
+- Prune descriptions hardest: one trigger per real branch, no synonyms, no
+  identity the body already carries.
+- Every skill PR reports word counts before and after (repo total, each changed
+  `SKILL.md` and description) and lists any rule dropped rather than merged or
+  moved.
 
 ## Feedback loop
 

@@ -1,13 +1,11 @@
 ---
 name: hydration-safe-state
 description: >
-  Keep hydration consistent in React when server-rendered or prerendered
-  HTML meets browser-only state. React-specific notes are labelled. Use when
-  debugging hydration mismatches, a flash of the
-  wrong theme, or a page that differs between navigation and reload; or when
-  persisting state to localStorage or cookies, adding a theme toggle,
-  restoring an auth session from storage, or showing viewer-local time or
-  locale.
+  Keep hydration consistent when server-rendered or prerendered HTML meets
+  browser-only state. Use when debugging hydration mismatches, a theme flash,
+  or a page that differs between navigation and reload; or when adding a
+  theme toggle, persisting state to localStorage or cookies, restoring an auth session from storage,
+  or showing viewer-local time or locale.
 ---
 
 # Hydration-Safe State
