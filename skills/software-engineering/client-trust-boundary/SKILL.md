@@ -50,7 +50,10 @@ short-lived, single-use tokens.
 ## Keep credentials out of telemetry
 
 Error reports, analytics events, and logs leave the trust boundary too. Strip
-tokens, decoded claims, and personal data before sending them.
+tokens, decoded claims, and personal data before sending them. Docs for
+security or infrastructure (agent instruction files, decision records,
+runbooks) state what is protected and how to operate it, never a working way
+around it.
 
 ## Verify from outside the app
 

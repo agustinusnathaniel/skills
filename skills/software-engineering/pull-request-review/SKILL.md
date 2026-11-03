@@ -73,7 +73,9 @@ pastes cleanly anywhere.
    user sees, then ask: post, edit, or skip. One version, no variants.
 2. Across revision rounds, keep a running list of every change the user asked
    for; when two asks conflict, name the conflict and ask.
-3. Post only the exact text the user approved.
+3. Post only the exact text the user approved. Right before posting, re-check
+   that the head commit and the user's own reviews have not changed since
+   drafting; if either has, show what changed instead of posting.
 4. Re-read the posted comment for formatting slips. Fix a slip in place only
    after the user says yes.
 
