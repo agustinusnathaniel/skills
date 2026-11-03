@@ -1,3 +1,7 @@
+---
+trigger: manual
+---
+
 # Skill authoring
 
 Every `SKILL.md` and reference here is a document agents load. Write and edit them
