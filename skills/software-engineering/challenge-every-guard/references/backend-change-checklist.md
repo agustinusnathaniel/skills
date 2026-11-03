@@ -83,7 +83,9 @@ for deploy order and feature flags.
   to ignore alerts.
 - Give every state real users or data can get stuck in a way to detect it
   and a documented way out.
-- Keep personal data, user content, and secrets out of logs.
+- Keep personal data, user content, and secrets out of logs. LLM SDK errors
+  can embed raw model output in their message and cause chain, so scrub them
+  at the error reporter, not only at your log calls.
 - Give every deliberately silent path (swallowed error, skip, give-up) a log
   line and a durable counter that a status or alert reads.
 
