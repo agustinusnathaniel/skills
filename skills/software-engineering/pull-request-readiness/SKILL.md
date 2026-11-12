@@ -36,7 +36,9 @@ reviewability, blast radius, staged rollout.
 
 - Fix a problem in the lowest PR that introduced the code, then carry it up
   the stack the way the repository does (rebase, or merge where force pushes
-  are not allowed).
+  are not allowed). Update a PR branch from its own base, never from the
+  default branch when the PR targets another long-lived branch: the extra
+  commits cannot be removed where force pushes are blocked.
 - Each PR is correct at its own head: tests and checks pass with only the PRs
   below it.
 - When a contract file (schema, API spec) is copied into several branches or
@@ -86,7 +88,8 @@ Run every check before marking a PR ready or requesting review:
 - When a PR has many reviewer points, one summary comment maps each point to
   the commit that addressed it, so reviewers can re-check in one pass.
 - Where the repository uses feature flags: whether one is needed, whether it
-  exists, whether it defaults to off. A change to an existing shared path is
+  exists, whether it defaults to off. A flag already on for some users is not
+  off for new behaviour: give that its own default-off flag. A change to an existing shared path is
   live as soon as it deploys, so it must be safe with the flag off.
 - Quality gates the repository uses: an independent review of the diff from a
   clean checkout, the `challenge-every-guard` "Clean before review" pass,

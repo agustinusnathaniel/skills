@@ -38,6 +38,11 @@ that accepts a key shipped in the client hides the URL but not the access.
 - Platform gates such as API key referrer restrictions, app attestation, and
   bot challenges cut low-effort abuse. They are signals, not authorization.
   Add per-user and per-function rate limits where abuse is cheap.
+- A chat or email bot, or a set of tools exposed to a language model, is a
+  client too. Give it only the tools its least-trusted sender may use,
+  read-only by default. A tool that changes money, plans, or data needs a
+  confirmation tied to that specific action, and does not run from a channel
+  where the sender is unverified (email senders can be spoofed).
 
 ## Treat client state as user input
 
