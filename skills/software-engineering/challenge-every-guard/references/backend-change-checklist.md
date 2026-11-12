@@ -15,7 +15,10 @@ for deploy order and feature flags.
   elsewhere may be stale.
 - Treat a missing, failed, or empty input to a filter or safety check as
   unknown and fail closed. An empty field in a bulk update or delete filter
-  matches every row: bail out before the write.
+  matches every row: bail out before the write. A feature-flag or config
+  client returns its default until it has initialized, so wait for
+  initialization or deny. A record that does not exist is an answer (no
+  policy applies), not a failed lookup.
 - Put each checked precondition in the write's own condition, such as a
   conditional update or a `WHERE` clause. A separate read, then write, lets
   the state change between the two.
@@ -74,6 +77,10 @@ for deploy order and feature flags.
 - Bound concurrency and request rate to what the called dependencies allow.
 - Log and retry a failure in derived or secondary data rather than failing
   the whole run.
+- In a multi-step operation, run the irreversible last step (close,
+  deactivate, or delete the source) only when every earlier step succeeded.
+  A step that failed or could not run marks the result incomplete, and the
+  summary people read says so.
 
 ## Audit and alerts
 

@@ -34,10 +34,21 @@ visible and bounded, then read the run log to confirm what actually happened.
 - A `concurrency` group keyed on the PR alone with `cancel-in-progress`
   lets a re-run of an older commit cancel the newest commit's run. Re-run at
   the head, or give re-runs their own group.
+- Branch filters use globs where `*` does not match `/`, so `branches: ['*']`
+  skips a PR whose base branch name contains a slash, as stacked PRs often
+  do; `**` matches it.
+- Changing a PR's base branch fires `pull_request` type `edited`, which the
+  default types (`opened`, `synchronize`, `reopened`) omit. A workflow
+  filtered on base branch has then not run against the new base, so the PR
+  can look green without its checks; a new push runs them. Check the head
+  commit's run list before calling it green.
 - A speed-up loses no signal (see `challenge-every-guard`): no test stops
   running, and when sharding, each test lands in exactly one shard (a matrix
   that deliberately runs tests across versions is fine). Measure the gain on
-  real runs against a stated baseline window.
+  real runs against a stated baseline window. A caching speed-up also checks
+  cache storage against the repository cache limit (10 GB by default), since
+  eviction makes an over-limit cache thrash. Set test worker count from the
+  runner's CPU count; more workers than cores caused timeouts.
 
 ## Move values across the shell boundary on purpose
 
