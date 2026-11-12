@@ -1,1 +1,1 @@
-@AGENTS.md
+@docs/skill-authoring.md

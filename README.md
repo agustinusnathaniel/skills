@@ -114,7 +114,7 @@ an installed copy if you still rely on it.
 
 ## Adding New Skills
 
-A new skill must meet the placement rule in [AGENTS.md](AGENTS.md).
+A new skill must meet the placement rule in [docs/skill-authoring.md](docs/skill-authoring.md).
 
 Create a new skill directory under `skills/<domain>/<skill-name>/` with a `SKILL.md` containing YAML frontmatter (`name` and `description` fields), then add it to `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `.zcode-plugin/plugin.json`, `kimi.plugin.json`, the appropriate `skills.sh.json` grouping, and the table above. Add a changeset (`pnpm changeset`) following the bump policy under Versioning.
 
@@ -122,7 +122,7 @@ Keep frontmatter to the portable [Agent Skills](https://agentskills.io/specifica
 
 Validate the skill frontmatter and relative reference links. Keep the directory, frontmatter name, and both registry entries consistent.
 
-[AGENTS.md](AGENTS.md) covers authoring standards and the feedback loop for improving skills from real sessions.
+[docs/skill-authoring.md](docs/skill-authoring.md) covers authoring standards and the feedback loop for improving skills from real sessions.
 
 ## Versioning
 
