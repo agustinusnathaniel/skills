@@ -34,7 +34,9 @@ the change. Justify anything new in the PR body (a dependency, a second
 configuration mechanism, an abstraction, an interface with one
 implementation, test infrastructure, a new service) or leave it out. Add no
 configuration, flag, or placeholder for a feature that does not exist yet,
-and extend the original code rather than copying it.
+and no flag attribute, log field, header, or config key that nothing reads:
+name its reader, or leave it out and say so even when the task asked for it.
+Extend the original code rather than copying it.
 
 ## Triage each guarded case
 

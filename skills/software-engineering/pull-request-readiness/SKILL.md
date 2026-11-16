@@ -34,18 +34,8 @@ reviewability, blast radius, staged rollout.
 
 ## Keep stacks correct
 
-- Fix a problem in the lowest PR that introduced the code, then carry it up
-  the stack the way the repository does (rebase, or merge where force pushes
-  are not allowed). Update a PR branch from its own base, never from the
-  default branch when the PR targets another long-lived branch: the extra
-  commits cannot be removed where force pushes are blocked.
-- Each PR is correct at its own head: tests and checks pass with only the PRs
-  below it.
-- When a contract file (schema, API spec) is copied into several branches or
-  repositories, keep the copies identical and compare hashes.
-- Generated code goes in its own commit.
-- The body of each stacked PR names the PR it is stacked on.
-- Merge bottom-up.
+For a stack of PRs, apply the [stack rules](references/stacks.md): where a
+fix lands, how each branch updates, what each body names, and merge order.
 
 ## Make the body a contract
 
@@ -67,9 +57,13 @@ goes in backticks.
 
 Run every check before marking a PR ready or requesting review:
 
-- Synced with the base branch.
+- Synced with its own base branch, never the default branch when the PR
+  targets another long-lived one: the extra commits cannot be removed where
+  force pushes are blocked.
 - Full affected suites pass at the current head, new or extended tests fail
   without the fix, and CI shows the new specs ran; a broken stack base can skip them.
+  A green CI run at that head counts: cite it, and run locally only what CI
+  does not cover.
 - Every CI check read, not only the summary. Some required checks do not
   re-run when the base changes; re-trigger them the way the repository allows.
 - Every bot comment since the PR opened is read and triaged with evidence
@@ -103,8 +97,10 @@ does not name. Once everything is green, mark
 ready promptly; marking ready and requesting review stay the user's call
 unless they have delegated it.
 
-A PR held on purpose (waiting on a dependency, a proof, or another PR) stays
-draft, and every status lists it as held with what it waits for. To put a PR
+A PR that waits on a dependency, a proof, or another PR still opens ready,
+with "Merge after: <what>" in the body so review runs meanwhile, and every
+status lists what it waits for. Keep a PR draft only when review would be
+wasted: a deploy-only PR, or a problem not yet reproduced. To put an open PR
 on hold, convert it to draft and remove its requested reviewers; draft status
 alone leaves it in their queue.
 
