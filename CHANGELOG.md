@@ -1,5 +1,11 @@
 # agustinusnathaniel-skills
 
+## 2.6.1
+
+### Patch Changes
+
+- [#51](https://github.com/agustinusnathaniel/skills/pull/51) [`97af19e`](https://github.com/agustinusnathaniel/skills/commit/97af19e2907b8ec300c3ee22d95f5ef141d886ab) Thanks [@agustinusnathaniel](https://github.com/agustinusnathaniel)! - `pull-request-review` shapes each paste-ready comment as a question that names the concrete scenario (input, wrong result, who sees it) and its evidence, followed by a proposed fix in one to three sentences, and never re-raises a point the author already settled unless the code it concerns changed.
+
 ## 2.6.0
 
 ### Minor Changes
