@@ -16,7 +16,8 @@ user has not approved word for word.
 
 For a large change, read the tracker item and the design discussion, and
 judge the diff against the spec it implements rather than against your own
-design. Check whether other open PRs or comments already raise the point.
+design. Check whether other open PRs or comments already raise the point;
+never re-raise a settled point unless the code it concerns changed.
 
 ## Lead with must-fix findings
 
@@ -46,9 +47,10 @@ For each finding give:
 
 - The exact file and line in the diff.
 - One sentence on the problem for the user.
-- A short, paste-ready comment phrased as a question or a concrete ask. For a
-  one- or two-line fix, include a suggested change (On GitHub: a suggestion
-  block).
+- A paste-ready comment of 1-3 sentences: a question naming the concrete
+  scenario (input, wrong result, who sees it) and evidence (a file:line
+  link), then a proposed fix. For a one- or two-line fix, use a suggested
+  change (On GitHub: a suggestion block).
 
 Post as one review at the head commit (On GitHub: a comment review); approve
 or request changes only when the user asks for that.
